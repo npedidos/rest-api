@@ -10,8 +10,12 @@ Cualquier contribución que hagas será muy apreciada.
 
 ## Agradecimientos
 
-Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para PHPStorm para
+Gracias a [JetBrains](https://www.jetbrains.com/?from=SoftN%20CMS) por proporcionar una licencia para IntelliJ para
 desarrollar este proyecto.
+
+| JetBrains  | IntelliJ                                                                                  |
+| ------------- |-------------------------------------------------------------------------------------------|
+| ![jetbrains](https://github.com/npedidos/rest-api/blob/master/img/jetbrains.svg "jetbrains") | ![phpstorm](https://github.com/npedidos/rest-api/blob/master/img/intellij.svg "intellij") |
 
 ## License
 
