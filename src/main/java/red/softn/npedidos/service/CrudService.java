@@ -1,7 +1,9 @@
 package red.softn.npedidos.service;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -33,9 +35,13 @@ public abstract class CrudService<T, ID> {
         this.getRepository()
             .findById(id)
             .orElseThrow(dishNotFound);
-        //        typeDish.setId(id);
+        Field field = ReflectionUtils.findField(typeDish.getClass(), "id");
         
-        return this.getRepository()
-                   .save(typeDish);
+        if (field != null) {
+            ReflectionUtils.makeAccessible(field);
+            ReflectionUtils.setField(field, typeDish, id);
+        }
+        
+        return getRepository().save(typeDish);
     }
 }
