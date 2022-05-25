@@ -12,4 +12,5 @@ import red.softn.npedidos.repository.FoodDishRepository;
 public class FoodDishService extends CrudService<FoodDish, Integer> {
     
     private final FoodDishRepository repository;
+    
 }

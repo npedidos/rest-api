@@ -46,4 +46,5 @@ public class FoodDishId implements Serializable {
         result = result * PRIME + ($typesDishesId == null ? 43 : $typesDishesId.hashCode());
         return result;
     }
+    
 }

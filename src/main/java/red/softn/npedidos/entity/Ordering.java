@@ -46,4 +46,5 @@ public class Ordering {
         result = result * PRIME + ($dateOrder == null ? 43 : $dateOrder.hashCode());
         return result;
     }
+    
 }

@@ -45,4 +45,5 @@ public class TypeDish {
         result = result * PRIME + ($name == null ? 43 : $name.hashCode());
         return result;
     }
+    
 }

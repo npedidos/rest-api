@@ -54,4 +54,5 @@ public class FoodDish {
         result = result * PRIME + ($typesDishes == null ? 43 : $typesDishes.hashCode());
         return result;
     }
+    
 }

@@ -46,4 +46,5 @@ public class ExcludeDay {
         result = result * PRIME + ($dateExclude == null ? 43 : $dateExclude.hashCode());
         return result;
     }
+    
 }

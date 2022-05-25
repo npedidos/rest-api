@@ -62,4 +62,5 @@ public class Setting {
         result = result * PRIME + ($description == null ? 43 : $description.hashCode());
         return result;
     }
+    
 }

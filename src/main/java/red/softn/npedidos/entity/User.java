@@ -45,4 +45,5 @@ public class User {
         result = result * PRIME + ($email == null ? 43 : $email.hashCode());
         return result;
     }
+    
 }
