@@ -1,4 +1,4 @@
-package red.softn.npedidos;
+package red.softn.npedidos.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
