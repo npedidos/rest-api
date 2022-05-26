@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 import red.softn.npedidos.exception.InternalServerErrorException;
-import red.softn.npedidos.pojo.ErrorDescription;
+import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.service.CrudService;
 
 import java.lang.reflect.Field;
@@ -61,7 +61,7 @@ public abstract class CrudController<T, ID> {
         try {
             fieldId = field.get(save);
         } catch (Exception ex) {
-            throw new InternalServerErrorException(new ErrorDescription("Error al obtener el id del objeto."));
+            throw new InternalServerErrorException(new ErrorDetails("Error al obtener el id del objeto."));
         }
         
         return fieldId;

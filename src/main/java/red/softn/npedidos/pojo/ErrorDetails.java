@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ErrorDescription {
+public class ErrorDetails {
     
     private String code;
     
     private String description;
     
-    public ErrorDescription(String description) {
+    public ErrorDetails(String description) {
         this.description = description;
     }
     

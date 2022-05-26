@@ -3,7 +3,7 @@ package red.softn.npedidos.service;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.exception.NotFoundException;
-import red.softn.npedidos.pojo.ErrorDescription;
+import red.softn.npedidos.pojo.ErrorDetails;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -41,7 +41,7 @@ public abstract class CrudService<T, ID> {
     
     private void checkIsExistById(ID id) {
         if (!getRepository().existsById(id)) {
-            throw new NotFoundException(new ErrorDescription("El registro no existe"));
+            throw new NotFoundException(new ErrorDetails("El registro no existe"));
         }
     }
     

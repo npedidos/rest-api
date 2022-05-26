@@ -1,16 +1,16 @@
 package red.softn.npedidos.exception;
 
 import org.springframework.http.HttpStatus;
-import red.softn.npedidos.pojo.ErrorDescription;
+import red.softn.npedidos.pojo.ErrorDetails;
 
 public class NotFoundException extends DefaultHttpException {
     
-    public NotFoundException(ErrorDescription errorDescription) {
-        super(HttpStatus.NOT_FOUND, errorDescription);
+    public NotFoundException(ErrorDetails errorDetails) {
+        super(HttpStatus.NOT_FOUND, errorDetails);
     }
     
-    public NotFoundException(ErrorDescription errorDescription, Throwable cause) {
-        super(HttpStatus.NOT_FOUND, errorDescription, cause);
+    public NotFoundException(ErrorDetails errorDetails, Throwable cause) {
+        super(HttpStatus.NOT_FOUND, errorDetails, cause);
     }
     
 }

@@ -1,16 +1,16 @@
 package red.softn.npedidos.exception;
 
 import org.springframework.http.HttpStatus;
-import red.softn.npedidos.pojo.ErrorDescription;
+import red.softn.npedidos.pojo.ErrorDetails;
 
 public class InternalServerErrorException extends DefaultHttpException {
     
-    public InternalServerErrorException(ErrorDescription errorDescription) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR, errorDescription);
+    public InternalServerErrorException(ErrorDetails errorDetails) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, errorDetails);
     }
     
-    public InternalServerErrorException(ErrorDescription errorDescription, Throwable cause) {
-        super(HttpStatus.INTERNAL_SERVER_ERROR, errorDescription, cause);
+    public InternalServerErrorException(ErrorDetails errorDetails, Throwable cause) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, errorDetails, cause);
     }
     
 }
