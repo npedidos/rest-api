@@ -22,18 +22,20 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleException(Exception ex) {
-        ErrorDetails errorDetails = new ErrorDetails(ex.getMessage());
-        
         return ResponseEntity.internalServerError()
-                             .body(new ErrorResponse(errorDetails));
+                             .body(getErrorResponse(ex));
     }
     
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return ResponseEntity.status(status)
+                             .body(getErrorResponse(ex));
+    }
+    
+    private ErrorResponse getErrorResponse(Exception ex) {
         ErrorDetails errorDetails = new ErrorDetails(ex.getMessage());
         
-        return ResponseEntity.status(status)
-                             .body(new ErrorResponse(errorDetails));
+        return new ErrorResponse(errorDetails);
     }
     
 }
