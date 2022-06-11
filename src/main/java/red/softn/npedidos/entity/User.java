@@ -22,6 +22,12 @@ public class User {
     @Column(name = "email", nullable = false, length = 100)
     private String email;
     
+    @Column(name = "username", nullable = false, length = 45)
+    private String username;
+    
+    @Column(name = "password", nullable = false, length = 45)
+    private String password;
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final User other)) {return false;}
@@ -31,7 +37,13 @@ public class User {
         if (!Objects.equals(this$id, other$id)) {return false;}
         final Object this$email = this.getEmail();
         final Object other$email = other.getEmail();
-        return Objects.equals(this$email, other$email);
+        if (!Objects.equals(this$email, other$email)) {return false;}
+        final Object this$username = this.getUsername();
+        final Object other$username = other.getUsername();
+        if (!Objects.equals(this$username, other$username)) {return false;}
+        final Object this$password = this.getPassword();
+        final Object other$password = other.getPassword();
+        return Objects.equals(this$password, other$password);
     }
     
     protected boolean canEqual(final Object other) {return other instanceof User;}
@@ -43,6 +55,10 @@ public class User {
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
         final Object $email = this.getEmail();
         result = result * PRIME + ($email == null ? 43 : $email.hashCode());
+        final Object $username = this.getUsername();
+        result = result * PRIME + ($username == null ? 43 : $username.hashCode());
+        final Object $password = this.getPassword();
+        result = result * PRIME + ($password == null ? 43 : $password.hashCode());
         return result;
     }
     
