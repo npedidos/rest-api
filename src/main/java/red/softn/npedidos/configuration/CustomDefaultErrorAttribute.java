@@ -1,6 +1,7 @@
 package red.softn.npedidos.configuration;
 
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.stereotype.Component;
@@ -20,15 +21,23 @@ public class CustomDefaultErrorAttribute extends DefaultErrorAttributes {
     
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
+        ErrorDetails errorDetails = new ErrorDetails();
         String errorMessage = (String) webRequest.getAttribute(RequestDispatcher.ERROR_MESSAGE, 0);
         
         if (Objects.isNull(errorMessage)) {
-            return null;
+            Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
+            String status = getValue(errorAttributes, "status");
+            String error = getValue(errorAttributes, "error");
+            
+            errorDetails.setCode(StringUtils.defaultIfBlank(status, "500"));
+            errorDetails.setDescription(StringUtils.defaultIfBlank(error, "Error desconocido"));
         }
         
-        ErrorDetails errorDetails = new ErrorDetails(errorMessage);
-        
         return this.gsonUtil.convertTo(new ErrorResponse(errorDetails), Map.class);
+    }
+    
+    private String getValue(Map<String, Object> map, String key) {
+        return map.containsKey(key) ? String.valueOf(map.get(key)) : "";
     }
     
 }
