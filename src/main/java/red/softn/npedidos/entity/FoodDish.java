@@ -14,14 +14,15 @@ import java.util.Objects;
 @Table(name = "food_dishes")
 public class FoodDish {
     
-    @EmbeddedId
-    private FoodDishId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
     
     @Column(name = "name", nullable = false, length = 250)
     private String name;
     
     @ToString.Exclude
-    @MapsId("typesDishesId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "types_dishes_id", nullable = false)
     private TypeDish typeDishes;
@@ -36,9 +37,9 @@ public class FoodDish {
         final Object this$name = this.getName();
         final Object other$name = other.getName();
         if (!Objects.equals(this$name, other$name)) {return false;}
-        final Object this$typesDishes = this.getTypeDishes();
-        final Object other$typesDishes = other.getTypeDishes();
-        return Objects.equals(this$typesDishes, other$typesDishes);
+        final Object this$typeDishes = this.getTypeDishes();
+        final Object other$typeDishes = other.getTypeDishes();
+        return Objects.equals(this$typeDishes, other$typeDishes);
     }
     
     protected boolean canEqual(final Object other) {return other instanceof FoodDish;}
@@ -50,8 +51,8 @@ public class FoodDish {
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
         final Object $name = this.getName();
         result = result * PRIME + ($name == null ? 43 : $name.hashCode());
-        final Object $typesDishes = this.getTypeDishes();
-        result = result * PRIME + ($typesDishes == null ? 43 : $typesDishes.hashCode());
+        final Object $typeDishes = this.getTypeDishes();
+        result = result * PRIME + ($typeDishes == null ? 43 : $typeDishes.hashCode());
         return result;
     }
     
