@@ -1,6 +1,7 @@
 package red.softn.npedidos.configuration;
 
 import lombok.RequiredArgsConstructor;
+import net.datafaker.Faker;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +25,11 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public ErrorProperties errorProperties() {
         return this.serverProperties.getError();
+    }
+    
+    @Bean
+    public Faker faker() {
+        return new Faker();
     }
     
 }
