@@ -3,7 +3,7 @@ package red.softn.npedidos.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -21,7 +21,7 @@ public class ExcludeDay {
     private Integer id;
     
     @Column(name = "date_exclude", nullable = false)
-    private LocalDateTime dateExclude;
+    private LocalDate dateExclude;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
