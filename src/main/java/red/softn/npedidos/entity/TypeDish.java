@@ -24,7 +24,7 @@ public class TypeDish {
     private String name;
     
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDishes")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDish")
     private List<FoodDish> foodDishes;
     
     public boolean equals(final Object o) {

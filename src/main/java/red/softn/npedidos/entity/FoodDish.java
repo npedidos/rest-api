@@ -26,7 +26,7 @@ public class FoodDish {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "types_dishes_id", nullable = false)
-    private TypeDish typeDishes;
+    private TypeDish typeDish;
     
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
@@ -45,8 +45,8 @@ public class FoodDish {
         final Object this$name = this.getName();
         final Object other$name = other.getName();
         if (!Objects.equals(this$name, other$name)) {return false;}
-        final Object this$typeDishes = this.getTypeDishes();
-        final Object other$typeDishes = other.getTypeDishes();
+        final Object this$typeDishes = this.getTypeDish();
+        final Object other$typeDishes = other.getTypeDish();
         return Objects.equals(this$typeDishes, other$typeDishes);
     }
     
@@ -59,7 +59,7 @@ public class FoodDish {
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
         final Object $name = this.getName();
         result = result * PRIME + ($name == null ? 43 : $name.hashCode());
-        final Object $typeDishes = this.getTypeDishes();
+        final Object $typeDishes = this.getTypeDish();
         result = result * PRIME + ($typeDishes == null ? 43 : $typeDishes.hashCode());
         return result;
     }
