@@ -30,10 +30,7 @@ public class User {
     private String password;
     
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_has_ordering",
-               joinColumns = @JoinColumn(name = "users_id", nullable = false),
-               inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private List<Ordering> orderings;
     
     public boolean equals(final Object o) {

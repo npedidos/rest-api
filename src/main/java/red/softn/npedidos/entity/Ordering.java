@@ -32,11 +32,9 @@ public class Ordering {
     private List<FoodDish> foodDishes;
     
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_has_ordering",
-               joinColumns = @JoinColumn(name = "ordering_id", nullable = false),
-               inverseJoinColumns = @JoinColumn(name = "users_id", nullable = false))
-    private List<User> users;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "users_id", nullable = false)
+    private User user;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
