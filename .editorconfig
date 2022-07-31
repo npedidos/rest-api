@@ -34,6 +34,10 @@ ij_css_space_before_opening_brace = true
 ij_css_use_double_quotes = true
 ij_css_value_alignment = do_not_align
 
+[*.csv]
+max_line_length = 2147483647
+ij_csv_wrap_long_lines = false
+
 [*.java]
 ij_continuation_indent_size = 4
 ij_java_align_consecutive_assignments = false
@@ -58,7 +62,7 @@ ij_java_align_multiline_throws_list = false
 ij_java_align_subsequent_simple_methods = false
 ij_java_align_throws_keyword = false
 ij_java_align_types_in_multi_catch = true
-ij_java_annotation_parameter_wrap = off
+ij_java_annotation_parameter_wrap = on_every_item
 ij_java_array_initializer_new_line_after_left_brace = true
 ij_java_array_initializer_right_brace_on_new_line = true
 ij_java_array_initializer_wrap = split_into_lines
