@@ -45,7 +45,10 @@ public class Ordering {
         if (!Objects.equals(this$id, other$id)) {return false;}
         final Object this$dateOrder = this.getDateOrder();
         final Object other$dateOrder = other.getDateOrder();
-        return Objects.equals(this$dateOrder, other$dateOrder);
+        if (!Objects.equals(this$dateOrder, other$dateOrder)) {return false;}
+        final Object this$user = this.getUser();
+        final Object other$user = other.getUser();
+        return Objects.equals(this$user, other$user);
     }
     
     protected boolean canEqual(final Object other) {return other instanceof Ordering;}
@@ -57,6 +60,8 @@ public class Ordering {
         result = result * PRIME + ($id == null ? 43 : $id.hashCode());
         final Object $dateOrder = this.getDateOrder();
         result = result * PRIME + ($dateOrder == null ? 43 : $dateOrder.hashCode());
+        final Object $user = this.getUser();
+        result = result * PRIME + ($user == null ? 43 : $user.hashCode());
         return result;
     }
     
