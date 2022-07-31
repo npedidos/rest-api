@@ -31,6 +31,8 @@ public class CustomDefaultErrorAttribute extends DefaultErrorAttributes {
             
             errorDetails.setCode(StringUtils.defaultIfBlank(status, "500"));
             errorDetails.setDescription(StringUtils.defaultIfBlank(error, "Error desconocido"));
+        } else {
+            errorDetails.setDescription(errorMessage);
         }
         
         return this.gsonUtil.convertTo(new ErrorResponse(errorDetails), Map.class);
