@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -22,6 +23,20 @@ public class Ordering {
     
     @Column(name = "date_order", nullable = false)
     private LocalDateTime dateOrder;
+    
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "ordering_has_food_dishes",
+               joinColumns = @JoinColumn(name = "ordering_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
+    private List<FoodDish> foodDishes;
+    
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_has_ordering",
+               joinColumns = @JoinColumn(name = "ordering_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "users_id", nullable = false))
+    private List<User> users;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

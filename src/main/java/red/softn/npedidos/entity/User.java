@@ -3,6 +3,7 @@ package red.softn.npedidos.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -27,6 +28,13 @@ public class User {
     
     @Column(name = "password", nullable = false, length = 45)
     private String password;
+    
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_has_ordering",
+               joinColumns = @JoinColumn(name = "users_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
+    private List<Ordering> orderings;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

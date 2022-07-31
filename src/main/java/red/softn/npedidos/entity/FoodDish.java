@@ -3,6 +3,7 @@ package red.softn.npedidos.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -26,6 +27,13 @@ public class FoodDish {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "types_dishes_id", nullable = false)
     private TypeDish typeDishes;
+    
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "ordering_has_food_dishes",
+               joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
+    private List<Ordering> orderings;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

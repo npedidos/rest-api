@@ -3,6 +3,7 @@ package red.softn.npedidos.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class TypeDish {
     
     @Column(name = "name", nullable = false, length = 50)
     private String name;
+    
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDishes")
+    private List<FoodDish> foodDishes;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
