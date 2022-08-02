@@ -1,4 +1,4 @@
-package red.softn.npedidos.configuration;
+package red.softn.npedidos.utils.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

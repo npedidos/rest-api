@@ -1,30 +1,47 @@
 package red.softn.npedidos.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ResolvableType;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.exception.NotFoundException;
 import red.softn.npedidos.pojo.ErrorDetails;
+import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
 
-public abstract class CrudService<T, ID> {
+public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID> {
+    
+    //TODO: por el momento dejo esto asi.
+    @Autowired
+    private GsonUtil gsonUtil;
     
     protected abstract CrudRepository<T, ID> getRepository();
     
-    public List<T> findAll() {
-        return (List<T>) getRepository().findAll();
-    }
+    //TODO: falla al intentar leer el campo LocalDate, hay que agregar un adaptador para este tipo de fecha. ver proyecto standard-web-project.
     
-    public T findById(ID id) {
-        return getRepository().findById(id)
-                              .orElse(null);
-    }
-    
-    public T save(T typeDish) {
-        setFieldId(null, typeDish);
+    public List<R> findAll() {
+        Iterable<T> all = getRepository().findAll();
         
-        return getRepository().save(typeDish);
+        return this.gsonUtil.convertTo(all, getResponseClass());
+    }
+    
+    public R findById(ID id) {
+        T entity = getRepository().findById(id)
+                                  .orElse(null);
+        
+        return this.gsonUtil.convertTo(entity, getResponseClass());
+    }
+    
+    public R save(E typeDish) {
+        T entity = this.gsonUtil.convertTo(typeDish, getEntityClass());
+        
+        setFieldId(null, entity);
+        
+        T save = getRepository().save(entity);
+        
+        return this.gsonUtil.convertTo(save, getResponseClass());
     }
     
     public void delete(ID id) {
@@ -32,11 +49,15 @@ public abstract class CrudService<T, ID> {
         getRepository().deleteById(id);
     }
     
-    public T update(ID id, T typeDish) {
+    public R update(ID id, E typeDish) {
         checkIsExistById(id);
-        setFieldId(id, typeDish);
+        T entity = this.gsonUtil.convertTo(typeDish, getEntityClass());
         
-        return getRepository().save(typeDish);
+        setFieldId(id, entity);
+        
+        T save = getRepository().save(entity);
+        
+        return this.gsonUtil.convertTo(save, getResponseClass());
     }
     
     private void checkIsExistById(ID id) {
@@ -52,6 +73,20 @@ public abstract class CrudService<T, ID> {
             ReflectionUtils.makeAccessible(field);
             ReflectionUtils.setField(field, typeDish, id);
         }
+    }
+    
+    @SuppressWarnings("unchecked")
+    private Class<T> getEntityClass() {
+        return (Class<T>) ResolvableType.forClass(this.getClass())
+                                        .getSuperType()
+                                        .resolveGeneric(2);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private Class<R> getResponseClass() {
+        return (Class<R>) ResolvableType.forClass(this.getClass())
+                                        .getSuperType()
+                                        .resolveGeneric(1);
     }
     
 }

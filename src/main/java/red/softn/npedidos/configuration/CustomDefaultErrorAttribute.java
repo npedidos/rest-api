@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.response.ErrorResponse;
+import red.softn.npedidos.utils.gson.GsonUtil;
 
 import javax.servlet.RequestDispatcher;
 import java.util.Map;
