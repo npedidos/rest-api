@@ -1,6 +1,7 @@
 package red.softn.npedidos.entity;
 
 import lombok.*;
+import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,6 +32,7 @@ public class User {
     
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @GsonExclude
     private List<Ordering> orderings;
     
     public boolean equals(final Object o) {

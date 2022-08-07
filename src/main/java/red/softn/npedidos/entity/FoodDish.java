@@ -1,6 +1,7 @@
 package red.softn.npedidos.entity;
 
 import lombok.*;
+import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -26,6 +27,7 @@ public class FoodDish {
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "types_dishes_id", nullable = false)
+    @GsonExclude
     private TypeDish typeDish;
     
     @ToString.Exclude
@@ -33,6 +35,7 @@ public class FoodDish {
     @JoinTable(name = "ordering_has_food_dishes",
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
+    @GsonExclude
     private List<Ordering> orderings;
     
     public boolean equals(final Object o) {

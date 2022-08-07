@@ -1,6 +1,7 @@
 package red.softn.npedidos.entity;
 
 import lombok.*;
+import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +26,7 @@ public class TypeDish {
     
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDish")
+    @GsonExclude
     private List<FoodDish> foodDishes;
     
     public boolean equals(final Object o) {

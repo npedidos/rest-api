@@ -1,6 +1,7 @@
 package red.softn.npedidos.entity;
 
 import lombok.*;
+import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -29,11 +30,13 @@ public class Ordering {
     @JoinTable(name = "ordering_has_food_dishes",
                joinColumns = @JoinColumn(name = "ordering_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
+    @GsonExclude
     private List<FoodDish> foodDishes;
     
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "users_id", nullable = false)
+    @GsonExclude
     private User user;
     
     public boolean equals(final Object o) {
