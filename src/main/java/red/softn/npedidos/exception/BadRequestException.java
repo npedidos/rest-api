@@ -13,4 +13,8 @@ public class BadRequestException extends DefaultHttpException {
         super(HttpStatus.BAD_REQUEST, errorDetails, cause);
     }
     
+    public BadRequestException(String message) {
+        this(new ErrorDetails(message));
+    }
+    
 }

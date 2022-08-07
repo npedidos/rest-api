@@ -13,4 +13,8 @@ public class InternalServerErrorException extends DefaultHttpException {
         super(HttpStatus.INTERNAL_SERVER_ERROR, errorDetails, cause);
     }
     
+    public InternalServerErrorException(String message) {
+        this(new ErrorDetails(message));
+    }
+    
 }
