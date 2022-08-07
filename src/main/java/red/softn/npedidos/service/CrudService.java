@@ -19,8 +19,6 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     
     protected abstract CrudRepository<T, ID> getRepository();
     
-    //TODO: falla al intentar leer el campo LocalDate, hay que agregar un adaptador para este tipo de fecha. ver proyecto standard-web-project.
-    
     public List<R> findAll() {
         Iterable<T> all = getRepository().findAll();
         
