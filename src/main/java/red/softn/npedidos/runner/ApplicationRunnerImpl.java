@@ -32,6 +32,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                     boolean seed = optionNames.contains("seed");
                     this.actionsRun.dbFresh(seed);
                 }
+                default -> throw new IllegalStateException("Unexpected value: " + value);
             }
             
             System.exit(0);
