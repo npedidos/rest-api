@@ -27,7 +27,7 @@ public class DatabaseSeeder {
     
     private final FoodDishRepository foodDishRepository;
     
-    private final OrderingRepository orderingRepository;
+    private final OrderRepository orderRepository;
     
     private final SettingRepository settingRepository;
     
@@ -52,14 +52,14 @@ public class DatabaseSeeder {
         this.excludeDayRepository.deleteAll();
         this.foodDishRepository.deleteAll();
         this.typeDishRepository.deleteAll();
-        this.orderingRepository.deleteAll();
+        this.orderRepository.deleteAll();
         this.settingRepository.deleteAll();
         this.userRepository.deleteAll();
         log.info("Proceso finalizado.");
     }
     
     private void relationshipFactory() {
-        Iterable<Ordering> orderings = this.orderingRepository.findAll();
+        Iterable<Order> orderings = this.orderRepository.findAll();
         Iterable<FoodDish> foodDishes = this.foodDishRepository.findAll();
         
         orderings.forEach(value -> {
@@ -69,7 +69,7 @@ public class DatabaseSeeder {
             
             value.setFoodDishes(foodDishList);
             
-            this.orderingRepository.save(value);
+            this.orderRepository.save(value);
         });
         
     }
@@ -115,7 +115,7 @@ public class DatabaseSeeder {
     }
     
     private void orderingFactory(int count) {
-        log.info("Insertando registros Ordering...");
+        log.info("Insertando registros Order...");
         DateAndTime date = this.faker.date();
         RandomService random = this.faker.random();
         Iterable<User> all = this.userRepository.findAll();
@@ -124,13 +124,13 @@ public class DatabaseSeeder {
         Options options = this.faker.options();
         
         run(count, () -> {
-            Ordering ordering = new Ordering();
+            Order order = new Order();
             LocalDateTime dateNoExclude = getDateNoExclude(date, random);
             
-            ordering.setDateOrder(dateNoExclude);
-            ordering.setUser(options.nextElement(userList));
+            order.setDateOrder(dateNoExclude);
+            order.setUser(options.nextElement(userList));
             
-            this.orderingRepository.save(ordering);
+            this.orderRepository.save(order);
         });
     }
     

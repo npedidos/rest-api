@@ -36,7 +36,7 @@ public class FoodDish {
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
     @GsonExclude
-    private List<Ordering> orderings;
+    private List<Order> orders;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

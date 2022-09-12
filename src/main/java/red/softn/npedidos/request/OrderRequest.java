@@ -1,11 +1,11 @@
-package red.softn.npedidos.response;
+package red.softn.npedidos.request;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class OrderingResponse {
+public class OrderRequest {
     
     private Integer id;
     

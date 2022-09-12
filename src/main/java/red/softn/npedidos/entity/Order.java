@@ -14,8 +14,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@Table(name = "ordering")
-public class Ordering {
+@Table(name = "orders")
+public class Order {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +27,8 @@ public class Ordering {
     
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "ordering_has_food_dishes",
-               joinColumns = @JoinColumn(name = "ordering_id", nullable = false),
+    @JoinTable(name = "orders_has_food_dishes",
+               joinColumns = @JoinColumn(name = "orders_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
     @GsonExclude
     private List<FoodDish> foodDishes;
@@ -41,7 +41,7 @@ public class Ordering {
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
-        if (!(o instanceof final Ordering other)) {return false;}
+        if (!(o instanceof final Order other)) {return false;}
         if (!other.canEqual(this)) {return false;}
         final Object this$id = this.getId();
         final Object other$id = other.getId();
@@ -54,7 +54,7 @@ public class Ordering {
         return Objects.equals(this$user, other$user);
     }
     
-    protected boolean canEqual(final Object other) {return other instanceof Ordering;}
+    protected boolean canEqual(final Object other) {return other instanceof Order;}
     
     public int hashCode() {
         final int PRIME = 59;
