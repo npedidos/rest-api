@@ -11,7 +11,7 @@ import red.softn.npedidos.response.OrderResponse;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class OrderingService extends CrudService<OrderRequest, OrderResponse, Order, Integer> {
+public class OrderService extends CrudService<OrderRequest, OrderResponse, Order, Integer> {
     
     private final OrderRepository repository;
     
