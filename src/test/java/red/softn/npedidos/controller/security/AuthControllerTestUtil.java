@@ -11,7 +11,7 @@ import red.softn.npedidos.response.TokenAuthenticationResponse;
 import java.util.Collections;
 
 @Getter
-public class AuthControllerUtil {
+public class AuthControllerTestUtil {
     
     private User userEntity;
     
@@ -25,7 +25,7 @@ public class AuthControllerUtil {
     @Getter(value = AccessLevel.PRIVATE)
     private final Faker faker;
     
-    public AuthControllerUtil(PasswordEncoder passwordEncoder, Faker faker) {
+    public AuthControllerTestUtil(PasswordEncoder passwordEncoder, Faker faker) {
         this.passwordEncoder = passwordEncoder;
         this.faker = faker;
         initLogin();
@@ -46,7 +46,7 @@ public class AuthControllerUtil {
                                                                              .build();
         
         userEntity.setId(this.faker.random()
-                                   .nextInt());
+                                   .nextInt(100));
         userEntity.setEmail(this.faker.internet()
                                       .emailAddress());
         userEntity.setUsername(username);

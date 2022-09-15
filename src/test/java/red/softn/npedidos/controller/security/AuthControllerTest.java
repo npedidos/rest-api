@@ -42,18 +42,18 @@ class AuthControllerTest {
     @Autowired
     private Faker faker;
     
-    private AuthControllerUtil authControllerUtil;
+    private AuthControllerTestUtil authControllerTestUtil;
     
     @BeforeEach
     void setUp() {
-        authControllerUtil = new AuthControllerUtil(this.passwordEncoder, this.faker);
+        authControllerTestUtil = new AuthControllerTestUtil(this.passwordEncoder, this.faker);
     }
     
     @Test
     void testLoginStatusIsOK() throws Exception {
-        var response = authControllerUtil.getTokenAuthenticationResponse();
-        var userEntity = this.authControllerUtil.getUserEntity();
-        var request = this.authControllerUtil.getUserDetails();
+        var response = authControllerTestUtil.getTokenAuthenticationResponse();
+        var userEntity = this.authControllerTestUtil.getUserEntity();
+        var request = this.authControllerTestUtil.getUserDetails();
         String username = request.getUsername();
         
         when(this.authService.login(request)).thenReturn(response);
