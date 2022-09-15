@@ -4,10 +4,10 @@ NPedidos es una aplicación de gestión de pedidos de comidas.
 
 ## Requisitos
 
-Java 17
-Maven 3.8.5
-MySQL 8
-Wildfly 26 (Opcional)
+* Java 17
+* Maven 3.8.5
+* MySQL 8
+* Wildfly 26 (Opcional)
 
 ## Contribuir
 
