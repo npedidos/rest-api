@@ -172,15 +172,12 @@ public class DatabaseSeeder {
     }
     
     private LocalDateTime getDateNoExclude(DateAndTime date, RandomService random) {
-        boolean present;
         LocalDateTime localDateTime;
         
         do {
             localDateTime = date.future(random.nextInt(1, 100), TimeUnit.DAYS)
                                 .toLocalDateTime();
-            present = this.excludeDayRepository.findByDateExclude(localDateTime.toLocalDate())
-                                               .isPresent();
-        } while (present);
+        } while (this.excludeDayRepository.existsByDateExclude(localDateTime.toLocalDate()));
         
         return localDateTime;
     }
