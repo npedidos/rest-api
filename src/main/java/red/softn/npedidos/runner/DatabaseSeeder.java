@@ -7,6 +7,7 @@ import net.datafaker.Faker;
 import net.datafaker.Food;
 import net.datafaker.Options;
 import net.datafaker.service.RandomService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import red.softn.npedidos.entity.*;
 import red.softn.npedidos.repository.*;
@@ -34,6 +35,8 @@ public class DatabaseSeeder {
     private final TypeDishRepository typeDishRepository;
     
     private final UserRepository userRepository;
+    
+    private final PasswordEncoder passwordEncoder;
     
     public void db() {
         log.info("Insertando datos de prueba...");
@@ -78,12 +81,13 @@ public class DatabaseSeeder {
         log.info("Insertando registros User...");
         run(count, () -> {
             User user = new User();
+            String username = this.faker.name()
+                                        .username();
+            
             user.setEmail(this.faker.internet()
                                     .emailAddress());
-            user.setUsername(this.faker.name()
-                                       .username());
-            user.setPassword(this.faker.internet()
-                                       .password(45, 45));
+            user.setUsername(username);
+            user.setPassword(this.passwordEncoder.encode(username));
             
             this.userRepository.save(user);
         });
