@@ -32,9 +32,9 @@ public class FoodDish {
     
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "ordering_has_food_dishes",
+    @JoinTable(name = "orders_has_food_dishes",
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
-               inverseJoinColumns = @JoinColumn(name = "ordering_id", nullable = false))
+               inverseJoinColumns = @JoinColumn(name = "orders_id", nullable = false))
     @GsonExclude
     private List<Order> orders;
     
