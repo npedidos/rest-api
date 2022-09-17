@@ -2,6 +2,7 @@ package red.softn.npedidos.configuration;
 
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +18,12 @@ public class AppConfig implements WebMvcConfigurer {
     
     private final ServerProperties serverProperties;
     
+    @Value("${app.http.path.prefix:}")
+    private String pathPrefix;
+    
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix("/api", HandlerTypePredicate.forAnnotation(RestController.class));
+        configurer.addPathPrefix(pathPrefix, HandlerTypePredicate.forAnnotation(RestController.class));
     }
     
     @Bean
