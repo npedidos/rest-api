@@ -1,13 +1,14 @@
 package red.softn.npedidos.controller;
 
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import red.softn.npedidos.exception.InternalServerErrorException;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.service.CrudServiceI;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.net.URI;
 
@@ -26,13 +27,14 @@ public abstract class CrudController<E, R, ID> {
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody E typeDish) {
+    public ResponseEntity<?> save(@RequestBody E typeDish, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) {
         R save = getService().save(typeDish);
         Object valueId = getValueId(save);
+        URI uri = uriComponentsBuilder.path(request.getServletPath() + "/{id}")
+                                      .buildAndExpand(valueId)
+                                      .toUri();
         
-        //TODO: ver ejemplos para el create uri.
-        
-        return ResponseEntity.created(getUri(valueId))
+        return ResponseEntity.created(uri)
                              .body(save);
     }
     
@@ -47,13 +49,6 @@ public abstract class CrudController<E, R, ID> {
         
         return ResponseEntity.noContent()
                              .build();
-    }
-    
-    private URI getUri(Object valueId) {
-        RequestMapping requestMapping = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-        String[] path = requestMapping.path();
-        
-        return URI.create(String.format("%s/%s", path[0], valueId));
     }
     
     private Object getValueId(R save) {
