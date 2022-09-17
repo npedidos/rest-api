@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Getter
-public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
+public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
     
     private T controllerTestUtil;
     
