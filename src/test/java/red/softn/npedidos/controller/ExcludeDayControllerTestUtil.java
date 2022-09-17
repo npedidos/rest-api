@@ -12,8 +12,8 @@ import java.util.List;
 @Getter
 public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDayRequest, ExcludeDayResponse, Integer> {
     
-    public ExcludeDayControllerTestUtil(Faker faker, Gson gson, String urlMapping) {
-        super(faker, gson, urlMapping);
+    public ExcludeDayControllerTestUtil(Faker faker, Gson gson) {
+        super(faker, gson);
     }
     
     @Override

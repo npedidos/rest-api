@@ -1,16 +1,17 @@
 package red.softn.npedidos.controller.security;
 
-import net.datafaker.Faker;
+import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.web.servlet.MockMvc;
+import red.softn.npedidos.configuration.security.WebSecurityConfig;
+import red.softn.npedidos.controller.AControllerTest;
 import red.softn.npedidos.repository.UserRepository;
 import red.softn.npedidos.service.security.AuthService;
-import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.util.Optional;
 
@@ -21,17 +22,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthController.class)
-    //@Import({WebSecurityConfig.class})
-class AuthControllerTest {
-    
-    @Autowired
-    private MockMvc mockMvc;
+@Import({WebSecurityConfig.class})
+@Getter
+class AuthControllerTest extends AControllerTest {
     
     @MockBean
     private AuthService authService;
-    
-    @MockBean
-    private GsonUtil gsonUtil;
     
     @MockBean
     private UserRepository userRepository;
@@ -39,14 +35,13 @@ class AuthControllerTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
     
-    @Autowired
-    private Faker faker;
-    
     private AuthControllerTestUtil authControllerTestUtil;
+    
+    private final String urlMapping = "/api/auth";
     
     @BeforeEach
     void setUp() {
-        authControllerTestUtil = new AuthControllerTestUtil(this.passwordEncoder, this.faker);
+        authControllerTestUtil = new AuthControllerTestUtil(this.passwordEncoder, getFaker());
     }
     
     @Test
@@ -56,12 +51,12 @@ class AuthControllerTest {
         var request = this.authControllerTestUtil.getUserDetails();
         String username = request.getUsername();
         
-        when(this.authService.login(request)).thenReturn(response);
+        when(this.authService.login(eq(request))).thenReturn(response);
         when(this.userRepository.findByUsername(eq(username))).thenReturn(Optional.of(userEntity));
         
-        var requestBuilder = post("/api/auth/login").with(httpBasic(username, username));
+        var requestBuilder = post(getUrlMapping() + "/login").with(httpBasic(username, username));
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isOk());
     }
     

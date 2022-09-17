@@ -25,18 +25,15 @@ public abstract class AControllerTestUtil<E, R, ID> {
     
     private final String requestJSON;
     
-    private final String urlMapping;
-    
     @Getter(value = AccessLevel.PROTECTED)
     private final Faker faker;
     
     @Getter(value = AccessLevel.PROTECTED)
     private final Gson gson;
     
-    public AControllerTestUtil(Faker faker, Gson gson, String urlMapping) {
+    public AControllerTestUtil(Faker faker, Gson gson) {
         this.faker = faker;
         this.gson = gson;
-        this.urlMapping = urlMapping;
         setRequestResponse();
         this.requestJSON = this.gson.toJson(this.request);
         this.responseList = List.of(this.response);

@@ -1,20 +1,14 @@
 package red.softn.npedidos.controller;
 
 import com.google.gson.Gson;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.service.CrudServiceI;
-import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -26,32 +20,17 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Setter(value = AccessLevel.PROTECTED)
 @Getter
-public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> {
+public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
     
     private T controllerTestUtil;
     
     private CrudServiceI<E, R, ID> service;
     
-    @Autowired
-    private MockMvc mockMvc;
-    
-    @Autowired
-    private Gson gson;
-    
-    @Autowired
-    private Faker faker;
-    
-    @MockBean
-    private GsonUtil gsonUtil;
-    
     public abstract CrudServiceI<E, R, ID> getService();
     
-    public abstract String getUrlMapping();
-    
     private String urlMappingId() {
-        return this.controllerTestUtil.getUrlMapping() + "/{id}";
+        return getUrlMapping() + "/{id}";
     }
     
     @SuppressWarnings("unchecked")
@@ -63,9 +42,9 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
     
     private T newInstanceControllerTestUtil() {
         try {
-            var accessibleConstructor = ReflectionUtils.accessibleConstructor(getControllerTestUtilClass(), Faker.class, Gson.class, String.class);
+            var accessibleConstructor = ReflectionUtils.accessibleConstructor(getControllerTestUtilClass(), Faker.class, Gson.class);
             
-            return accessibleConstructor.newInstance(getFaker(), getGson(), getUrlMapping());
+            return accessibleConstructor.newInstance(getFaker(), getGson());
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                  IllegalAccessException e) {
             throw new RuntimeException("Error al crear la instancia de la clase ControllerTestUtil.");
@@ -84,9 +63,9 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
         
         when(this.service.findAll()).thenReturn(response);
         
-        var requestBuilder = get(this.controllerTestUtil.getUrlMapping()).with(jwt());
+        var requestBuilder = get(getUrlMapping()).with(jwt());
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isOk());
     }
     
@@ -99,7 +78,7 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
         
         var requestBuilder = get(urlMappingId(), id).with(jwt());
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isOk());
     }
     
@@ -111,11 +90,11 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
         
         when(this.service.save(eq(request))).thenReturn(response);
         
-        var requestBuilder = post(this.controllerTestUtil.getUrlMapping()).with(jwt())
-                                                                          .contentType(MediaType.APPLICATION_JSON)
-                                                                          .content(requestJSON);
+        var requestBuilder = post(getUrlMapping()).with(jwt())
+                                                  .contentType(MediaType.APPLICATION_JSON)
+                                                  .content(requestJSON);
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isCreated());
     }
     
@@ -132,7 +111,7 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
                                                     .contentType(MediaType.APPLICATION_JSON)
                                                     .content(requestJSON);
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isOk());
     }
     
@@ -145,7 +124,7 @@ public abstract class CrudControllerTest<E, R, ID, T extends AControllerTestUtil
         
         var requestBuilder = delete(urlMappingId(), id).with(jwt());
         
-        this.mockMvc.perform(requestBuilder)
+        getMockMvc().perform(requestBuilder)
                     .andExpect(status().isNoContent());
     }
     
