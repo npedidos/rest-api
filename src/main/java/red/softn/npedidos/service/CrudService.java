@@ -2,7 +2,7 @@ package red.softn.npedidos.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.exception.NotFoundException;
 import red.softn.npedidos.pojo.ErrorDetails;
@@ -17,7 +17,7 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     @Autowired
     private GsonUtil gsonUtil;
     
-    protected abstract CrudRepository<T, ID> getRepository();
+    protected abstract JpaRepository<T, ID> getRepository();
     
     public List<R> findAll() {
         Iterable<T> all = getRepository().findAll();
