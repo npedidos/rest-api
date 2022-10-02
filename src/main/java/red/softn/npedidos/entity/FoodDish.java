@@ -31,7 +31,7 @@ public class FoodDish {
     private TypeDish typeDish;
     
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "orders_has_food_dishes",
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "orders_id", nullable = false))
