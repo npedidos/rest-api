@@ -1,0 +1,43 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+    - uses: actions/checkout@v3
+    
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+        
+    - name: Compile with Maven
+      run: mvn -B compile --file pom.xml
+      
+    - name: Test
+      run: mvn -B test --file pom.xml
+
+    - name: Report results to DeepSource
+      run: |
+            # Install deepsource CLI
+            curl https://deepsource.io/cli | sh
+
+            # From the root directory, run the report coverage command
+            ./bin/deepsource report --analyzer test-coverage --key java --value-file ./target/site/jacoco/jacoco.xml
+
+    env:
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+
+
+  
