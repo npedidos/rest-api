@@ -1,8 +1,12 @@
 package red.softn.npedidos.service;
 
+import red.softn.npedidos.response.PagingAndSortingResponse;
+
 import java.util.List;
 
 public interface CrudServiceI<E, R, ID> {
+    
+    PagingAndSortingResponse<R> findAll(String filter);
     
     List<R> findAll();
     
