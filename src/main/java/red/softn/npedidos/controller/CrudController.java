@@ -18,7 +18,7 @@ public abstract class CrudController<E, R, ID> {
     public abstract CrudServiceI<E, R, ID> getService();
     
     @GetMapping
-    public ResponseEntity<?> findAll(@RequestParam("f") String filter) {
+    public ResponseEntity<?> findAll(@RequestParam(value = "f", required = false) String filter) {
         if (StringUtils.isBlank(filter)) {
             return ResponseEntity.ok(getService().findAll());
         }
