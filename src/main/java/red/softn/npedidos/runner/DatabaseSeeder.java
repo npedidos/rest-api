@@ -62,6 +62,7 @@ public class DatabaseSeeder {
     }
     
     private void relationshipFactory() {
+        log.info("Insertando relaciones de tablas...");
         Iterable<Order> orderings = this.orderRepository.findAll();
         Iterable<FoodDish> foodDishes = this.foodDishRepository.findAll();
         
