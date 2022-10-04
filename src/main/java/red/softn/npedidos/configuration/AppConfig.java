@@ -5,7 +5,6 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,27 +20,11 @@ public class AppConfig implements WebMvcConfigurer {
     
     private final ServerProperties serverProperties;
     
-    @Value("${app.http.path.prefix:}")
-    private String pathPrefix;
-    
-    @Value("${app.name:}")
-    private String appName;
-    
-    @Value("${app.description:}")
-    private String appDescription;
-    
-    @Value("${app.version:0}")
-    private String appVersion;
-    
-    @Value("${app.licenses.name:}")
-    private String appLicensesName;
-    
-    @Value("${app.licenses.url:}")
-    private String appLicensesUrl;
+    private final AppProperties appProperties;
     
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.addPathPrefix(pathPrefix, HandlerTypePredicate.forAnnotation(RestController.class));
+        configurer.addPathPrefix(appProperties.getPathPrefix(), HandlerTypePredicate.forAnnotation(RestController.class));
     }
     
     @Bean
@@ -56,11 +39,11 @@ public class AppConfig implements WebMvcConfigurer {
     
     @Bean
     public OpenAPI openAPI() {
-        var license = new License().name(appLicensesName)
-                                   .url(appLicensesUrl);
-        var info = new Info().title(appName)
-                             .description(appDescription)
-                             .version(appVersion)
+        var license = new License().name(appProperties.getAppLicensesName())
+                                   .url(appProperties.getAppLicensesUrl());
+        var info = new Info().title(appProperties.getAppName())
+                             .description(appProperties.getAppDescription())
+                             .version(appProperties.getAppVersion())
                              .license(license);
         
         return new OpenAPI().info(info);
