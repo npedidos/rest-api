@@ -5,9 +5,11 @@ import lombok.Getter;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
 import org.springframework.util.ReflectionUtils;
+import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.service.CrudServiceI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -20,6 +22,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Import({AppProperties.class})
 @Getter
 public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
     

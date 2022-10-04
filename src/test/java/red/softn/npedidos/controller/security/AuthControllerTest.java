@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.configuration.security.WebSecurityConfig;
 import red.softn.npedidos.controller.AControllerTest;
 import red.softn.npedidos.repository.UserRepository;
@@ -22,7 +23,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AuthController.class)
-@Import({WebSecurityConfig.class})
+@Import({
+    WebSecurityConfig.class,
+    AppProperties.class
+})
 @Getter
 class AuthControllerTest extends AControllerTest {
     
