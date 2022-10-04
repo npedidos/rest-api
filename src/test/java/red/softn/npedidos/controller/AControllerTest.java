@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
+import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.utils.gson.GsonConfig;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
-@Import({GsonConfig.class})
+@Import({
+    GsonConfig.class,
+    AppProperties.class
+})
 @Getter
 public abstract class AControllerTest {
     

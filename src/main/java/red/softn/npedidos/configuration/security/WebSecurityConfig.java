@@ -7,7 +7,6 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -26,6 +25,7 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.repository.UserRepository;
 import red.softn.npedidos.service.security.UserDetailsServiceImpl;
 
@@ -34,23 +34,16 @@ import red.softn.npedidos.service.security.UserDetailsServiceImpl;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     
-    @Value("${app.http.path.prefix:}")
-    private String pathPrefix;
-    
-    @Value("${app.http.paths.permit-all:}")
-    private String[] permitAllPaths;
-    
-    @Value("${app.security.jwt.secret}")
-    private String secretKey;
-    
     private final UserRepository userRepository;
+    
+    private final AppProperties appProperties;
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.antMatcher(pathPrefix + "/**")
+        http.antMatcher(appProperties.getPathPrefix() + "/**")
             .authorizeRequests(authorizeRequestCustomizer -> {
-                if (ArrayUtils.isNotEmpty(permitAllPaths)) {
-                    authorizeRequestCustomizer.antMatchers(permitAllPaths)
+                if (ArrayUtils.isNotEmpty(appProperties.getPermitAllPaths())) {
+                    authorizeRequestCustomizer.antMatchers(appProperties.getPermitAllPaths())
                                               .permitAll();
                 }
             
@@ -88,7 +81,7 @@ public class WebSecurityConfig {
     
     @Bean
     public JwtEncoder jwtEncoder() throws KeyLengthException {
-        MACSigner macSigner = new MACSigner(secretKey);
+        MACSigner macSigner = new MACSigner(appProperties.getSecretKey());
         JWKSource<SecurityContext> jwkSource = new ImmutableSecret<>(macSigner.getSecretKey());
         
         return new NimbusJwtEncoder(jwkSource);
@@ -96,7 +89,7 @@ public class WebSecurityConfig {
     
     @Bean
     public JwtDecoder jwtDecoder() throws KeyLengthException {
-        MACSigner macSigner = new MACSigner(secretKey);
+        MACSigner macSigner = new MACSigner(appProperties.getSecretKey());
         
         return NimbusJwtDecoder.withSecretKey(macSigner.getSecretKey())
                                .macAlgorithm(MacAlgorithm.HS256)
