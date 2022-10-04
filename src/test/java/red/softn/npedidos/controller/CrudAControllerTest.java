@@ -1,7 +1,6 @@
 package red.softn.npedidos.controller;
 
 import com.google.gson.Gson;
-import lombok.Getter;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,18 +13,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Getter
 public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
     
     private T controllerTestUtil;
-    
-    private CrudServiceI<E, R, ID> service;
     
     public abstract CrudServiceI<E, R, ID> getService();
     
@@ -54,14 +50,13 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
     @BeforeEach
     public void setUp() {
         this.controllerTestUtil = newInstanceControllerTestUtil();
-        this.service = getService();
     }
     
     @Test
     void testFindAllStatusIsOk() throws Exception {
         List<R> response = this.controllerTestUtil.getResponseList();
         
-        when(this.service.findAll()).thenReturn(response);
+        when(getService().findAll()).thenReturn(response);
         
         var requestBuilder = get(getUrlMapping()).with(jwt());
         
@@ -74,7 +69,7 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
         ID id = this.controllerTestUtil.getId();
         R response = this.controllerTestUtil.getResponse();
         
-        when(this.service.findById(eq(id))).thenReturn(response);
+        when(getService().findById(eq(id))).thenReturn(response);
         
         var requestBuilder = get(urlMappingId(), id).with(jwt());
         
@@ -88,7 +83,7 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
         var request = this.controllerTestUtil.getRequest();
         String requestJSON = this.controllerTestUtil.getRequestJSON();
         
-        when(this.service.save(eq(request))).thenReturn(response);
+        when(getService().save(eq(request))).thenReturn(response);
         
         var requestBuilder = post(getUrlMapping()).with(jwt())
                                                   .contentType(MediaType.APPLICATION_JSON)
@@ -105,7 +100,7 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
         var requestJSON = this.controllerTestUtil.getRequestJSON();
         ID id = this.controllerTestUtil.getId();
         
-        when(this.service.update(eq(id), eq(request))).thenReturn(response);
+        when(getService().update(eq(id), eq(request))).thenReturn(response);
         
         var requestBuilder = put(urlMappingId(), id).with(jwt())
                                                     .contentType(MediaType.APPLICATION_JSON)
@@ -119,13 +114,12 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
     void testDeleteStatusIsNoContent() throws Exception {
         ID id = this.controllerTestUtil.getId();
         
-        doNothing().when(this.service)
-                   .delete(eq(id));
-        
         var requestBuilder = delete(urlMappingId(), id).with(jwt());
         
         getMockMvc().perform(requestBuilder)
                     .andExpect(status().isNoContent());
+        
+        verify(getService()).delete(eq(id));
     }
     
 }
