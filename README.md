@@ -2,8 +2,8 @@
 
 [![DeepSource](https://deepsource.io/gh/npedidos/rest-api.svg/?label=active+issues&show_trend=true&token=Dfu5Zcgrcwn5tDz83zE1QmFe)](https://deepsource.io/gh/npedidos/rest-api/?ref=repository-badge)
 [![hacktoberfest issues](https://img.shields.io/github/hacktoberfest/2022/npedidos/rest-api?color=%237259a3&style=flat-square)](https://github.com/npedidos/rest-api/issues?q=is%3Aissue+label%3Ahacktoberfest+is%3Aopen)
-![Build Status](https://img.shields.io/github/workflow/status/npedidos/rest-api/Build%20-%20master?label=Build%20-%20master&style=flat-square)
-![Repo size](https://img.shields.io/github/repo-size/npedidos/rest-api?style=flat-square)
+[![Build Status](https://img.shields.io/github/workflow/status/npedidos/rest-api/Build%20-%20master?label=Build%20-%20master&style=flat-square)](https://github.com/npedidos/rest-api/actions/workflows/build.yml)
+[![Repo size](https://img.shields.io/github/repo-size/npedidos/rest-api?style=flat-square)](https://github.com/npedidos/rest-api)
 
 [![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
 
@@ -137,8 +137,8 @@ Puedes acceder a la información de la API con swagger en las siguientes URL:
 
 Al acceder se te pedirá ingresar un usuario y contraseña.
 
-> Previamente, rellenar la base de datos con datos de pruebas, ya que este proceso crear usuarios. Por el momento
-> cualquier es válido para acceder.
+> Previamente, rellenar la base de datos con datos de pruebas, ya que este proceso creara usuarios con los que puedes
+> acceder. Por el momento cualquiera es válido para acceder.
 
 ## Contribuir
 
