@@ -18,8 +18,8 @@ public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDay
         var request = new ExcludeDayRequest();
         var response = new ExcludeDayResponse();
         
-        request.setId(getRandomInteger());
-        request.setDateExclude(getDateFutureDays());
+        request.setId(fakeRandomInteger());
+        request.setDateExclude(fakeDateFutureDays());
         response.setId(request.getId());
         response.setDateExclude(request.getDateExclude());
         

@@ -18,8 +18,8 @@ public class FoodDishServiceTestUtil extends CrudServiceTestUtil<FoodDishRequest
         var entity = new FoodDish();
         var entitySaveResult = new FoodDish();
         
-        entity.setId(getRandomInteger());
-        entity.setName(getRandomWord());
+        entity.setId(fakeRandomInteger());
+        entity.setName(fakeRandomWord());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setName(entity.getName());
         response.setId(entity.getId());

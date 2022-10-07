@@ -1,16 +1,14 @@
 package red.softn.npedidos.service;
 
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.Value;
 import net.datafaker.Faker;
+import red.softn.npedidos.TestUtil;
 
 import java.util.List;
 
 @Getter
-@Setter(AccessLevel.PROTECTED)
-public abstract class CrudServiceTestUtil<E, R, T, ID> {
+public abstract class CrudServiceTestUtil<E, R, T, ID> extends TestUtil {
     
     private E request;
     
@@ -22,30 +20,18 @@ public abstract class CrudServiceTestUtil<E, R, T, ID> {
     
     private ID id;
     
-    private List<R> responseList;
+    private final List<R> responseList;
     
-    private List<T> entityList;
-    
-    private Faker faker;
+    private final List<T> entityList;
     
     public CrudServiceTestUtil(Faker faker) {
-        this.faker = faker;
+        super(faker);
         setInit();
         this.responseList = List.of(this.response);
         this.entityList = List.of(this.entity);
     }
     
     public abstract Init<E, R, T, ID> init();
-    
-    public Integer getRandomInteger() {
-        return this.faker.random()
-                         .nextInt(1, 1000);
-    }
-    
-    public String getRandomWord() {
-        return this.faker.lorem()
-                         .word();
-    }
     
     private void setInit() {
         Init<E, R, T, ID> init = init();

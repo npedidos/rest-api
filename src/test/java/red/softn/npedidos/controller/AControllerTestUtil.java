@@ -3,17 +3,14 @@ package red.softn.npedidos.controller;
 import com.google.gson.Gson;
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.Value;
 import net.datafaker.Faker;
+import red.softn.npedidos.TestUtil;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Getter
-@Setter(AccessLevel.PROTECTED)
-public abstract class AControllerTestUtil<E, R, ID> {
+public abstract class AControllerTestUtil<E, R, ID> extends TestUtil {
     
     private E request;
     
@@ -26,13 +23,10 @@ public abstract class AControllerTestUtil<E, R, ID> {
     private final String requestJSON;
     
     @Getter(value = AccessLevel.PROTECTED)
-    private final Faker faker;
-    
-    @Getter(value = AccessLevel.PROTECTED)
     private final Gson gson;
     
     public AControllerTestUtil(Faker faker, Gson gson) {
-        this.faker = faker;
+        super(faker);
         this.gson = gson;
         setInit();
         this.requestJSON = this.gson.toJson(this.request);
@@ -46,18 +40,6 @@ public abstract class AControllerTestUtil<E, R, ID> {
         this.request = init.getRequest();
         this.response = init.getResponse();
         this.id = init.getId();
-    }
-    
-    public Integer getRandomInteger() {
-        return this.faker.random()
-                         .nextInt(1, 1000);
-    }
-    
-    public LocalDate getDateFutureDays() {
-        return this.faker.date()
-                         .future(getRandomInteger(), TimeUnit.DAYS)
-                         .toLocalDateTime()
-                         .toLocalDate();
     }
     
     @Value(staticConstructor = "of")

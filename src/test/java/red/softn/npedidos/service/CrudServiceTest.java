@@ -4,9 +4,9 @@ import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.core.ResolvableType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.configuration.AppConfig;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
@@ -36,10 +36,12 @@ abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil<E, R, 
         this.crudServiceTestUtil = newCrudServiceTestUtil();
     }
     
+    @SuppressWarnings("unchecked")
     private U newCrudServiceTestUtil() {
         try {
             Faker faker = new AppConfig(null, null).faker();
-            var accessibleConstructor = ReflectionUtils.accessibleConstructor(getCrudServiceTestUtilClass(), Faker.class);
+            Class<U> crudServiceTestUtilClass = (Class<U>) getCrudServiceTestUtilClass();
+            var accessibleConstructor = ReflectionUtils.accessibleConstructor(crudServiceTestUtilClass, Faker.class);
             
             return accessibleConstructor.newInstance(faker);
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
@@ -48,25 +50,16 @@ abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil<E, R, 
         }
     }
     
-    @SuppressWarnings("unchecked")
-    private Class<U> getCrudServiceTestUtilClass() {
-        return (Class<U>) ResolvableType.forClass(this.getClass())
-                                        .getSuperType()
-                                        .resolveGeneric(4);
+    private Class<?> getCrudServiceTestUtilClass() {
+        return TestUtil.resolveGeneric(getClass(), 4);
     }
     
-    @SuppressWarnings("unchecked")
-    private Class<T> getResponseClass() {
-        return (Class<T>) ResolvableType.forClass(this.getClass())
-                                        .getSuperType()
-                                        .resolveGeneric(1);
+    private Class<?> getResponseClass() {
+        return TestUtil.resolveGeneric(getClass(), 1);
     }
     
-    @SuppressWarnings("unchecked")
-    private Class<T> getEntityClass() {
-        return (Class<T>) ResolvableType.forClass(this.getClass())
-                                        .getSuperType()
-                                        .resolveGeneric(2);
+    private Class<?> getEntityClass() {
+        return TestUtil.resolveGeneric(getClass(), 2);
     }
     
     @Test

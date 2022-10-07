@@ -4,9 +4,9 @@ import com.google.gson.Gson;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.ResolvableType;
 import org.springframework.http.MediaType;
 import org.springframework.util.ReflectionUtils;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.service.CrudServiceI;
 
 import java.lang.reflect.InvocationTargetException;
@@ -29,16 +29,15 @@ public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUti
         return getUrlMapping() + "/{id}";
     }
     
-    @SuppressWarnings("unchecked")
-    private Class<T> getControllerTestUtilClass() {
-        return (Class<T>) ResolvableType.forClass(this.getClass())
-                                        .getSuperType()
-                                        .resolveGeneric(3);
+    private Class<?> getControllerTestUtilClass() {
+        return TestUtil.resolveGeneric(getClass(), 3);
     }
     
+    @SuppressWarnings("unchecked")
     private T newInstanceControllerTestUtil() {
         try {
-            var accessibleConstructor = ReflectionUtils.accessibleConstructor(getControllerTestUtilClass(), Faker.class, Gson.class);
+            Class<T> controllerTestUtilClass = (Class<T>) getControllerTestUtilClass();
+            var accessibleConstructor = ReflectionUtils.accessibleConstructor(controllerTestUtilClass, Faker.class, Gson.class);
             
             return accessibleConstructor.newInstance(getFaker(), getGson());
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
