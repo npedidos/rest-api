@@ -19,7 +19,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public abstract class CrudAControllerTest<E, R, ID, T extends AControllerTestUtil<E, R, ID>> extends AControllerTest {
+public abstract class CrudControllerTest<E, R, ID, T extends ControllerTestUtil<E, R, ID>> extends ControllerTest {
     
     private T controllerTestUtil;
     

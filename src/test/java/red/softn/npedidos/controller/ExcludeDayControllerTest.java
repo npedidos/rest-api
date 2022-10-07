@@ -9,7 +9,7 @@ import red.softn.npedidos.service.ExcludeDayService;
 
 @WebMvcTest(ExcludeDayController.class)
 @Getter
-class ExcludeDayAControllerTest extends CrudAControllerTest<ExcludeDayRequest, ExcludeDayResponse, Integer, ExcludeDayControllerTestUtil> {
+class ExcludeDayControllerTest extends CrudControllerTest<ExcludeDayRequest, ExcludeDayResponse, Integer, ExcludeDayControllerTestUtil> {
     
     @MockBean
     private ExcludeDayService service;

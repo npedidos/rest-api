@@ -16,7 +16,7 @@ import red.softn.npedidos.utils.gson.GsonUtil;
     AppProperties.class
 })
 @Getter
-public abstract class AControllerTest {
+public abstract class ControllerTest {
     
     @MockBean
     private GsonUtil gsonUtil;

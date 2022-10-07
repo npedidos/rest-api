@@ -10,7 +10,7 @@ import red.softn.npedidos.TestUtil;
 import java.util.List;
 
 @Getter
-public abstract class AControllerTestUtil<E, R, ID> extends TestUtil {
+public abstract class ControllerTestUtil<E, R, ID> extends TestUtil {
     
     private E request;
     
@@ -25,7 +25,7 @@ public abstract class AControllerTestUtil<E, R, ID> extends TestUtil {
     @Getter(value = AccessLevel.PROTECTED)
     private final Gson gson;
     
-    public AControllerTestUtil(Faker faker, Gson gson) {
+    public ControllerTestUtil(Faker faker, Gson gson) {
         super(faker);
         this.gson = gson;
         setInit();

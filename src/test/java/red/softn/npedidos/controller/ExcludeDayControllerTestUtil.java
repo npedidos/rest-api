@@ -7,7 +7,7 @@ import red.softn.npedidos.request.ExcludeDayRequest;
 import red.softn.npedidos.response.ExcludeDayResponse;
 
 @Getter
-public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDayRequest, ExcludeDayResponse, Integer> {
+public class ExcludeDayControllerTestUtil extends ControllerTestUtil<ExcludeDayRequest, ExcludeDayResponse, Integer> {
     
     public ExcludeDayControllerTestUtil(Faker faker, Gson gson) {
         super(faker, gson);

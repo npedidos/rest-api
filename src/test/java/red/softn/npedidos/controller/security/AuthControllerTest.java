@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import red.softn.npedidos.configuration.security.WebSecurityConfig;
-import red.softn.npedidos.controller.AControllerTest;
+import red.softn.npedidos.controller.ControllerTest;
 import red.softn.npedidos.repository.UserRepository;
 import red.softn.npedidos.service.security.AuthService;
 
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AuthController.class)
 @Import({WebSecurityConfig.class})
 @Getter
-class AuthControllerTest extends AControllerTest {
+class AuthControllerTest extends ControllerTest {
     
     @MockBean
     private AuthService authService;
