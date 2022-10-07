@@ -11,7 +11,7 @@ import red.softn.npedidos.response.ExcludeDayResponse;
 @Service
 @RequiredArgsConstructor
 @Getter
-public class ExcludeDayService extends CrudService<ExcludeDayRequest, ExcludeDayResponse, ExcludeDay, Integer> implements CrudServiceI<ExcludeDayRequest, ExcludeDayResponse, Integer> {
+public class ExcludeDayService extends CrudService<ExcludeDayRequest, ExcludeDayResponse, ExcludeDay, Integer> {
     
     private final ExcludeDayRepository repository;
     
