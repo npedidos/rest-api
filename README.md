@@ -57,7 +57,7 @@ Clonar proyecto:
 > File > New > Project from Version Control
 
 <a name="maven-home-path"></a>
-Comprobar que **maven home path** este indicando ruta del maven local:
+Establecer la ruta local de maven:
 
 > File > Settings > Build, Execution, Deployment > Build Tools > Maven
 > - maven home path
