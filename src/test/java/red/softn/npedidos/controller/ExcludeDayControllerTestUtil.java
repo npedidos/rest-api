@@ -6,9 +6,6 @@ import net.datafaker.Faker;
 import red.softn.npedidos.request.ExcludeDayRequest;
 import red.softn.npedidos.response.ExcludeDayResponse;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Getter
 public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDayRequest, ExcludeDayResponse, Integer> {
     
@@ -17,7 +14,7 @@ public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDay
     }
     
     @Override
-    protected List<Object> initRequestResponse() {
+    protected Init<ExcludeDayRequest, ExcludeDayResponse, Integer> init() {
         var request = new ExcludeDayRequest();
         var response = new ExcludeDayResponse();
         
@@ -26,7 +23,7 @@ public class ExcludeDayControllerTestUtil extends AControllerTestUtil<ExcludeDay
         response.setId(request.getId());
         response.setDateExclude(request.getDateExclude());
         
-        return Arrays.asList(request, response, request.getId());
+        return Init.of(request, response, request.getId());
     }
     
 }

@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import net.datafaker.Faker;
-import org.springframework.core.ResolvableType;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,48 +34,18 @@ public abstract class AControllerTestUtil<E, R, ID> {
     public AControllerTestUtil(Faker faker, Gson gson) {
         this.faker = faker;
         this.gson = gson;
-        setRequestResponse();
+        setInit();
         this.requestJSON = this.gson.toJson(this.request);
         this.responseList = List.of(this.response);
     }
     
-    protected abstract List<Object> initRequestResponse();
+    protected abstract Init<E, R, ID> init();
     
-    private void setRequestResponse() {
-        Class<?> requestClass = getRequestClass();
-        Class<?> responseClass = getResponseClass();
-        Class<?> idClass = getIdClass();
-        
-        initRequestResponse().stream()
-                             .forEach(value -> {
-                                 ResolvableType resolvableType = ResolvableType.forClass(value.getClass());
-            
-                                 if (resolvableType.isAssignableFrom(requestClass)) {
-                                     this.request = (E) value;
-                                 } else if (resolvableType.isAssignableFrom(responseClass)) {
-                                     this.response = (R) value;
-                                 } else if (resolvableType.isAssignableFrom(idClass)) {
-                                     this.id = (ID) value;
-                                 }
-                             });
-    }
-    
-    private Class<?> getIdClass() {
-        return getResolveGeneric(2);
-    }
-    
-    private Class<?> getResponseClass() {
-        return getResolveGeneric(1);
-    }
-    
-    private Class<?> getRequestClass() {
-        return getResolveGeneric(0);
-    }
-    
-    private Class<?> getResolveGeneric(int index) {
-        return ResolvableType.forClass(this.getClass())
-                             .getSuperType()
-                             .resolveGeneric(index);
+    private void setInit() {
+        Init<E, R, ID> init = init();
+        this.request = init.getRequest();
+        this.response = init.getResponse();
+        this.id = init.getId();
     }
     
     public Integer getRandomInteger() {
@@ -88,6 +58,17 @@ public abstract class AControllerTestUtil<E, R, ID> {
                          .future(getRandomInteger(), TimeUnit.DAYS)
                          .toLocalDateTime()
                          .toLocalDate();
+    }
+    
+    @Value(staticConstructor = "of")
+    public static class Init<E, R, ID> {
+        
+        E request;
+        
+        R response;
+        
+        ID id;
+        
     }
     
 }
