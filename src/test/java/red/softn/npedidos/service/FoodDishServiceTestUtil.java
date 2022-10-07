@@ -27,7 +27,7 @@ public class FoodDishServiceTestUtil extends CrudServiceTestUtil<FoodDishRequest
         request.setId(entity.getId());
         request.setName(entity.getName());
         
-        return new Init<>(request, response, entity, entitySaveResult, entity.getId());
+        return Init.of(request, response, entity, entitySaveResult, entity.getId());
     }
     
 }

@@ -1,9 +1,9 @@
 package red.softn.npedidos.service;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import net.datafaker.Faker;
 
 import java.util.List;
@@ -57,19 +57,18 @@ public abstract class CrudServiceTestUtil<E, R, T, ID> {
         this.id = init.getId();
     }
     
-    @Getter
-    @AllArgsConstructor
+    @Value(staticConstructor = "of")
     public static class Init<E, R, T, ID> {
         
-        private E request;
+        E request;
         
-        private R response;
+        R response;
         
-        private T entity;
+        T entity;
         
-        private T entitySaveResult;
+        T entitySaveResult;
         
-        private ID id;
+        ID id;
         
     }
     
