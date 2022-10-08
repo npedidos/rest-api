@@ -9,7 +9,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import red.softn.npedidos.configuration.security.WebSecurityConfig;
-import red.softn.npedidos.controller.ControllerTest;
+import red.softn.npedidos.ControllerTest;
 import red.softn.npedidos.repository.UserRepository;
 import red.softn.npedidos.service.security.AuthService;
 

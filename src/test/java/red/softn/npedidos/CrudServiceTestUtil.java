@@ -1,53 +1,57 @@
-package red.softn.npedidos.controller;
+package red.softn.npedidos;
 
-import com.google.gson.Gson;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Value;
 import net.datafaker.Faker;
-import red.softn.npedidos.TestUtil;
 
 import java.util.List;
 
 @Getter
-public abstract class ControllerTestUtil<E, R, ID> extends TestUtil {
+public abstract class CrudServiceTestUtil<E, R, T, ID> extends TestUtil {
     
     private E request;
     
     private R response;
     
+    private T entity;
+    
+    private T entitySaveResult;
+    
     private ID id;
     
     private final List<R> responseList;
     
-    private final String requestJSON;
+    private final List<T> entityList;
     
-    @Getter(value = AccessLevel.PROTECTED)
-    private final Gson gson;
-    
-    public ControllerTestUtil(Faker faker, Gson gson) {
+    public CrudServiceTestUtil(Faker faker) {
         super(faker);
-        this.gson = gson;
         setInit();
-        this.requestJSON = this.gson.toJson(this.request);
         this.responseList = List.of(this.response);
+        this.entityList = List.of(this.entity);
     }
     
-    protected abstract Init<E, R, ID> init();
+    public abstract Init<E, R, T, ID> init();
     
     private void setInit() {
-        Init<E, R, ID> init = init();
+        Init<E, R, T, ID> init = init();
+        
         this.request = init.getRequest();
         this.response = init.getResponse();
+        this.entity = init.getEntity();
+        this.entitySaveResult = init.getEntitySaveResult();
         this.id = init.getId();
     }
     
     @Value(staticConstructor = "of")
-    public static class Init<E, R, ID> {
+    public static class Init<E, R, T, ID> {
         
         E request;
         
         R response;
+        
+        T entity;
+        
+        T entitySaveResult;
         
         ID id;
         

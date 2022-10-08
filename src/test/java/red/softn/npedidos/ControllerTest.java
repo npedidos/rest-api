@@ -1,4 +1,4 @@
-package red.softn.npedidos.controller;
+package red.softn.npedidos;
 
 import com.google.gson.Gson;
 import lombok.Getter;

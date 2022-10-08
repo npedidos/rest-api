@@ -3,6 +3,7 @@ package red.softn.npedidos.controller;
 import lombok.Getter;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import red.softn.npedidos.CrudControllerTest;
 import red.softn.npedidos.request.ExcludeDayRequest;
 import red.softn.npedidos.response.ExcludeDayResponse;
 import red.softn.npedidos.service.ExcludeDayService;

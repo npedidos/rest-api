@@ -1,4 +1,4 @@
-package red.softn.npedidos.controller;
+package red.softn.npedidos;
 
 import com.google.gson.Gson;
 import net.datafaker.Faker;
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.util.ReflectionUtils;
-import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.service.CrudServiceI;
 
 import java.lang.reflect.InvocationTargetException;

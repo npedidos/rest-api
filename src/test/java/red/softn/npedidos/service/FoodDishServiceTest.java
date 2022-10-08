@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import red.softn.npedidos.CrudServiceTest;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.request.FoodDishRequest;

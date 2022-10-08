@@ -1,4 +1,4 @@
-package red.softn.npedidos.service;
+package red.softn.npedidos;
 
 import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,8 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
+import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.configuration.AppConfig;
+import red.softn.npedidos.service.CrudService;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -20,7 +22,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil<E, R, T, ID>> {
+public abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil<E, R, T, ID>> {
     
     private U crudServiceTestUtil;
     
