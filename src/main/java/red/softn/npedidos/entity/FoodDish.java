@@ -38,6 +38,14 @@ public class FoodDish {
     @GsonExclude
     private List<Order> orders;
     
+    @ToString.Exclude
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "menus_has_food_dishes",
+               joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "menus_id", nullable = false))
+    @GsonExclude
+    private List<Menu> menus;
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final FoodDish other)) {return false;}
