@@ -60,11 +60,15 @@ public abstract class CrudController<E, R, ID> {
         Field field = ReflectionUtils.findField(save.getClass(), "id");
         Object fieldId;
         
+        if (field == null) {
+            throw new InternalServerErrorException(new ErrorDetails("La clase no tiene una propiedad ID."));
+        }
+        
         try {
             ReflectionUtils.makeAccessible(field);
             fieldId = ReflectionUtils.getField(field, save);
         } catch (Exception ex) {
-            throw new InternalServerErrorException(new ErrorDetails("Error al obtener el id del objeto."));
+            throw new InternalServerErrorException(new ErrorDetails("Error al obtener el valor de la propiedad ID."));
         }
         
         return fieldId;
