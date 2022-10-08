@@ -9,7 +9,7 @@ import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.service.FoodDishService;
 
 @RestController
-@RequestMapping("/food-dish")
+@RequestMapping("/food-dishes")
 @RequiredArgsConstructor
 @Getter
 public class FoodDishController extends CrudController<FoodDishRequest, FoodDishResponse, Integer> {

@@ -9,7 +9,7 @@ import red.softn.npedidos.response.ExcludeDayResponse;
 import red.softn.npedidos.service.ExcludeDayService;
 
 @RestController
-@RequestMapping("/exclude-day")
+@RequestMapping("/exclude-days")
 @RequiredArgsConstructor
 @Getter
 public class ExcludeDayController extends CrudController<ExcludeDayRequest, ExcludeDayResponse, Integer> {

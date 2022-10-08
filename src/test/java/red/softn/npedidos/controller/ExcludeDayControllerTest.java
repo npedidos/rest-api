@@ -15,6 +15,6 @@ class ExcludeDayControllerTest extends CrudControllerTest<ExcludeDayRequest, Exc
     @MockBean
     private ExcludeDayService service;
     
-    private final String urlMapping = "/api/exclude-day";
+    private final String urlMapping = "/api/exclude-days";
     
 }

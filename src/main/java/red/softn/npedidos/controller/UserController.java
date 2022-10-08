@@ -9,7 +9,7 @@ import red.softn.npedidos.response.UserResponse;
 import red.softn.npedidos.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @Getter
 public class UserController extends CrudController<UserRequest, UserResponse, Integer> {

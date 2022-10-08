@@ -9,7 +9,7 @@ import red.softn.npedidos.response.SettingResponse;
 import red.softn.npedidos.service.SettingService;
 
 @RestController
-@RequestMapping("/setting")
+@RequestMapping("/settings")
 @RequiredArgsConstructor
 @Getter
 public class SettingController extends CrudController<SettingRequest, SettingResponse, Integer> {
