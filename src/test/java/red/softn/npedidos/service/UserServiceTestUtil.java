@@ -21,7 +21,7 @@ public class UserServiceTestUtil extends CrudServiceTestUtil<UserRequest, UserRe
     
         entity.setId(fakeRandomInteger());
         entity.setUsername(fakeRandomWord());
-        entity.setPassword(fakeRandomWord());
+        entity.setPassword(fakeRandomPassword());
         entity.setEmail(fakeRandomEmail());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setUsername(entity.getUsername());
