@@ -38,4 +38,12 @@ public abstract class TestUtil {
                          .word();
     }
     
+    public String fakeRandomEmail() {
+        return this.faker.internet().emailAddress();
+    }
+    
+    public String fakeRandomPassword() {
+        return this.faker.internet().password(60, 60);
+    }
+    
 }
