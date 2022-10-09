@@ -38,4 +38,8 @@ public abstract class TestUtil {
                          .word();
     }
     
+    public String fakeRandomEmail() {
+        return this.fakeRandomWord() + "@" + this.fakeRandomWord() + ".com";
+    }
+    
 }

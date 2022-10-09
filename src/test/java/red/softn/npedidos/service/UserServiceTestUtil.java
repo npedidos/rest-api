@@ -18,15 +18,22 @@ public class UserServiceTestUtil extends CrudServiceTestUtil<UserRequest, UserRe
         var response = new UserResponse();
         var entity = new User();
         var entitySaveResult = new User();
-        
+    
         entity.setId(fakeRandomInteger());
         entity.setUsername(fakeRandomWord());
+        entity.setPassword(fakeRandomWord());
+        entity.setEmail(fakeRandomEmail());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setUsername(entity.getUsername());
+        entitySaveResult.setPassword(entity.getPassword());
+        entitySaveResult.setEmail(entity.getEmail());
         response.setId(entity.getId());
         response.setUsername(entity.getUsername());
+        response.setEmail(entity.getEmail());
         request.setId(entity.getId());
         request.setUsername(entity.getUsername());
+        request.setPassword(entity.getPassword());
+        request.setEmail(entity.getEmail());
         
         return Init.of(request, response, entity, entitySaveResult, entity.getId());
     }
