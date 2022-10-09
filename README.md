@@ -6,7 +6,7 @@
 [![Repo size](https://img.shields.io/github/repo-size/npedidos/rest-api?style=flat-square)](https://github.com/npedidos/rest-api)
 
 [![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
-
+---
 📚 Translations Readme: [<img title="English" alt="English" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="28">](translations/README.en.md)
 
 ## Descripción
