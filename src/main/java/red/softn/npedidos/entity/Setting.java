@@ -1,6 +1,7 @@
 package red.softn.npedidos.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,11 +23,11 @@ public class Setting {
     @Column(name = "key_name", nullable = false, length = 45)
     private String keyName;
     
-    @Lob
     @Column(name = "value", nullable = false)
     private String value;
     
-    @Column(name = "description", length = 250)
+    @Column(name = "description")
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
     
     public boolean equals(final Object o) {
