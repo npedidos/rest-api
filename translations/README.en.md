@@ -11,7 +11,7 @@
 
 NPedidos is an application that simplifies the management of food orders.
 
-This project provides the neccessary resources: [proyecto web](https://github.com/npedidos/web).
+This project provides the necessary resources: [proyecto web](https://github.com/npedidos/web).
 
 ## Demonstration
 
