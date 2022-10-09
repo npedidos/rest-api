@@ -1,4 +1,3 @@
-
 # NPedidos - REST API
 
 [![DeepSource](https://deepsource.io/gh/npedidos/rest-api.svg/?label=active+issues&show_trend=true&token=Dfu5Zcgrcwn5tDz83zE1QmFe)](https://deepsource.io/gh/npedidos/rest-api/?ref=repository-badge)
@@ -31,14 +30,14 @@ Not yet available.
 
 **Create the Database**
 
-- Run the script [npedidos.sql](npedidos.sql)
+- Run the script [npedidos.sql](../npedidos.sql)
 
 **Use Postman**
 
 - You can fork the APIs at the following link:
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/3462094-1245bdc5-f0fc-4a80-b067-33db0095e664?action=collection%2Ffork&collection-url=entityId%3D3462094-1245bdc5-f0fc-4a80-b067-33db0095e664%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bnpedidos%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6InRva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
-  
+
 **Working in IntelliJ IDEA**
 
 - [Clone project](#clonar-proyecto)
@@ -75,9 +74,9 @@ Start the app:
 
 - `Run > Run...`
     - `App`
-    - 
-   > If the username and password from the database is different from `root`, modify the connection information
-   > from the `src/main/resources/application-runner.properties` file
+    -
+  > If the username and password from the database is different from `root`, modify the connection information
+  > from the `src/main/resources/application-runner.properties` file
 
 <a name="db-seed"></a>
 Populate the database with test records:
@@ -136,12 +135,12 @@ You can access the API information with swagger at the following URLs:
 - http://localhost:8080/api/api-docs
 - http://localhost:8080/swagger-ui/index.html
 
-When accessing you will be asked to enter a username and password. 
+When accessing you will be asked to enter a username and password.
 
 > Before that, fill the database with test data, since this process will create users with whom you can
 > access. At the moment anyone is valid to access.
 
-## Contribute 
+## Contribute
 
 Any contribution you make will be greatly appreciated.
 
