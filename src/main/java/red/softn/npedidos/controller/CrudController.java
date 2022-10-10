@@ -32,10 +32,11 @@ public abstract class CrudController<E, R, ID> {
     }
     
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody E typeDish, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest request) {
-        R save = getService().save(typeDish);
+    public ResponseEntity<?> save(@RequestBody E request, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest httpServletRequest) {
+        R save = getService().save(request);
         Object valueId = getValueId(save);
-        URI uri = uriComponentsBuilder.path(request.getServletPath() + "/{id}")
+        URI uri = uriComponentsBuilder.path(httpServletRequest.getServletPath())
+                                      .pathSegment("{id}")
                                       .buildAndExpand(valueId)
                                       .toUri();
         
@@ -44,8 +45,8 @@ public abstract class CrudController<E, R, ID> {
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable ID id, @RequestBody E typeDish) {
-        return ResponseEntity.ok(getService().update(id, typeDish));
+    public ResponseEntity<?> update(@PathVariable ID id, @RequestBody E request) {
+        return ResponseEntity.ok(getService().update(id, request));
     }
     
     @DeleteMapping("/{id}")
@@ -56,8 +57,8 @@ public abstract class CrudController<E, R, ID> {
                              .build();
     }
     
-    private Object getValueId(R save) {
-        Field field = ReflectionUtils.findField(save.getClass(), "id");
+    private Object getValueId(R response) {
+        Field field = ReflectionUtils.findField(response.getClass(), "id");
         Object fieldId;
         
         if (field == null) {
@@ -66,7 +67,7 @@ public abstract class CrudController<E, R, ID> {
         
         try {
             ReflectionUtils.makeAccessible(field);
-            fieldId = ReflectionUtils.getField(field, save);
+            fieldId = ReflectionUtils.getField(field, response);
         } catch (Exception ex) {
             throw new InternalServerErrorException(new ErrorDetails("Error al obtener el valor de la propiedad ID."));
         }
