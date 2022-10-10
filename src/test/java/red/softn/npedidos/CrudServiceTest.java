@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
-import red.softn.npedidos.CrudServiceTestUtil;
-import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.configuration.AppConfig;
 import red.softn.npedidos.service.CrudService;
 import red.softn.npedidos.utils.gson.GsonUtil;

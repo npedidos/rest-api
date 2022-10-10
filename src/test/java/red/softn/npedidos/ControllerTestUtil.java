@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Value;
 import net.datafaker.Faker;
-import red.softn.npedidos.TestUtil;
 
 import java.util.List;
 
