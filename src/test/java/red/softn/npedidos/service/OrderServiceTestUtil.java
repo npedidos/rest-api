@@ -26,7 +26,7 @@ public class OrderServiceTestUtil extends CrudServiceTestUtil<OrderRequest, Orde
         var entitySaveResult = new Order();
     
         entity.setId(fakeRandomInteger());
-        entity.setDateOrder(LocalDateTime.of(2022, 10, 10, 10, 10));
+        entity.setDateOrder(fakeDateFutureDays().atStartOfDay());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setDateOrder(entity.getDateOrder());
         response.setId(entity.getId());
