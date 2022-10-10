@@ -1,5 +1,6 @@
 package red.softn.npedidos.service;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
+@Getter
 public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID> {
     
     //TODO: por el momento dejo esto asi.
