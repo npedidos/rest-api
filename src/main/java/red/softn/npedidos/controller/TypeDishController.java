@@ -22,6 +22,16 @@ public class TypeDishController extends CrudController<TypeDishRequest, TypeDish
     
     private final TypeDishService service;
     
+    @GetMapping("/{id}/food-dishes")
+    public ResponseEntity<?> findAllFoodDishes(@PathVariable Integer id) {
+        return ResponseEntity.ok(getService().findAllFoodDishes(id));
+    }
+    
+    @GetMapping("/{id}/food-dishes/{foodDishId}")
+    public ResponseEntity<?> findByIdFoodDish(@PathVariable Integer id, @PathVariable Integer foodDishId) {
+        return ResponseEntity.ok(getService().findByIdFoodDish(id, foodDishId));
+    }
+    
     @PostMapping("/{id}/food-dishes")
     public ResponseEntity<?> save(@PathVariable Integer id, @RequestBody FoodDishRequest request, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest httpServletRequest) {
         FoodDishResponse response = getService().save(id, request);
