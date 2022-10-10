@@ -2,11 +2,17 @@ package red.softn.npedidos.controller;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+import red.softn.npedidos.request.FoodDishRequest;
 import red.softn.npedidos.request.TypeDishRequest;
+import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.TypeDishResponse;
 import red.softn.npedidos.service.TypeDishService;
+
+import javax.servlet.http.HttpServletRequest;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/types-dishes")
@@ -15,5 +21,17 @@ import red.softn.npedidos.service.TypeDishService;
 public class TypeDishController extends CrudController<TypeDishRequest, TypeDishResponse, Integer> {
     
     private final TypeDishService service;
+    
+    @PostMapping("/{id}/food-dishes")
+    public ResponseEntity<?> save(@PathVariable Integer id, @RequestBody FoodDishRequest request, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest httpServletRequest) {
+        FoodDishResponse response = getService().save(id, request);
+        URI uri = uriComponentsBuilder.path(httpServletRequest.getServletPath())
+                                      .pathSegment("{foodDish}")
+                                      .buildAndExpand(response.getId())
+                                      .toUri();
+        
+        return ResponseEntity.created(uri)
+                             .body(response);
+    }
     
 }
