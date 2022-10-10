@@ -7,6 +7,7 @@ import net.datafaker.Faker;
 import org.springframework.core.ResolvableType;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
@@ -26,11 +27,14 @@ public abstract class TestUtil {
                          .nextInt(1, 1000);
     }
     
-    public LocalDate fakeDateFutureDays() {
+    public LocalDateTime fakeDateFutureDaysTime() {
         return this.faker.date()
                          .future(fakeRandomInteger(), TimeUnit.DAYS)
-                         .toLocalDateTime()
-                         .toLocalDate();
+                         .toLocalDateTime();
+    }
+    
+    public LocalDate fakeDateFutureDays() {
+        return fakeDateFutureDaysTime().toLocalDate();
     }
     
     public String fakeRandomWord() {
@@ -39,11 +43,13 @@ public abstract class TestUtil {
     }
     
     public String fakeRandomEmail() {
-        return this.faker.internet().emailAddress();
+        return this.faker.internet()
+                         .emailAddress();
     }
     
     public String fakeRandomPassword() {
-        return this.faker.internet().password(60, 60);
+        return this.faker.internet()
+                         .password(60, 60);
     }
     
 }
