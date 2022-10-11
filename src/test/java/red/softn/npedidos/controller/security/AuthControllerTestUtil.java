@@ -23,6 +23,7 @@ public class AuthControllerTestUtil extends TestUtil {
     private final PasswordEncoder passwordEncoder;
     
     public AuthControllerTestUtil(PasswordEncoder passwordEncoder) {
+        super();
         this.passwordEncoder = passwordEncoder;
         initLogin();
     }
