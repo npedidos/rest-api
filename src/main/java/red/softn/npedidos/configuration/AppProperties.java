@@ -32,4 +32,7 @@ public class AppProperties {
     @Value("${app.http.paths.permit-all:}")
     private String[] permitAllPaths;
     
+    @Value("${app.pageable.size:10}")
+    private int pageableSize;
+    
 }
