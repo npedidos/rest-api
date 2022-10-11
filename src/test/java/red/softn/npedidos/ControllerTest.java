@@ -8,12 +8,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import red.softn.npedidos.configuration.AppProperties;
+import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.utils.gson.GsonConfig;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
 @Import({
     GsonConfig.class,
-    AppProperties.class
+    AppProperties.class,
+    DataRequestScope.class
 })
 @Getter
 public abstract class ControllerTest {
