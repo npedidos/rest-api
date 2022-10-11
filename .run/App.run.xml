@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+  <configuration default="false" name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" activateToolWindowBeforeRun="false">
     <option name="ACTIVE_PROFILES" />
     <module name="rest-api" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="red.softn.npedidos.RestApiApplication" />
