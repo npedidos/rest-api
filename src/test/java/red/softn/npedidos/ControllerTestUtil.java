@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Value;
-import net.datafaker.Faker;
 
 import java.util.List;
 
@@ -24,8 +23,8 @@ public abstract class ControllerTestUtil<E, R, ID> extends TestUtil {
     @Getter(value = AccessLevel.PROTECTED)
     private final Gson gson;
     
-    public ControllerTestUtil(Faker faker, Gson gson) {
-        super(faker);
+    public ControllerTestUtil(Gson gson) {
+        super();
         this.gson = gson;
         setInit();
         this.requestJSON = this.gson.toJson(this.request);

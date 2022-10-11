@@ -2,7 +2,6 @@ package red.softn.npedidos;
 
 import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
 import org.springframework.core.ResolvableType;
 
@@ -10,11 +9,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
-@RequiredArgsConstructor
 public abstract class TestUtil {
     
     @Getter(value = AccessLevel.PROTECTED)
     private final Faker faker;
+    
+    protected TestUtil() {
+        faker = new Faker();
+    }
     
     public static Class<?> resolveGeneric(Class<?> clazz, int index) {
         return ResolvableType.forClass(clazz)

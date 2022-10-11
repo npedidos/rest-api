@@ -1,6 +1,5 @@
 package red.softn.npedidos.service;
 
-import net.datafaker.Faker;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.entity.TypeDish;
 import red.softn.npedidos.request.TypeDishRequest;
@@ -13,8 +12,8 @@ import red.softn.npedidos.response.TypeDishResponse;
  */
 public class TypeDishServiceTestUtil extends CrudServiceTestUtil<TypeDishRequest, TypeDishResponse, TypeDish, Integer> {
     
-    public TypeDishServiceTestUtil(Faker faker) {
-        super(faker);
+    public TypeDishServiceTestUtil() {
+        super();
     }
     
     @Override

@@ -2,7 +2,6 @@ package red.softn.npedidos;
 
 import com.google.gson.Gson;
 import lombok.Getter;
-import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
@@ -22,9 +21,6 @@ public abstract class ControllerTest {
     
     @MockBean
     private GsonUtil gsonUtil;
-    
-    @Autowired
-    private Faker faker;
     
     @Autowired
     private MockMvc mockMvc;

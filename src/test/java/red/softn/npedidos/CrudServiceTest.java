@@ -1,12 +1,10 @@
 package red.softn.npedidos;
 
-import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
-import red.softn.npedidos.configuration.AppConfig;
 import red.softn.npedidos.service.CrudService;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
@@ -39,11 +37,10 @@ public abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil
     @SuppressWarnings("unchecked")
     private U newCrudServiceTestUtil() {
         try {
-            Faker faker = new AppConfig(null, null).faker();
             Class<U> crudServiceTestUtilClass = (Class<U>) getCrudServiceTestUtilClass();
-            var accessibleConstructor = ReflectionUtils.accessibleConstructor(crudServiceTestUtilClass, Faker.class);
+            var accessibleConstructor = ReflectionUtils.accessibleConstructor(crudServiceTestUtilClass);
             
-            return accessibleConstructor.newInstance(faker);
+            return accessibleConstructor.newInstance();
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                  IllegalAccessException e) {
             throw new RuntimeException("Error al crear la instancia de la clase CrudServiceTestUtil.");

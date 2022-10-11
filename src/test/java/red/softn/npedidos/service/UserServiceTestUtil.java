@@ -1,6 +1,5 @@
 package red.softn.npedidos.service;
 
-import net.datafaker.Faker;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.request.UserRequest;
@@ -8,8 +7,8 @@ import red.softn.npedidos.response.UserResponse;
 
 public class UserServiceTestUtil extends CrudServiceTestUtil<UserRequest, UserResponse, User, Integer> {
     
-    public UserServiceTestUtil(Faker faker) {
-        super(faker);
+    public UserServiceTestUtil() {
+        super();
     }
     
     @Override

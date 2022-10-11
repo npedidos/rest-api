@@ -2,7 +2,6 @@ package red.softn.npedidos;
 
 import lombok.Getter;
 import lombok.Value;
-import net.datafaker.Faker;
 
 import java.util.List;
 
@@ -23,8 +22,8 @@ public abstract class CrudServiceTestUtil<E, R, T, ID> extends TestUtil {
     
     private final List<T> entityList;
     
-    public CrudServiceTestUtil(Faker faker) {
-        super(faker);
+    public CrudServiceTestUtil() {
+        super();
         setInit();
         this.responseList = List.of(this.response);
         this.entityList = List.of(this.entity);

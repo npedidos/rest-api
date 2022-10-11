@@ -1,7 +1,6 @@
 package red.softn.npedidos;
 
 import com.google.gson.Gson;
-import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -36,9 +35,9 @@ public abstract class CrudControllerTest<E, R, ID, T extends ControllerTestUtil<
     private T newInstanceControllerTestUtil() {
         try {
             Class<T> controllerTestUtilClass = (Class<T>) getControllerTestUtilClass();
-            var accessibleConstructor = ReflectionUtils.accessibleConstructor(controllerTestUtilClass, Faker.class, Gson.class);
+            var accessibleConstructor = ReflectionUtils.accessibleConstructor(controllerTestUtilClass, Gson.class);
             
-            return accessibleConstructor.newInstance(getFaker(), getGson());
+            return accessibleConstructor.newInstance(getGson());
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                  IllegalAccessException e) {
             throw new RuntimeException("Error al crear la instancia de la clase ControllerTestUtil.");

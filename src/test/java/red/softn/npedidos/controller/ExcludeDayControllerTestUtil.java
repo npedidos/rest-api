@@ -2,7 +2,6 @@ package red.softn.npedidos.controller;
 
 import com.google.gson.Gson;
 import lombok.Getter;
-import net.datafaker.Faker;
 import red.softn.npedidos.ControllerTestUtil;
 import red.softn.npedidos.request.ExcludeDayRequest;
 import red.softn.npedidos.response.ExcludeDayResponse;
@@ -10,8 +9,8 @@ import red.softn.npedidos.response.ExcludeDayResponse;
 @Getter
 public class ExcludeDayControllerTestUtil extends ControllerTestUtil<ExcludeDayRequest, ExcludeDayResponse, Integer> {
     
-    public ExcludeDayControllerTestUtil(Faker faker, Gson gson) {
-        super(faker, gson);
+    public ExcludeDayControllerTestUtil(Gson gson) {
+        super(gson);
     }
     
     @Override

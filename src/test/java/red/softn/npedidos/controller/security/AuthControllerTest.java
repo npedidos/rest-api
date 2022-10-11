@@ -41,7 +41,7 @@ class AuthControllerTest extends ControllerTest {
     
     @BeforeEach
     void setUp() {
-        authControllerTestUtil = new AuthControllerTestUtil(this.passwordEncoder, getFaker());
+        authControllerTestUtil = new AuthControllerTestUtil(this.passwordEncoder);
     }
     
     @Test
