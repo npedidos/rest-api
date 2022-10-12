@@ -1,6 +1,5 @@
 package red.softn.npedidos.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +17,8 @@ public abstract class CrudController<E, R, ID> {
     public abstract CrudServiceI<E, R, ID> getService();
     
     @GetMapping
-    public ResponseEntity<?> findAll(@RequestParam(value = "f", required = false) String filter) {
-        if (StringUtils.isBlank(filter)) {
-            return ResponseEntity.ok(getService().findAll());
-        }
-        
-        return ResponseEntity.ok(getService().findAll(filter));
+    public ResponseEntity<?> findAll() {
+        return ResponseEntity.ok(getService().findAllPageable());
     }
     
     @GetMapping("/{id}")

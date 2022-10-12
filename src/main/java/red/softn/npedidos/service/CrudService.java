@@ -4,20 +4,15 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.exception.NotFoundException;
+import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.pojo.ErrorDetails;
-import red.softn.npedidos.request.PagingAndSortingRequest;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.lang.reflect.Field;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
 
 @Getter
@@ -27,11 +22,15 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     @Autowired
     private GsonUtil gsonUtil;
     
+    @Autowired
+    private DataRequestScope dataRequestScope;
+    
     protected abstract JpaRepository<T, ID> getRepository();
     
-    public PagingAndSortingResponse<R> findAll(String filter) {
+    @Override
+    public PagingAndSortingResponse<R> findAllPageable() {
         PagingAndSortingResponse<R> response = new PagingAndSortingResponse<>();
-        Page<T> page = getRepository().findAll(getPageable(filter));
+        Page<T> page = getRepository().findAll(this.dataRequestScope.getPageable());
         List<R> content = this.gsonUtil.convertTo(page.getContent(), getResponseClass());
         
         response.setContent(content);
@@ -43,20 +42,7 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
         return response;
     }
     
-    private Pageable getPageable(String filter) {
-        byte[] decode = Base64.getDecoder()
-                              .decode(filter);
-        String json = new String(decode, StandardCharsets.UTF_8);
-        PagingAndSortingRequest pagingAndSortRequest = this.gsonUtil.fromJsonTo(json, PagingAndSortingRequest.class);
-        var paging = pagingAndSortRequest.getPaging();
-        var sorting = pagingAndSortRequest.getSorting();
-        var orderList = sorting.stream()
-                               .map(value -> new Sort.Order(value.getDirection(), value.getProperty()))
-                               .toList();
-        
-        return PageRequest.of(paging.getPage(), paging.getSize(), Sort.by(orderList));
-    }
-    
+    @Deprecated
     public List<R> findAll() {
         Iterable<T> all = getRepository().findAll();
         

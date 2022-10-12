@@ -6,8 +6,9 @@ import java.util.List;
 
 public interface CrudServiceI<E, R, ID> {
     
-    PagingAndSortingResponse<R> findAll(String filter);
+    PagingAndSortingResponse<R> findAllPageable();
     
+    @Deprecated
     List<R> findAll();
     
     R findById(ID id);
