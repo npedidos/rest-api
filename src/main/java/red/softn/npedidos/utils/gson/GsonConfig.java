@@ -30,7 +30,7 @@ public class GsonConfig {
         gsonBuilder.registerTypeAdapter(Timestamp.class, new TimestampTypeAdapter());
         gsonBuilder.registerTypeAdapter(Date.class, new DateTypeAdapter());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
-       gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter());
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter());
         return gsonBuilder.create();
     }
     
@@ -104,17 +104,17 @@ public class GsonConfig {
     }
     
     private static class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
-    
+        
         @Override
         public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
             return LocalDateTime.parse(jsonElement.getAsString());
         }
-    
+        
         @Override
         public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
             return new JsonPrimitive(localDateTime.toString());
         }
-    
+        
     }
     
 }
