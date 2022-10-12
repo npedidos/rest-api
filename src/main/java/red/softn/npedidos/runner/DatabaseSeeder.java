@@ -36,6 +36,8 @@ public class DatabaseSeeder {
     
     private final UserRepository userRepository;
     
+    private final MenuRepository menuRepository;
+    
     private final PasswordEncoder passwordEncoder;
     
     public void db() {
@@ -46,6 +48,7 @@ public class DatabaseSeeder {
         foodDishFactory(100);
         orderingFactory(50);
         settingFactory(10);
+        menuFactory(10);
         relationshipFactory();
         log.info("Proceso finalizado.");
     }
@@ -58,6 +61,7 @@ public class DatabaseSeeder {
         this.orderRepository.deleteAll();
         this.settingRepository.deleteAll();
         this.userRepository.deleteAll();
+        this.menuRepository.deleteAll();
         log.info("Proceso finalizado.");
     }
     
@@ -65,6 +69,7 @@ public class DatabaseSeeder {
         log.info("Insertando relaciones de tablas...");
         Iterable<Order> orderings = this.orderRepository.findAll();
         Iterable<FoodDish> foodDishes = this.foodDishRepository.findAll();
+        List<Menu> menus = this.menuRepository.findAll();
         
         orderings.forEach(value -> {
             List<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
@@ -76,6 +81,15 @@ public class DatabaseSeeder {
             this.orderRepository.save(value);
         });
         
+        menus.forEach(value -> {
+            List<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
+                                                       .limit(3)
+                                                       .toList();
+            
+            value.setFoodDishes(foodDishList);
+            
+            this.menuRepository.save(value);
+        });
     }
     
     private void userFactory(int count) {
@@ -116,6 +130,22 @@ public class DatabaseSeeder {
                                              .sentence(2));
             
             this.settingRepository.save(setting);
+        });
+    }
+    
+    private void menuFactory(int count) {
+        log.info("Insertando registros de menu...");
+        DateAndTime date = this.faker.date();
+        RandomService random = this.faker.random();
+        
+        run(count, () -> {
+            Menu menu = new Menu();
+            
+            menu.setDate(date.future(random.nextInt(1, 100), TimeUnit.DAYS)
+                             .toLocalDateTime()
+                             .toLocalDate());
+            
+            this.menuRepository.save(menu);
         });
     }
     
