@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -29,7 +30,7 @@ public class GsonConfig {
         gsonBuilder.registerTypeAdapter(Timestamp.class, new TimestampTypeAdapter());
         gsonBuilder.registerTypeAdapter(Date.class, new DateTypeAdapter());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
-        
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter());
         return gsonBuilder.create();
     }
     
@@ -98,6 +99,20 @@ public class GsonConfig {
         @Override
         public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             return LocalDate.parse(json.getAsString());
+        }
+        
+    }
+    
+    private static class LocalDateTimeTypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+        
+        @Override
+        public LocalDateTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+            return LocalDateTime.parse(jsonElement.getAsString());
+        }
+        
+        @Override
+        public JsonElement serialize(LocalDateTime localDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+            return new JsonPrimitive(localDateTime.toString());
         }
         
     }
