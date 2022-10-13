@@ -1,6 +1,5 @@
 package red.softn.npedidos.service;
 
-import net.datafaker.Faker;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.request.MenuRequest;
@@ -8,8 +7,8 @@ import red.softn.npedidos.response.MenuResponse;
 
 class MenuServiceTestUtil extends CrudServiceTestUtil<MenuRequest, MenuResponse, Menu, Integer> {
     
-    public MenuServiceTestUtil(Faker faker) {
-        super(faker);
+    public MenuServiceTestUtil() {
+        super();
     }
     
     @Override
