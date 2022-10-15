@@ -1,39 +1,47 @@
 package red.softn.npedidos.utils.gson;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GsonConfigTest {
     
-    GsonConfig sut;
+    private Gson gson;
     
-    static class TestConverter {
-        LocalDateTime timer;
-        
-        public LocalDateTime getTimer() {
-            return this.timer;
-        }
+    private static GsonConfigTestUtil gsonConfigTestUtil;
+    
+    @BeforeAll
+    static void beforeAll() {
+        gsonConfigTestUtil = new GsonConfigTestUtil();
     }
     
     @BeforeEach
     void setUp() {
-        sut = new GsonConfig();
+        this.gson = new GsonConfig().gson(new GsonBuilder());
     }
     
     @Test
-    void shouldRegisterLocalDateTimeAdapter() {
-        final var builder = new GsonBuilder();
-        final var gson = sut.gson(builder);
-        final var time  = LocalDateTime.of(2022, 3, 1, 10, 10, 19).toString();
+    void testSerializeLocalDateTime() {
+        var localDateTime = gsonConfigTestUtil.getLocalDateTime();
+        var expected = gsonConfigTestUtil.getLocalDateTimeJson();
+        var actual = this.gson.toJson(localDateTime);
         
-        final var result = gson.fromJson("{\"timer\" : \"2022-03-01T10:10:19\"}", TestConverter.class);
+        assertEquals(expected, actual);
+    }
+    
+    @Test
+    void testDeserializerLocalDateTime() {
+        final var localDateTimeJson = gsonConfigTestUtil.getLocalDateTimeJson();
+        final var expected = gsonConfigTestUtil.getLocalDateTime();
+        final var actual = this.gson.fromJson(localDateTimeJson, LocalDateTime.class);
         
-        assertThat(result.getTimer()).isEqualTo(time);
+        assertEquals(expected, actual);
     }
     
 }
