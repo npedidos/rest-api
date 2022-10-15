@@ -31,6 +31,7 @@ public class GsonConfig {
         gsonBuilder.registerTypeAdapter(Date.class, new DateTypeAdapter());
         gsonBuilder.registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter());
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeTypeAdapter());
+        
         return gsonBuilder.create();
     }
     

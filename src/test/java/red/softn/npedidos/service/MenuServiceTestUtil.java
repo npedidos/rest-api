@@ -17,7 +17,7 @@ class MenuServiceTestUtil extends CrudServiceTestUtil<MenuRequest, MenuResponse,
         var response = new MenuResponse();
         var entity = new Menu();
         var entitySaveResult = new Menu();
-    
+        
         entity.setId(fakeRandomInteger());
         entity.setDate(fakeDateFutureDays());
         entitySaveResult.setId(entity.getId());
@@ -29,4 +29,5 @@ class MenuServiceTestUtil extends CrudServiceTestUtil<MenuRequest, MenuResponse,
         
         return Init.of(request, response, entity, entitySaveResult, entity.getId());
     }
+    
 }

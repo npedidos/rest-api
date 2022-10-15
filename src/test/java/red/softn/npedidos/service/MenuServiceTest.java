@@ -20,4 +20,5 @@ class MenuServiceTest extends CrudServiceTest<MenuRequest, MenuResponse, Menu, I
     
     @Mock
     private MenuRepository repository;
+    
 }
