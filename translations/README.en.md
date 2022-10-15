@@ -19,6 +19,13 @@ Not yet available.
 
 ## Local deployment
 
+- [prerequisites](#prerequisites)
+- [How to get started](#empezar-a-trabajar)
+    - [Create the Database](#create-database)
+    - [Use Postman](#using-postman)
+    - [Working in IntelliJ IDEA](#working-ingellij)
+    - [Access Swagger](#access-swagger)
+
 ### prerequisites
 
 * [Java 17](https://jdk.java.net/archive/)
@@ -26,18 +33,22 @@ Not yet available.
 * [MySQL 8](https://dev.mysql.com/downloads/mysql/)
 * [Wildfly 26](https://www.wildfly.org/downloads/) (Optional)
 
+<a name="empezar-a-trabajar"></a>
 ### How to get started
 
+<a name="create-database"></a>
 **Create the Database**
 
 - Run the script [npedidos.sql](../npedidos.sql)
 
+<a name="using-postman"></a>
 **Use Postman**
 
 - You can fork the APIs at the following link:
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/3462094-1245bdc5-f0fc-4a80-b067-33db0095e664?action=collection%2Ffork&collection-url=entityId%3D3462094-1245bdc5-f0fc-4a80-b067-33db0095e664%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bnpedidos%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6InRva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
 
+<a name="working-ingellij"></a>
 **Working in IntelliJ IDEA**
 
 - [Clone project](#clonar-proyecto)
@@ -128,7 +139,8 @@ spring-boot-devtools
 > Settings > Build, Execution, Development > Compiler
 > - Build project automatically
 
-**Watch swagger**
+<a name="access-swagger"></a>
+**Access swagger**
 
 You can access the API information with swagger at the following URLs:
 
