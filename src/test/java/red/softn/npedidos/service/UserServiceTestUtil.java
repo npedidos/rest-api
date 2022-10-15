@@ -1,6 +1,7 @@
 package red.softn.npedidos.service;
 
 import red.softn.npedidos.CrudServiceTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.request.UserRequest;
 import red.softn.npedidos.response.UserResponse;
@@ -18,10 +19,10 @@ public class UserServiceTestUtil extends CrudServiceTestUtil<UserRequest, UserRe
         var entity = new User();
         var entitySaveResult = new User();
         
-        entity.setId(fakeRandomInteger());
-        entity.setUsername(fakeRandomWord());
-        entity.setPassword(fakeRandomPassword());
-        entity.setEmail(fakeRandomEmail());
+        entity.setId(TestUtil.fakeRandomInteger());
+        entity.setUsername(TestUtil.fakeRandomWord());
+        entity.setPassword(TestUtil.fakeRandomPassword());
+        entity.setEmail(TestUtil.fakeRandomEmail());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setUsername(entity.getUsername());
         entitySaveResult.setPassword(entity.getPassword());

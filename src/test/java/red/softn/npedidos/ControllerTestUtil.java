@@ -8,7 +8,7 @@ import lombok.Value;
 import java.util.List;
 
 @Getter
-public abstract class ControllerTestUtil<E, R, ID> extends TestUtil {
+public abstract class ControllerTestUtil<E, R, ID> {
     
     private E request;
     
@@ -24,7 +24,6 @@ public abstract class ControllerTestUtil<E, R, ID> extends TestUtil {
     private final Gson gson;
     
     public ControllerTestUtil(Gson gson) {
-        super();
         this.gson = gson;
         setInit();
         this.requestJSON = this.gson.toJson(this.request);

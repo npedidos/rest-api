@@ -1,6 +1,7 @@
 package red.softn.npedidos.service;
 
 import red.softn.npedidos.CrudServiceTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.request.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
@@ -19,8 +20,8 @@ public class OrderServiceTestUtil extends CrudServiceTestUtil<OrderRequest, Orde
         var entity = new Order();
         var entitySaveResult = new Order();
         
-        entity.setId(fakeRandomInteger());
-        entity.setDateOrder(fakeDateFutureDaysTime());
+        entity.setId(TestUtil.fakeRandomInteger());
+        entity.setDateOrder(TestUtil.fakeDateFutureDaysTime());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setDateOrder(entity.getDateOrder());
         response.setId(entity.getId());

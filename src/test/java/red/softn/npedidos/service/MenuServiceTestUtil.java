@@ -1,6 +1,7 @@
 package red.softn.npedidos.service;
 
 import red.softn.npedidos.CrudServiceTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.request.MenuRequest;
 import red.softn.npedidos.response.MenuResponse;
@@ -18,8 +19,8 @@ class MenuServiceTestUtil extends CrudServiceTestUtil<MenuRequest, MenuResponse,
         var entity = new Menu();
         var entitySaveResult = new Menu();
         
-        entity.setId(fakeRandomInteger());
-        entity.setDate(fakeDateFutureDays());
+        entity.setId(TestUtil.fakeRandomInteger());
+        entity.setDate(TestUtil.fakeDateFutureDays());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setDate(entity.getDate());
         response.setId(entity.getId());

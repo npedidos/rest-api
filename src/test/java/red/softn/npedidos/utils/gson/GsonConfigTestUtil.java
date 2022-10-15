@@ -6,14 +6,14 @@ import red.softn.npedidos.TestUtil;
 import java.time.LocalDateTime;
 
 @Getter
-public class GsonConfigTestUtil extends TestUtil {
+public class GsonConfigTestUtil {
     
     private final LocalDateTime localDateTime;
     
     private final String localDateTimeJson;
     
     public GsonConfigTestUtil() {
-        this.localDateTime = fakeDateFutureDaysTime();
+        this.localDateTime = TestUtil.fakeDateFutureDaysTime();
         this.localDateTimeJson = String.format("\"%s\"", localDateTime.toString());
     }
     

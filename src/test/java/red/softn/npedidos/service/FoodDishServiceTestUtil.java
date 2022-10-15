@@ -1,6 +1,7 @@
 package red.softn.npedidos.service;
 
 import red.softn.npedidos.CrudServiceTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.request.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
@@ -18,8 +19,8 @@ public class FoodDishServiceTestUtil extends CrudServiceTestUtil<FoodDishRequest
         var entity = new FoodDish();
         var entitySaveResult = new FoodDish();
         
-        entity.setId(fakeRandomInteger());
-        entity.setName(fakeRandomWord());
+        entity.setId(TestUtil.fakeRandomInteger());
+        entity.setName(TestUtil.fakeRandomWord());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setName(entity.getName());
         response.setId(entity.getId());

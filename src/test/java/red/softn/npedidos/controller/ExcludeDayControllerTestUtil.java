@@ -3,6 +3,7 @@ package red.softn.npedidos.controller;
 import com.google.gson.Gson;
 import lombok.Getter;
 import red.softn.npedidos.ControllerTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.request.ExcludeDayRequest;
 import red.softn.npedidos.response.ExcludeDayResponse;
 
@@ -18,8 +19,8 @@ public class ExcludeDayControllerTestUtil extends ControllerTestUtil<ExcludeDayR
         var request = new ExcludeDayRequest();
         var response = new ExcludeDayResponse();
         
-        request.setId(fakeRandomInteger());
-        request.setDateExclude(fakeDateFutureDays());
+        request.setId(TestUtil.fakeRandomInteger());
+        request.setDateExclude(TestUtil.fakeDateFutureDays());
         response.setId(request.getId());
         response.setDateExclude(request.getDateExclude());
         

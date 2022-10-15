@@ -1,7 +1,5 @@
 package red.softn.npedidos;
 
-import lombok.AccessLevel;
-import lombok.Getter;
 import net.datafaker.Faker;
 import org.springframework.core.ResolvableType;
 
@@ -9,12 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
-public abstract class TestUtil {
+public final class TestUtil {
     
-    @Getter(value = AccessLevel.PROTECTED)
-    private final Faker faker;
+    public static final Faker faker;
     
-    protected TestUtil() {
+    static {
         faker = new Faker();
     }
     
@@ -24,34 +21,34 @@ public abstract class TestUtil {
                              .resolveGeneric(index);
     }
     
-    public Integer fakeRandomInteger() {
-        return this.faker.random()
-                         .nextInt(1, 1000);
+    public static Integer fakeRandomInteger() {
+        return faker.random()
+                    .nextInt(1, 1000);
     }
     
-    public LocalDateTime fakeDateFutureDaysTime() {
-        return this.faker.date()
-                         .future(fakeRandomInteger(), TimeUnit.DAYS)
-                         .toLocalDateTime();
+    public static LocalDateTime fakeDateFutureDaysTime() {
+        return faker.date()
+                    .future(fakeRandomInteger(), TimeUnit.DAYS)
+                    .toLocalDateTime();
     }
     
-    public LocalDate fakeDateFutureDays() {
+    public static LocalDate fakeDateFutureDays() {
         return fakeDateFutureDaysTime().toLocalDate();
     }
     
-    public String fakeRandomWord() {
-        return this.faker.lorem()
-                         .word();
+    public static String fakeRandomWord() {
+        return faker.lorem()
+                    .word();
     }
     
-    public String fakeRandomEmail() {
-        return this.faker.internet()
-                         .emailAddress();
+    public static String fakeRandomEmail() {
+        return faker.internet()
+                    .emailAddress();
     }
     
-    public String fakeRandomPassword() {
-        return this.faker.internet()
-                         .password(60, 60);
+    public static String fakeRandomPassword() {
+        return faker.internet()
+                    .password(60, 60);
     }
     
 }

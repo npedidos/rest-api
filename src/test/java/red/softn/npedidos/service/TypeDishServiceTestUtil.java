@@ -1,6 +1,7 @@
 package red.softn.npedidos.service;
 
 import red.softn.npedidos.CrudServiceTestUtil;
+import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.TypeDish;
 import red.softn.npedidos.request.TypeDishRequest;
 import red.softn.npedidos.response.TypeDishResponse;
@@ -18,8 +19,8 @@ public class TypeDishServiceTestUtil extends CrudServiceTestUtil<TypeDishRequest
         var entity = new TypeDish();
         var entitySaveResult = new TypeDish();
         
-        entity.setId(fakeRandomInteger());
-        entity.setName(fakeRandomWord());
+        entity.setId(TestUtil.fakeRandomInteger());
+        entity.setName(TestUtil.fakeRandomWord());
         entitySaveResult.setId(entity.getId());
         entitySaveResult.setName(entity.getName());
         response.setId(entity.getId());

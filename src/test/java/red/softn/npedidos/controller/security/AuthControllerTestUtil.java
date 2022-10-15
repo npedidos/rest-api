@@ -11,7 +11,7 @@ import red.softn.npedidos.response.TokenAuthenticationResponse;
 import java.util.Collections;
 
 @Getter
-public class AuthControllerTestUtil extends TestUtil {
+public class AuthControllerTestUtil {
     
     private User userEntity;
     
@@ -29,12 +29,12 @@ public class AuthControllerTestUtil extends TestUtil {
     }
     
     private void initLogin() {
-        var username = getFaker().name()
-                                 .username();
+        var username = TestUtil.faker.name()
+                                     .username();
         var passwordEncode = this.passwordEncoder.encode(username);
         var user = new TokenAuthenticationResponse.User(username);
-        this.tokenAuthenticationResponse = new TokenAuthenticationResponse(getFaker().internet()
-                                                                                     .uuid(), user);
+        this.tokenAuthenticationResponse = new TokenAuthenticationResponse(TestUtil.faker.internet()
+                                                                                         .uuid(), user);
         this.userEntity = new User();
         this.userDetails = org.springframework.security.core.userdetails.User.builder()
                                                                              .username(username)
@@ -42,9 +42,9 @@ public class AuthControllerTestUtil extends TestUtil {
                                                                              .authorities(Collections.emptyList())
                                                                              .build();
         
-        userEntity.setId(fakeRandomInteger());
-        userEntity.setEmail(getFaker().internet()
-                                      .emailAddress());
+        userEntity.setId(TestUtil.fakeRandomInteger());
+        userEntity.setEmail(TestUtil.faker.internet()
+                                          .emailAddress());
         userEntity.setUsername(username);
         userEntity.setPassword(passwordEncode);
         userEntity.setOrders(Collections.emptyList());

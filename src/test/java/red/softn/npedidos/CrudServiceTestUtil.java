@@ -6,7 +6,7 @@ import lombok.Value;
 import java.util.List;
 
 @Getter
-public abstract class CrudServiceTestUtil<E, R, T, ID> extends TestUtil {
+public abstract class CrudServiceTestUtil<E, R, T, ID> {
     
     private E request;
     
@@ -23,7 +23,6 @@ public abstract class CrudServiceTestUtil<E, R, T, ID> extends TestUtil {
     private final List<T> entityList;
     
     public CrudServiceTestUtil() {
-        super();
         setInit();
         this.responseList = List.of(this.response);
         this.entityList = List.of(this.entity);
