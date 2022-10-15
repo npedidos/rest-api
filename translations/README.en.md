@@ -6,6 +6,8 @@
 [![Repo size](https://img.shields.io/github/repo-size/npedidos/rest-api?style=flat-square)](https://github.com/npedidos/rest-api)
 
 [![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
+---
+📚 Translations: [<img title="Spanish" alt="Spanish" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="28">](../README.md)
 
 ## Description
 
@@ -85,7 +87,7 @@ Start the app:
 
 - `Run > Run...`
     - `App`
-    -
+
   > If the username and password from the database is different from `root`, modify the connection information
   > from the `src/main/resources/application-runner.properties` file
 
