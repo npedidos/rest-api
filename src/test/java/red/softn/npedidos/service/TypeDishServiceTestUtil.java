@@ -5,11 +5,6 @@ import red.softn.npedidos.entity.TypeDish;
 import red.softn.npedidos.request.TypeDishRequest;
 import red.softn.npedidos.response.TypeDishResponse;
 
-/**
- * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @version 1.0
- * @since 09/10/2022
- */
 public class TypeDishServiceTestUtil extends CrudServiceTestUtil<TypeDishRequest, TypeDishResponse, TypeDish, Integer> {
     
     public TypeDishServiceTestUtil() {

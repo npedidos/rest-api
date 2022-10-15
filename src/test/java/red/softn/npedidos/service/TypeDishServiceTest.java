@@ -11,11 +11,6 @@ import red.softn.npedidos.repository.TypeDishRepository;
 import red.softn.npedidos.request.TypeDishRequest;
 import red.softn.npedidos.response.TypeDishResponse;
 
-/**
- * @author <a href="https://github.com/anas-elgarhy">Anas Elgarhy</a>
- * @version 1.0
- * @since 09/10/2022
- */
 @ExtendWith(MockitoExtension.class)
 @Getter
 class TypeDishServiceTest extends CrudServiceTest<TypeDishRequest, TypeDishResponse, TypeDish, Integer, TypeDishServiceTestUtil> {
