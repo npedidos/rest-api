@@ -24,7 +24,7 @@ Not yet available.
 * [Java 17](https://jdk.java.net/archive/)
 * [Maven 3.8.6](https://maven.apache.org/download.cgi)
 * [MySQL 8](https://dev.mysql.com/downloads/mysql/)
-* [Wildfly 26](https://www.wildfly.org/downloads/) (Opcional)
+* [Wildfly 26](https://www.wildfly.org/downloads/) (Optional)
 
 ### How to get started
 
@@ -118,7 +118,7 @@ Enable save options
 
 > Settings > Tools > Actions on save
 
-> Have editorConfig enabeld.
+> Have editorConfig enabled.
 
 <a name="spring-boot-devtools"></a>
 spring-boot-devtools
@@ -144,7 +144,7 @@ When accessing you will be asked to enter a username and password.
 
 Any contribution you make will be greatly appreciated.
 
-- Before you start contributing, read the [contribution guidelines](CONTRIBUTING.md).
+- Before you start contributing, read the [contribution guidelines](../CONTRIBUTING.md).
 
 ## Thank you
 
@@ -157,4 +157,4 @@ developing this project.
 
 ## License
 
-[MIT license](LICENSE).
+[MIT license](../LICENSE).
