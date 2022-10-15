@@ -6,6 +6,8 @@
 [![Repo size](https://img.shields.io/github/repo-size/npedidos/rest-api?style=flat-square)](https://github.com/npedidos/rest-api)
 
 [![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
+---
+📚 Translations: [<img title="Spanish" alt="Spanish" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/es.svg" width="28">](../README.md)
 
 ## Description
 
@@ -19,25 +21,36 @@ Not yet available.
 
 ## Local deployment
 
+- [prerequisites](#prerequisites)
+- [How to get started](#empezar-a-trabajar)
+    - [Create the Database](#create-database)
+    - [Use Postman](#using-postman)
+    - [Working in IntelliJ IDEA](#working-ingellij)
+    - [Access Swagger](#access-swagger)
+
 ### prerequisites
 
 * [Java 17](https://jdk.java.net/archive/)
 * [Maven 3.8.6](https://maven.apache.org/download.cgi)
 * [MySQL 8](https://dev.mysql.com/downloads/mysql/)
-* [Wildfly 26](https://www.wildfly.org/downloads/) (Opcional)
+* [Wildfly 26](https://www.wildfly.org/downloads/) (Optional)
 
+<a name="empezar-a-trabajar"></a>
 ### How to get started
 
+<a name="create-database"></a>
 **Create the Database**
 
 - Run the script [npedidos.sql](../npedidos.sql)
 
+<a name="using-postman"></a>
 **Use Postman**
 
 - You can fork the APIs at the following link:
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/3462094-1245bdc5-f0fc-4a80-b067-33db0095e664?action=collection%2Ffork&collection-url=entityId%3D3462094-1245bdc5-f0fc-4a80-b067-33db0095e664%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bnpedidos%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6InRva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
 
+<a name="working-ingellij"></a>
 **Working in IntelliJ IDEA**
 
 - [Clone project](#clonar-proyecto)
@@ -74,7 +87,7 @@ Start the app:
 
 - `Run > Run...`
     - `App`
-    -
+
   > If the username and password from the database is different from `root`, modify the connection information
   > from the `src/main/resources/application-runner.properties` file
 
@@ -118,7 +131,7 @@ Enable save options
 
 > Settings > Tools > Actions on save
 
-> Have editorConfig enabeld.
+> Have editorConfig enabled.
 
 <a name="spring-boot-devtools"></a>
 spring-boot-devtools
@@ -128,7 +141,8 @@ spring-boot-devtools
 > Settings > Build, Execution, Development > Compiler
 > - Build project automatically
 
-**Watch swagger**
+<a name="access-swagger"></a>
+**Access swagger**
 
 You can access the API information with swagger at the following URLs:
 
@@ -144,7 +158,7 @@ When accessing you will be asked to enter a username and password.
 
 Any contribution you make will be greatly appreciated.
 
-- Before you start contributing, read the [contribution guidelines](CONTRIBUTING.md).
+- Before you start contributing, read the [contribution guidelines](../CONTRIBUTING.md).
 
 ## Thank you
 
@@ -157,4 +171,4 @@ developing this project.
 
 ## License
 
-[MIT license](LICENSE).
+[MIT license](../LICENSE).
