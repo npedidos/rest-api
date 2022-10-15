@@ -3,6 +3,8 @@ package red.softn.npedidos.runner;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +18,15 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     
     private final ActionsRun actionsRun;
     
+    private final ApplicationContext applicationContext;
+    
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<String> nonOptionArgs = args.getNonOptionArgs();
         Set<String> optionNames = args.getOptionNames();
         
         if (nonOptionArgs == null) {
-            System.exit(0);
+            throw new IllegalArgumentException("No se han especificado argumentos.");
         }
         
         nonOptionArgs.forEach(value -> {
@@ -32,10 +36,10 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                     boolean seed = optionNames.contains("seed");
                     this.actionsRun.dbFresh(seed);
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + value);
+                default -> throw new IllegalStateException(String.format("El argumento %s no es valido.", value));
             }
             
-            System.exit(0);
+            SpringApplication.exit(this.applicationContext);
         });
     }
     
