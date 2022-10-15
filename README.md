@@ -7,7 +7,10 @@
 
 [![Twitch nmarulo](https://img.shields.io/twitch/status/nmarulo?color=%23A970FF&label=twitch%20nmarulo&style=flat-square)](https://www.twitch.tv/nmarulo)
 ---
-📚 Translations Readme: [<img title="English" alt="English" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="28">](translations/README.en.md)
+
+📚 **Translations Readme**:
+
+[<img title="English" alt="English" src="https://cdn.staticaly.com/gh/hjnilsson/country-flags/master/svg/us.svg" width="32">](translations/README.en.md)
 
 ## Descripción
 
@@ -21,6 +24,13 @@ No disponible, por el momento.
 
 ## Despliegue local
 
+- [Requisitos](#requisitos)
+- [Empezar a trabajar](#empezar-a-trabajar)
+    - [Crear base de datos](#create-database)
+    - [Usando postman](#using-postman)
+    - [Trabajando en IntelliJ IDEA](#working-ingellij)
+    - [Acceder a swagger](#access-swagger)
+
 ### Requisitos
 
 * [Java 17](https://jdk.java.net/archive/)
@@ -30,16 +40,19 @@ No disponible, por el momento.
 
 ### Empezar a trabajar
 
+<a name="create-database"></a>
 **Crear base de datos**
 
 - Ejecutamos el script [npedidos.sql](npedidos.sql)
 
+<a name="using-postman"></a>
 **Usando postman**
 
 - Puedes hacer un fork a las API en el siguiente enlace:
 
   [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/3462094-1245bdc5-f0fc-4a80-b067-33db0095e664?action=collection%2Ffork&collection-url=entityId%3D3462094-1245bdc5-f0fc-4a80-b067-33db0095e664%26entityType%3Dcollection%26workspaceId%3Dfaa3b08b-5495-45eb-a53f-5d832821e4f2#?env%5Bnpedidos%20-%20local%5D=W3sia2V5IjoidXJsIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpIiwiZW5hYmxlZCI6dHJ1ZSwidHlwZSI6ImRlZmF1bHQifSx7ImtleSI6InRva2VuIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9XQ==)
 
+<a name="working-ingellij"></a>
 **Trabajando en IntelliJ IDEA**
 
 - [Clonar proyecto](#clonar-proyecto)
@@ -50,7 +63,7 @@ No disponible, por el momento.
 - [Iniciar sesión](#login)
 - [Otras configuraciones de RUN](#run-configs)
 - [Habilitar EditorConfig](#editor-config)
-- [Estables opciones de guardado](#on-save)
+- [Establecer opciones de guardado](#on-save)
 - [spring-boot-devtools](#spring-boot-devtools)
 
 <a name="clonar-proyecto"></a>
@@ -130,7 +143,8 @@ spring-boot-devtools
 > Settings > Build, Execution, Development > Compiler
 > - Build project automatically
 
-**Ver swagger**
+<a name="access-swagger"></a>
+**Acceder a swagger**
 
 Puedes acceder a la información de la API con swagger en las siguientes URL:
 
