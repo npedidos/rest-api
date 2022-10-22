@@ -1,15 +1,18 @@
 package red.softn.npedidos.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -35,6 +38,10 @@ public class Order {
     @JoinColumn(name = "users_id", nullable = false)
     @GsonExclude
     private User user;
+    
+    public Order() {
+        this.foodDishes = new HashSet<>();
+    }
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
