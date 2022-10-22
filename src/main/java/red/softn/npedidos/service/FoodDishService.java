@@ -9,11 +9,13 @@ import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.MenuRepository;
 import red.softn.npedidos.request.FoodDishRequest;
-import red.softn.npedidos.request.MenuRequest;
+import red.softn.npedidos.request.fooddish.FoodDishMenusSaveRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.specifications.MenuSpecifications;
+
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -31,21 +33,16 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         return pageToResponse(menus, MenuResponse.class);
     }
     
-    public MenuResponse save(Integer id, MenuRequest request) {
-        Menu menu;
+    public void save(Integer id, FoodDishMenusSaveRequest request) {
+        FoodDish foodDish = getRepository().getReferenceById(id);
+        Set<Menu> menus = foodDish.getMenus();
         
-        if (request.getId() != null && this.menuRepository.existsById(request.getId())) {
-            menu = this.menuRepository.getReferenceById(request.getId());
-        } else {
-            menu = getGsonUtil().convertTo(request, Menu.class);
-        }
+        request.getMenus()
+               .stream()
+               .map(Menu::new)
+               .forEach(menus::add);
         
-        menu.getFoodDishes()
-            .add(getRepository().getReferenceById(id));
-        
-        Menu save = this.menuRepository.save(menu);
-        
-        return getGsonUtil().convertTo(save, MenuResponse.class);
+        getRepository().save(foodDish);
     }
     
 }

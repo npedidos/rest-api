@@ -40,6 +40,10 @@ public class Menu {
         this.foodDishes = new HashSet<>();
     }
     
+    public Menu(Integer id) {
+        this.id = id;
+    }
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final Menu other)) {return false;}

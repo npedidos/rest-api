@@ -4,14 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 import red.softn.npedidos.request.FoodDishRequest;
-import red.softn.npedidos.request.MenuRequest;
+import red.softn.npedidos.request.fooddish.FoodDishMenusSaveRequest;
 import red.softn.npedidos.response.FoodDishResponse;
-import red.softn.npedidos.response.MenuResponse;
 import red.softn.npedidos.service.FoodDishService;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/food-dishes")
@@ -27,15 +23,11 @@ public class FoodDishController extends CrudController<FoodDishRequest, FoodDish
     }
     
     @PostMapping("/{id}/menus")
-    public ResponseEntity<?> saveMenus(@PathVariable Integer id, @RequestBody MenuRequest request, UriComponentsBuilder uriComponentsBuilder) {
-        MenuResponse response = getService().save(id, request);
-        URI uri = uriComponentsBuilder.path(getAppProperties().getPathPrefix())
-                                      .pathSegment("menus", "{id}")
-                                      .buildAndExpand(response.getId())
-                                      .toUri();
+    public ResponseEntity<?> saveMenus(@PathVariable Integer id, @RequestBody FoodDishMenusSaveRequest request) {
+        getService().save(id, request);
         
-        return ResponseEntity.created(uri)
-                             .body(response);
+        return ResponseEntity.noContent()
+                             .build();
     }
     
 }
