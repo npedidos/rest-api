@@ -11,7 +11,6 @@ import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.TypeDishResponse;
 import red.softn.npedidos.service.TypeDishService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
 @RestController
@@ -27,16 +26,11 @@ public class TypeDishController extends CrudController<TypeDishRequest, TypeDish
         return ResponseEntity.ok(getService().findAllFoodDishes(id));
     }
     
-    @GetMapping("/{id}/food-dishes/{foodDishId}")
-    public ResponseEntity<?> findByIdFoodDish(@PathVariable Integer id, @PathVariable Integer foodDishId) {
-        return ResponseEntity.ok(getService().findByIdFoodDish(id, foodDishId));
-    }
-    
     @PostMapping("/{id}/food-dishes")
-    public ResponseEntity<?> save(@PathVariable Integer id, @RequestBody FoodDishRequest request, UriComponentsBuilder uriComponentsBuilder, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<?> save(@PathVariable Integer id, @RequestBody FoodDishRequest request, UriComponentsBuilder uriComponentsBuilder) {
         FoodDishResponse response = getService().save(id, request);
-        URI uri = uriComponentsBuilder.path(httpServletRequest.getServletPath())
-                                      .pathSegment("{foodDish}")
+        URI uri = uriComponentsBuilder.path(getAppProperties().getPathPrefix())
+                                      .pathSegment("food-dishes", "{id}")
                                       .buildAndExpand(response.getId())
                                       .toUri();
         

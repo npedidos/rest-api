@@ -42,10 +42,4 @@ public class TypeDishService extends CrudService<TypeDishRequest, TypeDishRespon
         return pageToResponse(allByTypesDishesId, FoodDishResponse.class);
     }
     
-    public FoodDishResponse findByIdFoodDish(Integer id, Integer foodDishId) {
-        FoodDish byIdAndTypeDishId = foodDishRepository.findByIdAndTypeDishId(foodDishId, id);
-        
-        return getGsonUtil().convertTo(byIdAndTypeDishId, FoodDishResponse.class);
-    }
-    
 }

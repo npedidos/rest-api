@@ -13,7 +13,4 @@ public interface FoodDishRepository extends JpaRepository<FoodDish, Integer> {
     @Query("SELECT f FROM FoodDish f WHERE f.typeDish.id = :id")
     Page<FoodDish> findAllByTypeDishId(Integer id, Pageable pageable);
     
-    @Query("SELECT f FROM FoodDish f WHERE f.id = :id AND f.typeDish.id = :typeDishId")
-    FoodDish findByIdAndTypeDishId(Integer id, Integer typeDishId);
-    
 }
