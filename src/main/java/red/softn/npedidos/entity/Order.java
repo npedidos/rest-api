@@ -29,7 +29,10 @@ public class Order {
     private LocalDateTime dateOrder;
     
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "orders_has_food_dishes",
+               joinColumns = @JoinColumn(name = "orders_id", nullable = false),
+               inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
     @GsonExclude
     private Set<FoodDish> foodDishes;
     
