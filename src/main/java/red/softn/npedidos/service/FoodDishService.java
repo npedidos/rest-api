@@ -9,6 +9,7 @@ import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.MenuRepository;
 import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.MenuRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
@@ -28,6 +29,23 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         Page<Menu> menus = this.menuRepository.findAll(MenuSpecifications.hasFoodDish(id), getDataRequestScope().getPageable());
         
         return pageToResponse(menus, MenuResponse.class);
+    }
+    
+    public MenuResponse save(Integer id, MenuRequest request) {
+        Menu menu;
+        
+        if (request.getId() != null && this.menuRepository.existsById(request.getId())) {
+            menu = this.menuRepository.getReferenceById(request.getId());
+        } else {
+            menu = getGsonUtil().convertTo(request, Menu.class);
+        }
+        
+        menu.getFoodDishes()
+            .add(getRepository().getReferenceById(id));
+        
+        Menu save = this.menuRepository.save(menu);
+        
+        return getGsonUtil().convertTo(save, MenuResponse.class);
     }
     
 }
