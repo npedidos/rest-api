@@ -2,6 +2,7 @@ package red.softn.npedidos.service;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.Menu;
@@ -10,9 +11,8 @@ import red.softn.npedidos.repository.MenuRepository;
 import red.softn.npedidos.request.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;
+import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.specifications.MenuSpecifications;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,11 +23,11 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
     
     private final MenuRepository menuRepository;
     
-    public List<MenuResponse> findAllMenus(Integer id) {
+    public PagingAndSortingResponse<MenuResponse> findAllMenus(Integer id) {
         //SELECT * FROM menus WHERE ID IN (SELECT menus_id FROM menus_has_food_dishes WHERE food_dishes_id = :id
-        List<Menu> menus = this.menuRepository.findAll(MenuSpecifications.hasFoodDish(id));
+        Page<Menu> menus = this.menuRepository.findAll(MenuSpecifications.hasFoodDish(id), getDataRequestScope().getPageable());
         
-        return getGsonUtil().convertTo(menus, MenuResponse.class);
+        return pageToResponse(menus, MenuResponse.class);
     }
     
 }
