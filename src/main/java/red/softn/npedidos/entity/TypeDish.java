@@ -4,8 +4,8 @@ import lombok.*;
 import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class TypeDish {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDish")
     @GsonExclude
-    private List<FoodDish> foodDishes;
+    private Set<FoodDish> foodDishes;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

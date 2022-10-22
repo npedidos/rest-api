@@ -4,8 +4,8 @@ import lombok.*;
 import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -36,7 +36,7 @@ public class FoodDish {
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "orders_id", nullable = false))
     @GsonExclude
-    private List<Order> orders;
+    private Set<Order> orders;
     
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.LAZY)
@@ -44,7 +44,7 @@ public class FoodDish {
                joinColumns = @JoinColumn(name = "food_dishes_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "menus_id", nullable = false))
     @GsonExclude
-    private List<Menu> menus;
+    private Set<Menu> menus;
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}
