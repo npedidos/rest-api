@@ -16,4 +16,12 @@ public class MenuSpecifications {
         };
     }
     
+    public static Specification<FoodDish> hasMenu(Integer id) {
+        return (root, query, criteriaBuilder) -> {
+            Join<FoodDish, Menu> menuJoin = root.join("menus");
+            
+            return criteriaBuilder.equal(menuJoin.get("id"), id);
+        };
+    }
+    
 }
