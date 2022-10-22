@@ -26,10 +26,7 @@ public class Order {
     private LocalDateTime dateOrder;
     
     @ToString.Exclude
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "orders_has_food_dishes",
-               joinColumns = @JoinColumn(name = "orders_id", nullable = false),
-               inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orders")
     @GsonExclude
     private Set<FoodDish> foodDishes;
     
