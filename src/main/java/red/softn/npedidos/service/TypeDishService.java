@@ -14,8 +14,6 @@ import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.response.TypeDishResponse;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Getter
@@ -29,7 +27,8 @@ public class TypeDishService extends CrudService<TypeDishRequest, TypeDishRespon
         FoodDish foodDish = getGsonUtil().convertTo(request, FoodDish.class);
         TypeDish typeDish = getRepository().getReferenceById(id);
         
-        typeDish.setFoodDishes(List.of(foodDish));
+        typeDish.getFoodDishes()
+                .add(foodDish);
         foodDish.setTypeDish(typeDish);
         
         FoodDish save = foodDishRepository.save(foodDish);

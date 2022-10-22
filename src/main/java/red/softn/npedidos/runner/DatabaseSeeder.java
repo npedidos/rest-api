@@ -14,7 +14,9 @@ import red.softn.npedidos.repository.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
@@ -72,9 +74,9 @@ public class DatabaseSeeder {
         List<Menu> menus = this.menuRepository.findAll();
         
         orderings.forEach(value -> {
-            List<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
-                                                       .limit(10)
-                                                       .toList();
+            Set<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
+                                                      .limit(10)
+                                                      .collect(Collectors.toSet());
             
             value.setFoodDishes(foodDishList);
             
@@ -82,9 +84,9 @@ public class DatabaseSeeder {
         });
         
         menus.forEach(value -> {
-            List<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
-                                                       .limit(3)
-                                                       .toList();
+            Set<FoodDish> foodDishList = StreamSupport.stream(foodDishes.spliterator(), false)
+                                                      .limit(3)
+                                                      .collect(Collectors.toSet());
             
             value.setFoodDishes(foodDishList);
             
