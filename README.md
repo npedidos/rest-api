@@ -171,6 +171,11 @@ desarrollar este proyecto.
 | ------------- |-------------------------------------------------------------------------------------------|
 | ![jetbrains](https://github.com/npedidos/rest-api/blob/master/img/jetbrains.svg "jetbrains") | ![phpstorm](https://github.com/npedidos/rest-api/blob/master/img/intellij.svg "intellij") |
 
+## Contributors
+<a href="https://github.com/abel-otegbola/clock-app/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=abel-otegbola/clock-app" />
+</a>  
+
 ## Licencia
 
 [MIT license](LICENSE).
