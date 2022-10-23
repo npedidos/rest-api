@@ -47,7 +47,7 @@ public class AuthControllerTestUtil {
                                           .emailAddress());
         userEntity.setUsername(username);
         userEntity.setPassword(passwordEncode);
-        userEntity.setOrders(Collections.emptyList());
+        userEntity.setOrders(Collections.emptySet());
     }
     
 }

@@ -29,9 +29,14 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     
     @Override
     public PagingAndSortingResponse<R> findAllPageable() {
-        PagingAndSortingResponse<R> response = new PagingAndSortingResponse<>();
         Page<T> page = getRepository().findAll(this.dataRequestScope.getPageable());
-        List<R> content = this.gsonUtil.convertTo(page.getContent(), getResponseClass());
+        
+        return pageToResponse(page, getResponseClass());
+    }
+    
+    protected <RE, EN> PagingAndSortingResponse<RE> pageToResponse(Page<EN> page, Class<RE> classRE) {
+        PagingAndSortingResponse<RE> response = new PagingAndSortingResponse<>();
+        List<RE> content = this.gsonUtil.convertTo(page.getContent(), classRE);
         
         response.setContent(content);
         response.setCurrentPage(page.getNumber());
@@ -105,7 +110,7 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     }
     
     @SuppressWarnings("unchecked")
-    private Class<R> getResponseClass() {
+    protected Class<R> getResponseClass() {
         return (Class<R>) ResolvableType.forClass(this.getClass())
                                         .getSuperType()
                                         .resolveGeneric(1);

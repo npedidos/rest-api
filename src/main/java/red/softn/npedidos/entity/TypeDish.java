@@ -1,14 +1,17 @@
 package red.softn.npedidos.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -27,7 +30,11 @@ public class TypeDish {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeDish")
     @GsonExclude
-    private List<FoodDish> foodDishes;
+    private Set<FoodDish> foodDishes;
+    
+    public TypeDish() {
+        this.foodDishes = new HashSet<>();
+    }
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

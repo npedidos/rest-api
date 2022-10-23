@@ -2,9 +2,10 @@ package red.softn.npedidos.controller;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.fooddish.FoodDishMenusSaveRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.service.FoodDishService;
 
@@ -15,5 +16,18 @@ import red.softn.npedidos.service.FoodDishService;
 public class FoodDishController extends CrudController<FoodDishRequest, FoodDishResponse, Integer> {
     
     private final FoodDishService service;
+    
+    @GetMapping("/{id}/menus")
+    public ResponseEntity<?> findAllMenus(@PathVariable Integer id) {
+        return ResponseEntity.ok(getService().findAllMenus(id));
+    }
+    
+    @PostMapping("/{id}/menus")
+    public ResponseEntity<?> saveMenus(@PathVariable Integer id, @RequestBody FoodDishMenusSaveRequest request) {
+        getService().save(id, request);
+        
+        return ResponseEntity.noContent()
+                             .build();
+    }
     
 }

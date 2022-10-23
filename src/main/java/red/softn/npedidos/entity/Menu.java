@@ -1,15 +1,18 @@
 package red.softn.npedidos.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import red.softn.npedidos.utils.gson.GsonExclude;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -31,7 +34,15 @@ public class Menu {
                joinColumns = @JoinColumn(name = "menus_id", nullable = false),
                inverseJoinColumns = @JoinColumn(name = "food_dishes_id", nullable = false))
     @GsonExclude
-    private List<FoodDish> foodDishes;
+    private Set<FoodDish> foodDishes;
+    
+    public Menu() {
+        this.foodDishes = new HashSet<>();
+    }
+    
+    public Menu(Integer id) {
+        this.id = id;
+    }
     
     public boolean equals(final Object o) {
         if (o == this) {return true;}

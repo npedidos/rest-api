@@ -1,9 +1,13 @@
 package red.softn.npedidos.controller;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.exception.InternalServerErrorException;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.service.CrudServiceI;
@@ -13,6 +17,10 @@ import java.lang.reflect.Field;
 import java.net.URI;
 
 public abstract class CrudController<E, R, ID> {
+    
+    @Autowired
+    @Getter(value = AccessLevel.PROTECTED)
+    private AppProperties appProperties;
     
     public abstract CrudServiceI<E, R, ID> getService();
     
