@@ -13,6 +13,7 @@ services:
     volumes:
       - db:/var/lib/mysql
       - "./npedidos.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./npedidos-seeddata.sql:/docker-entrypoint-initdb.d/2.sql"
   app:
     depends_on:
       - mysqldb

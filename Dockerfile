@@ -1,4 +1,4 @@
-# Stage 1
+# Stage 1: Maven Build
 FROM maven:3.8.5-openjdk-17 as stage1
 # [optimization] speed up Maven JVM a bit
 ENV MAVEN_OPTS="-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
@@ -11,7 +11,7 @@ COPY ./src ./src
 # compile the source code, package it in a war file + generate server in target/server
 RUN mvn clean package -Dmaven.test.skip=true
 
-# Stage 2
+# Stage 2: Wildfly Deployment
 FROM quay.io/wildfly/wildfly-runtime-jdk17
 COPY --from=stage1 --chown=jboss:root /opt/rest-api-app/target/server $JBOSS_HOME
 RUN chmod -R ug+rwX $JBOSS_HOME
