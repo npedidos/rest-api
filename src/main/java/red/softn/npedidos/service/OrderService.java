@@ -9,6 +9,7 @@ import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.OrderRepository;
+import red.softn.npedidos.request.OrderFoodDishesSaveRequest;
 import red.softn.npedidos.request.OrderRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.OrderResponse;
@@ -42,6 +43,18 @@ public class OrderService extends CrudService<OrderRequest, OrderResponse, Order
         var save = getRepository().save(entity);
         
         return getGsonUtil().convertTo(save, getResponseClass());
+    }
+    
+    public void saveFoodDishes(Integer id, OrderFoodDishesSaveRequest request) {
+        var order = getRepository().getReferenceById(id);
+        var foodDishes = order.getFoodDishes();
+        
+        request.getFoodDishesId()
+               .stream()
+               .map(FoodDish::new)
+               .forEach(foodDishes::add);
+        
+        getRepository().save(order);
     }
     
 }
