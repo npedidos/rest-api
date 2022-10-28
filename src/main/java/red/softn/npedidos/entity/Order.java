@@ -46,6 +46,12 @@ public class Order {
         this.foodDishes = new HashSet<>();
     }
     
+    public Order(LocalDateTime dateOrder, Set<FoodDish> foodDishes, User user) {
+        this.dateOrder = dateOrder;
+        this.foodDishes = foodDishes;
+        this.user = user;
+    }
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final Order other)) {return false;}
