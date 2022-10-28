@@ -3,6 +3,7 @@ package red.softn.npedidos.service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.entity.User;
@@ -22,10 +23,19 @@ public class UserService extends CrudService<UserRequest, UserResponse, User, In
     
     private final OrderRepository orderRepository;
     
+    private final PasswordEncoder passwordEncoder;
+    
     public PagingAndSortingResponse<OrderResponse> findAllOrders(Integer id) {
         Page<Order> allByUser = this.orderRepository.findAllByUserId(id, getDataRequestScope().getPageable());
         
         return pageToResponse(allByUser, OrderResponse.class);
+    }
+    
+    @Override
+    public UserResponse save(UserRequest request) {
+        request.setPassword(this.passwordEncoder.encode(request.getPassword()));
+        
+        return super.save(request);
     }
     
 }
