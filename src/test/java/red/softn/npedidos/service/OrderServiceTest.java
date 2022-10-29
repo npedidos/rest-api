@@ -9,7 +9,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import red.softn.npedidos.CrudServiceTest;
 import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.repository.OrderRepository;
-import red.softn.npedidos.request.OrderRequest;
+import red.softn.npedidos.request.orders.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

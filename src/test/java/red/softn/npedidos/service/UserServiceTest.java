@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import red.softn.npedidos.CrudServiceTest;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.repository.UserRepository;
-import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

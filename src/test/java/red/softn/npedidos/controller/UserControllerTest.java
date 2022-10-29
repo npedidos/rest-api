@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import red.softn.npedidos.CrudControllerTest;
-import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 import red.softn.npedidos.service.UserService;
 
@@ -16,4 +16,5 @@ public class UserControllerTest extends CrudControllerTest<UserRequest, UserResp
     private UserService service;
     
     private final String urlMapping = "/api/users";
+    
 }

@@ -8,7 +8,7 @@ import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.MenuRepository;
-import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import red.softn.npedidos.request.fooddish.FoodDishMenusSaveRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;

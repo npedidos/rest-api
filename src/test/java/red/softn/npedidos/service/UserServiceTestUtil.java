@@ -3,7 +3,7 @@ package red.softn.npedidos.service;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.User;
-import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 
 public class UserServiceTestUtil extends CrudServiceTestUtil<UserRequest, UserResponse, User, Integer> {

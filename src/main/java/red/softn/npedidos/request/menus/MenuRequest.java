@@ -1,4 +1,4 @@
-package red.softn.npedidos.request;
+package red.softn.npedidos.request.menus;
 
 import lombok.Data;
 

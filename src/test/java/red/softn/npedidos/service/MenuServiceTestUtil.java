@@ -3,7 +3,7 @@ package red.softn.npedidos.service;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.Menu;
-import red.softn.npedidos.request.MenuRequest;
+import red.softn.npedidos.request.menus.MenuRequest;
 import red.softn.npedidos.response.MenuResponse;
 
 class MenuServiceTestUtil extends CrudServiceTestUtil<MenuRequest, MenuResponse, Menu, Integer> {

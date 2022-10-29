@@ -1,4 +1,4 @@
-package red.softn.npedidos.request;
+package red.softn.npedidos.request.users;
 
 import lombok.Data;
 

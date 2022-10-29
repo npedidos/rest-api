@@ -17,5 +17,4 @@ public class TypeDishControllerTest extends CrudControllerTest<TypeDishRequest, 
     
     private final String urlMapping = "/api/types-dishes";
     
-    
 }

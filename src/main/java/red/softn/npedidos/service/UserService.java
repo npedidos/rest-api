@@ -10,7 +10,7 @@ import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.repository.OrderRepository;
 import red.softn.npedidos.repository.UserRepository;
-import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.request.users.UserOrdersSaveRequest;
 import red.softn.npedidos.response.OrderResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;

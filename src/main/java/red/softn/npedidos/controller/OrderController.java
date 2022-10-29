@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import red.softn.npedidos.request.OrderFoodDishesSaveRequest;
-import red.softn.npedidos.request.OrderRequest;
+import red.softn.npedidos.request.orders.OrderFoodDishesSaveRequest;
+import red.softn.npedidos.request.orders.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
 import red.softn.npedidos.service.OrderService;
 

@@ -24,4 +24,5 @@ public class TypeDishControllerTestTestUtil extends ControllerTestUtil<TypeDishR
         
         return Init.of(request, response, request.getId());
     }
+    
 }

@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import red.softn.npedidos.CrudServiceTest;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.repository.FoodDishRepository;
-import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 
 @ExtendWith(MockitoExtension.class)

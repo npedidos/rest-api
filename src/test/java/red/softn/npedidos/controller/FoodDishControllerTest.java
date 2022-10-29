@@ -4,7 +4,7 @@ import lombok.Getter;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import red.softn.npedidos.CrudControllerTest;
-import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.service.FoodDishService;
 

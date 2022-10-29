@@ -3,7 +3,7 @@ package red.softn.npedidos.service;
 import red.softn.npedidos.CrudServiceTestUtil;
 import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.FoodDish;
-import red.softn.npedidos.request.FoodDishRequest;
+import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 
 public class FoodDishServiceTestUtil extends CrudServiceTestUtil<FoodDishRequest, FoodDishResponse, FoodDish, Integer> {

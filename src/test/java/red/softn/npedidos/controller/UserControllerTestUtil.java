@@ -4,11 +4,12 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import red.softn.npedidos.ControllerTestUtil;
 import red.softn.npedidos.TestUtil;
-import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 
 @Getter
 public class UserControllerTestUtil extends ControllerTestUtil<UserRequest, UserResponse, Integer> {
+    
     public UserControllerTestUtil(Gson gson) {super(gson);}
     
     @Override
@@ -26,4 +27,5 @@ public class UserControllerTestUtil extends ControllerTestUtil<UserRequest, User
         
         return Init.of(request, response, request.getId());
     }
+    
 }

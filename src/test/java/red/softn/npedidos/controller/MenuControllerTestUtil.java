@@ -3,7 +3,7 @@ package red.softn.npedidos.controller;
 import com.google.gson.Gson;
 import red.softn.npedidos.ControllerTestUtil;
 import red.softn.npedidos.TestUtil;
-import red.softn.npedidos.request.MenuRequest;
+import red.softn.npedidos.request.menus.MenuRequest;
 import red.softn.npedidos.response.MenuResponse;
 
 public class MenuControllerTestUtil extends ControllerTestUtil<MenuRequest, MenuResponse, Integer> {
@@ -24,4 +24,5 @@ public class MenuControllerTestUtil extends ControllerTestUtil<MenuRequest, Menu
         
         return Init.of(request, response, request.getId());
     }
+    
 }

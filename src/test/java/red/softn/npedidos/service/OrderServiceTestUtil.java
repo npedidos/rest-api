@@ -5,7 +5,7 @@ import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.entity.User;
-import red.softn.npedidos.request.OrderRequest;
+import red.softn.npedidos.request.orders.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
 
 import java.util.Set;
