@@ -1,5 +1,6 @@
 package red.softn.npedidos;
 
+import lombok.Getter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -18,6 +19,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@Getter
 public abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil<E, R, T, ID>> {
     
     private U crudServiceTestUtil;
@@ -88,7 +90,7 @@ public abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil
     }
     
     @Test
-    void testSave() {
+    public void testSave() {
         E request = this.crudServiceTestUtil.getRequest();
         R expected = this.crudServiceTestUtil.getResponse();
         T entity = this.crudServiceTestUtil.getEntity();
