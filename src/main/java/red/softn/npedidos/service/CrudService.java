@@ -61,8 +61,8 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
         return this.gsonUtil.convertTo(entity, getResponseClass());
     }
     
-    public R save(E typeDish) {
-        T entity = this.gsonUtil.convertTo(typeDish, getEntityClass());
+    public R save(E request) {
+        T entity = this.gsonUtil.convertTo(request, getEntityClass());
         
         setFieldId(null, entity);
         

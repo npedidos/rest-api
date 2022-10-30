@@ -42,6 +42,10 @@ public class User {
         this.orders = new HashSet<>();
     }
     
+    public User(Integer id) {
+        this.id = id;
+    }
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final User other)) {return false;}
