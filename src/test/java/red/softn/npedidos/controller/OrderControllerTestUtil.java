@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import lombok.Getter;
 import red.softn.npedidos.ControllerTestUtil;
 import red.softn.npedidos.TestUtil;
-import red.softn.npedidos.request.OrderRequest;
+import red.softn.npedidos.request.orders.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
 
 @Getter
