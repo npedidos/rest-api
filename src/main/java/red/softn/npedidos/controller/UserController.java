@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.request.users.UserOrdersSaveRequest;
+import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 import red.softn.npedidos.service.UserService;
 

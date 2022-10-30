@@ -8,7 +8,6 @@ import red.softn.npedidos.request.SettingRequest;
 import red.softn.npedidos.response.SettingResponse;
 import red.softn.npedidos.service.SettingService;
 
-
 @WebMvcTest(SettingController.class)
 @Getter
 public class SettingControllerTest extends CrudControllerTest<SettingRequest, SettingResponse, Integer, SettingControllerTestUtil> {

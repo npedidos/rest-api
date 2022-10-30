@@ -26,7 +26,6 @@ public class SettingControllerTestUtil extends ControllerTestUtil<SettingRequest
         response.setValue(request.getValue());
         response.setKeyName(request.getKeyName());
         
-        
         return Init.of(request, response, request.getId());
     }
     
