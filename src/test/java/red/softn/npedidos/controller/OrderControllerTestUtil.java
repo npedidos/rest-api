@@ -19,7 +19,9 @@ public class OrderControllerTestUtil extends ControllerTestUtil<OrderRequest, Or
         var request = new OrderRequest();
         var response = new OrderResponse();
         request.setId(TestUtil.fakeRandomInteger());
+        request.setDateOrder(TestUtil.fakeDateFutureDaysTime());
         response.setId(request.getId());
+        response.setDateOrder(request.getDateOrder());
         
         return Init.of(request, response, request.getId());
     }
