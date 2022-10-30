@@ -19,6 +19,57 @@ This project provides the necessary resources: [proyecto web](https://github.com
 
 Not yet available.
 
+## Docker deployment
+
+### Requirements
+
+* [Docker](https://docs.docker.com/get-docker/) (including [Docker Compose](https://docs.docker.com/compose/install/))
+
+### How to get started
+
+#### Environment variables
+
+Since environment variables usually hold sensitive data like database credentials, `.env` file should NOT be committed
+to git.
+We provide a sample `.env.sample` file. It's up to you as a developer to copy the same and create your own `.env` file
+(or just populate the relevant environment variables on your system).
+
+#### First Run
+
+Once you've cloned the project and created `.env` file we can now start our demo project. Easy!
+Run the following command from the root project directory:
+
+```sh
+docker-compose up -d
+```
+
+The docker-compose command will pull the images from Docker Hub and then link them together based on the information
+inside the docker-compose.yml file. This will create two containers (Wildfly server and MySQL database), run Maven
+build, expose ports, populate the database with an initial set of data, and configure application as required.
+Database data is stored in a Docker volume.
+
+After the command completes we can view the status of our stack:
+
+```sh
+docker-compose ps
+```
+
+First time you run the command, it will take a few minutes to download the images and start the containers.
+Application container is not waiting for the database to be ready, so it will fail to start.
+You can simply restart it with the following command:
+
+```sh
+docker-compose restart app
+```
+
+#### Shutdown
+
+After we are done with our demo we can stop the containers and remove them:
+
+```sh
+docker-compose down
+```
+
 ## Local deployment
 
 - [prerequisites](#prerequisites)
