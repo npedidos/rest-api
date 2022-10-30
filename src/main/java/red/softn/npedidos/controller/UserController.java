@@ -3,13 +3,14 @@ package red.softn.npedidos.controller;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import red.softn.npedidos.request.UserRequest;
+import red.softn.npedidos.request.users.UserOrdersSaveRequest;
 import red.softn.npedidos.response.UserResponse;
 import red.softn.npedidos.service.UserService;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/users")
@@ -22,6 +23,18 @@ public class UserController extends CrudController<UserRequest, UserResponse, In
     @GetMapping("/{id}/orders")
     public ResponseEntity<?> findAllOrders(@PathVariable Integer id) {
         return ResponseEntity.ok(getService().findAllOrders(id));
+    }
+    
+    @PostMapping("/{id}/orders")
+    public ResponseEntity<?> saveOrders(@PathVariable Integer id, @RequestBody UserOrdersSaveRequest request, UriComponentsBuilder uriComponentsBuilder) {
+        Integer orderId = getService().saveOrders(id, request);
+        URI uri = uriComponentsBuilder.path(getAppProperties().getPathPrefix())
+                                      .pathSegment("orders", "{id}")
+                                      .buildAndExpand(orderId)
+                                      .toUri();
+        
+        return ResponseEntity.created(uri)
+                             .build();
     }
     
 }

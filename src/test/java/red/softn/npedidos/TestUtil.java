@@ -5,6 +5,7 @@ import org.springframework.core.ResolvableType;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public final class TestUtil {
@@ -19,6 +20,12 @@ public final class TestUtil {
         return ResolvableType.forClass(clazz)
                              .getSuperType()
                              .resolveGeneric(index);
+    }
+    
+    public static List<Integer> fakeRandomIntegerList() {
+        return faker.collection(TestUtil::fakeRandomInteger)
+                    .len(1, 100)
+                    .generate();
     }
     
     public static Integer fakeRandomInteger() {
