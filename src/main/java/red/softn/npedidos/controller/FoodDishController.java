@@ -30,4 +30,12 @@ public class FoodDishController extends CrudController<FoodDishRequest, FoodDish
                              .build();
     }
     
+    @DeleteMapping("/{id}/menus")
+    public ResponseEntity<?> deleteMenus(@PathVariable Integer id, @RequestBody FoodDishMenusSaveRequest request) {
+        getService().deleteMenus(id, request);
+        
+        return ResponseEntity.noContent()
+                             .build();
+    }
+    
 }
