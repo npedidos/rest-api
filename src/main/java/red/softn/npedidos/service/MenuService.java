@@ -16,6 +16,7 @@ import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.specifications.MenuSpecifications;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -52,6 +53,19 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
                .stream()
                .map(FoodDish::new)
                .forEach(foodDishes::add);
+        
+        getRepository().save(menu);
+    }
+    
+    public void deleteFoodDishes(Integer id, MenuFoodDishesSaveRequest request) {
+        var menu = getRepository().getReferenceById(id);
+        var foodDishes = request.getFoodDishesId()
+                                .stream()
+                                .map(this.foodDishRepository::getReferenceById)
+                                .collect(Collectors.toSet());
+        
+        menu.getFoodDishes()
+            .removeAll(foodDishes);
         
         getRepository().save(menu);
     }
