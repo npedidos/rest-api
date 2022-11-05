@@ -57,4 +57,17 @@ public class OrderService extends CrudService<OrderRequest, OrderResponse, Order
         getRepository().save(order);
     }
     
+    public void deleteFoodDishes(Integer id, OrderFoodDishesSaveRequest request) {
+        var order = getRepository().getReferenceById(id);
+        var foodDishes = request.getFoodDishesId()
+                                .stream()
+                                .map(this.foodDishRepository::getReferenceById)
+                                .collect(Collectors.toSet());
+        
+        order.getFoodDishes()
+             .removeAll(foodDishes);
+        
+        getRepository().save(order);
+    }
+    
 }

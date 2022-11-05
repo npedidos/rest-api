@@ -30,4 +30,12 @@ public class OrderController extends CrudController<OrderRequest, OrderResponse,
                              .build();
     }
     
+    @DeleteMapping("/{id}/food-dishes")
+    public ResponseEntity<?> deleteFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesSaveRequest request) {
+        getService().deleteFoodDishes(id, request);
+        
+        return ResponseEntity.noContent()
+                             .build();
+    }
+    
 }
