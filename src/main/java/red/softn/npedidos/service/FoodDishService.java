@@ -60,7 +60,7 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         FoodDish foodDish = getRepository().getReferenceById(id);
         Set<Menu> menus = foodDish.getMenus();
         
-        request.getMenus()
+        request.getMenusId()
                .stream()
                .map(Menu::new)
                .forEach(menus::add);
@@ -70,7 +70,7 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
     
     public void deleteMenus(Integer id, FoodDishMenusSaveRequest request) {
         var foodDish = getRepository().getReferenceById(id);
-        var menus = request.getMenus()
+        var menus = request.getMenusId()
                            .stream()
                            .map(this.menuRepository::getReferenceById)
                            .collect(Collectors.toSet());
