@@ -46,6 +46,10 @@ public class Order {
         this.foodDishes = new HashSet<>();
     }
     
+    public Order(Integer id) {
+        this.id = id;
+    }
+    
     public Order(LocalDateTime dateOrder, Set<FoodDish> foodDishes, User user) {
         this.dateOrder = dateOrder;
         this.foodDishes = foodDishes;

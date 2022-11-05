@@ -16,4 +16,12 @@ public class OrderFoodDishSpecifications {
         };
     }
     
+    public static Specification<Order> hasOrder(Integer id) {
+        return (root, query, criteriaBuilder) -> {
+            Join<Order, FoodDish> orderJoin = root.join("foodDishes");
+            
+            return criteriaBuilder.equal(orderJoin.get("id"), id);
+        };
+    }
+    
 }
