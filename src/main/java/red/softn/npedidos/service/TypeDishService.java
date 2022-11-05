@@ -10,9 +10,13 @@ import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.TypeDishRepository;
 import red.softn.npedidos.request.TypeDishRequest;
 import red.softn.npedidos.request.fooddish.FoodDishRequest;
+import red.softn.npedidos.request.typedishes.TypeDishFoodDishesSaveRequest;
+import red.softn.npedidos.response.ContentResponse;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.response.TypeDishResponse;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,23 +27,37 @@ public class TypeDishService extends CrudService<TypeDishRequest, TypeDishRespon
     
     private final FoodDishRepository foodDishRepository;
     
-    public FoodDishResponse save(Integer id, FoodDishRequest request) {
-        FoodDish foodDish = getGsonUtil().convertTo(request, FoodDish.class);
-        TypeDish typeDish = getRepository().getReferenceById(id);
+    public ContentResponse<FoodDishResponse> saveFoodDishes(Integer id, TypeDishFoodDishesSaveRequest request) {
+        var typeDish = getRepository().getReferenceById(id);
+        var foodDishes = request.getFoodDishes()
+                                .stream()
+                                .map(value -> getFoodDish(typeDish, value))
+                                .toList();
         
-        typeDish.getFoodDishes()
-                .add(foodDish);
-        foodDish.setTypeDish(typeDish);
+        List<FoodDish> saveAll = this.foodDishRepository.saveAll(foodDishes);
+        List<FoodDishResponse> response = getGsonUtil().convertTo(saveAll, FoodDishResponse.class);
         
-        FoodDish save = foodDishRepository.save(foodDish);
-        
-        return getGsonUtil().convertTo(save, FoodDishResponse.class);
+        return new ContentResponse<>(response);
     }
     
     public PagingAndSortingResponse<FoodDishResponse> findAllFoodDishes(Integer id) {
         Page<FoodDish> allByTypesDishesId = foodDishRepository.findAllByTypeDishId(id, getDataRequestScope().getPageable());
         
         return pageToResponse(allByTypesDishesId, FoodDishResponse.class);
+    }
+    
+    private FoodDish getFoodDish(TypeDish typeDish, FoodDishRequest value) {
+        FoodDish foodDish;
+        
+        if (value.getId() == null) {
+            foodDish = getGsonUtil().convertTo(value, FoodDish.class);
+        } else {
+            foodDish = this.foodDishRepository.getReferenceById(value.getId());
+        }
+        
+        foodDish.setTypeDish(typeDish);
+        
+        return foodDish;
     }
     
 }
