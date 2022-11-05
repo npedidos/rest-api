@@ -8,7 +8,7 @@ import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.Menu;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.MenuRepository;
-import red.softn.npedidos.request.menus.MenuFoodDishesSaveRequest;
+import red.softn.npedidos.request.menus.MenuFoodDishesRequest;
 import red.softn.npedidos.request.menus.MenuRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;
@@ -45,7 +45,7 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
         return getGsonUtil().convertTo(save, getResponseClass());
     }
     
-    public void saveFoodDishes(Integer id, MenuFoodDishesSaveRequest request) {
+    public void saveFoodDishes(Integer id, MenuFoodDishesRequest request) {
         Menu menu = getRepository().getReferenceById(id);
         Set<FoodDish> foodDishes = menu.getFoodDishes();
         
@@ -57,7 +57,7 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
         getRepository().save(menu);
     }
     
-    public void deleteFoodDishes(Integer id, MenuFoodDishesSaveRequest request) {
+    public void deleteFoodDishes(Integer id, MenuFoodDishesRequest request) {
         var menu = getRepository().getReferenceById(id);
         var foodDishes = request.getFoodDishesId()
                                 .stream()

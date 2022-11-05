@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import red.softn.npedidos.request.orders.OrderFoodDishesSaveRequest;
+import red.softn.npedidos.request.orders.OrderFoodDishesRequest;
 import red.softn.npedidos.request.orders.OrderRequest;
 import red.softn.npedidos.response.OrderResponse;
 import red.softn.npedidos.service.OrderService;
@@ -23,7 +23,7 @@ public class OrderController extends CrudController<OrderRequest, OrderResponse,
     }
     
     @PostMapping("/{id}/food-dishes")
-    public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesSaveRequest request) {
+    public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesRequest request) {
         getService().saveFoodDishes(id, request);
         
         return ResponseEntity.noContent()
@@ -31,7 +31,7 @@ public class OrderController extends CrudController<OrderRequest, OrderResponse,
     }
     
     @DeleteMapping("/{id}/food-dishes")
-    public ResponseEntity<?> deleteFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesSaveRequest request) {
+    public ResponseEntity<?> deleteFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesRequest request) {
         getService().deleteFoodDishes(id, request);
         
         return ResponseEntity.noContent()

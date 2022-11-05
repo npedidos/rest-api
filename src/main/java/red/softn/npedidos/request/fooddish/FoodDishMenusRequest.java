@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FoodDishMenusSaveRequest {
+public class FoodDishMenusRequest {
     
     private List<Integer> menusId;
     

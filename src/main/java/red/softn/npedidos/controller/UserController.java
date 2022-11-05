@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import red.softn.npedidos.request.users.UserOrdersSaveRequest;
+import red.softn.npedidos.request.users.UserOrdersRequest;
 import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.UserResponse;
 import red.softn.npedidos.service.UserService;
@@ -26,7 +26,7 @@ public class UserController extends CrudController<UserRequest, UserResponse, In
     }
     
     @PostMapping("/{id}/orders")
-    public ResponseEntity<?> saveOrders(@PathVariable Integer id, @RequestBody UserOrdersSaveRequest request, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> saveOrders(@PathVariable Integer id, @RequestBody UserOrdersRequest request, UriComponentsBuilder uriComponentsBuilder) {
         Integer orderId = getService().saveOrders(id, request);
         URI uri = uriComponentsBuilder.path(getAppProperties().getPathPrefix())
                                       .pathSegment("orders", "{id}")

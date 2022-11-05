@@ -10,7 +10,7 @@ import red.softn.npedidos.entity.Order;
 import red.softn.npedidos.entity.User;
 import red.softn.npedidos.repository.OrderRepository;
 import red.softn.npedidos.repository.UserRepository;
-import red.softn.npedidos.request.users.UserOrdersSaveRequest;
+import red.softn.npedidos.request.users.UserOrdersRequest;
 import red.softn.npedidos.request.users.UserRequest;
 import red.softn.npedidos.response.OrderResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
@@ -42,7 +42,7 @@ public class UserService extends CrudService<UserRequest, UserResponse, User, In
         return super.save(request);
     }
     
-    public Integer saveOrders(Integer id, UserOrdersSaveRequest request) {
+    public Integer saveOrders(Integer id, UserOrdersRequest request) {
         var user = getRepository().getReferenceById(id);
         var foodDishes = request.getFoodDishesId()
                                 .stream()

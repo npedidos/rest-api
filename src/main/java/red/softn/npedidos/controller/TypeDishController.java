@@ -5,8 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import red.softn.npedidos.request.TypeDishRequest;
-import red.softn.npedidos.request.typedishes.TypeDishFoodDishesSaveRequest;
+import red.softn.npedidos.request.typedishes.TypeDishFoodDishesRequest;
+import red.softn.npedidos.request.typedishes.TypeDishRequest;
 import red.softn.npedidos.response.TypeDishResponse;
 import red.softn.npedidos.service.TypeDishService;
 
@@ -24,7 +24,7 @@ public class TypeDishController extends CrudController<TypeDishRequest, TypeDish
     }
     
     @PostMapping("/{id}/food-dishes")
-    public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody TypeDishFoodDishesSaveRequest request) {
+    public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody TypeDishFoodDishesRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(getService().saveFoodDishes(id, request));
     }

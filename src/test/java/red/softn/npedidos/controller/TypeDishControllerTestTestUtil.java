@@ -3,7 +3,7 @@ package red.softn.npedidos.controller;
 import com.google.gson.Gson;
 import red.softn.npedidos.ControllerTestUtil;
 import red.softn.npedidos.TestUtil;
-import red.softn.npedidos.request.TypeDishRequest;
+import red.softn.npedidos.request.typedishes.TypeDishRequest;
 import red.softn.npedidos.response.TypeDishResponse;
 
 public class TypeDishControllerTestTestUtil extends ControllerTestUtil<TypeDishRequest, TypeDishResponse, Integer> {

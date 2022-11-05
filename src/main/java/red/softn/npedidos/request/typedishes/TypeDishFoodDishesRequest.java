@@ -6,7 +6,7 @@ import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import java.util.List;
 
 @Data
-public class TypeDishFoodDishesSaveRequest {
+public class TypeDishFoodDishesRequest {
     
     private List<FoodDishRequest> foodDishes;
     

@@ -11,7 +11,7 @@ import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.MenuRepository;
 import red.softn.npedidos.repository.OrderRepository;
 import red.softn.npedidos.repository.TypeDishRepository;
-import red.softn.npedidos.request.fooddish.FoodDishMenusSaveRequest;
+import red.softn.npedidos.request.fooddish.FoodDishMenusRequest;
 import red.softn.npedidos.request.fooddish.FoodDishOrdersRequest;
 import red.softn.npedidos.request.fooddish.FoodDishRequest;
 import red.softn.npedidos.response.FoodDishResponse;
@@ -56,7 +56,7 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         return getGsonUtil().convertTo(save, getResponseClass());
     }
     
-    public void saveMenus(Integer id, FoodDishMenusSaveRequest request) {
+    public void saveMenus(Integer id, FoodDishMenusRequest request) {
         FoodDish foodDish = getRepository().getReferenceById(id);
         Set<Menu> menus = foodDish.getMenus();
         
@@ -68,7 +68,7 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         getRepository().save(foodDish);
     }
     
-    public void deleteMenus(Integer id, FoodDishMenusSaveRequest request) {
+    public void deleteMenus(Integer id, FoodDishMenusRequest request) {
         var foodDish = getRepository().getReferenceById(id);
         var menus = request.getMenusId()
                            .stream()

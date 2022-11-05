@@ -8,9 +8,9 @@ import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.TypeDish;
 import red.softn.npedidos.repository.FoodDishRepository;
 import red.softn.npedidos.repository.TypeDishRepository;
-import red.softn.npedidos.request.TypeDishRequest;
 import red.softn.npedidos.request.fooddish.FoodDishRequest;
-import red.softn.npedidos.request.typedishes.TypeDishFoodDishesSaveRequest;
+import red.softn.npedidos.request.typedishes.TypeDishFoodDishesRequest;
+import red.softn.npedidos.request.typedishes.TypeDishRequest;
 import red.softn.npedidos.response.ContentResponse;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
@@ -27,7 +27,7 @@ public class TypeDishService extends CrudService<TypeDishRequest, TypeDishRespon
     
     private final FoodDishRepository foodDishRepository;
     
-    public ContentResponse<FoodDishResponse> saveFoodDishes(Integer id, TypeDishFoodDishesSaveRequest request) {
+    public ContentResponse<FoodDishResponse> saveFoodDishes(Integer id, TypeDishFoodDishesRequest request) {
         var typeDish = getRepository().getReferenceById(id);
         var foodDishes = request.getFoodDishes()
                                 .stream()
