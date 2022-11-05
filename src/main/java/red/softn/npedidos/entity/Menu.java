@@ -44,6 +44,11 @@ public class Menu {
         this.id = id;
     }
     
+    public Menu(LocalDate date, Set<FoodDish> foodDishes) {
+        this.date = date;
+        this.foodDishes = foodDishes;
+    }
+    
     public boolean equals(final Object o) {
         if (o == this) {return true;}
         if (!(o instanceof final Menu other)) {return false;}

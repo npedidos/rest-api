@@ -32,6 +32,18 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
         return pageToResponse(foodDishes, FoodDishResponse.class);
     }
     
+    @Override
+    public MenuResponse save(MenuRequest request) {
+        Set<FoodDish> foodDishes = request.getFoodDishesId()
+                                          .stream()
+                                          .map(FoodDish::new)
+                                          .collect(Collectors.toSet());
+        var menu = new Menu(request.getDate(), foodDishes);
+        var save = getRepository().save(menu);
+        
+        return getGsonUtil().convertTo(save, getResponseClass());
+    }
+    
     public void saveFoodDishes(Integer id, MenuFoodDishesSaveRequest request) {
         Menu menu = getRepository().getReferenceById(id);
         Set<FoodDish> foodDishes = menu.getFoodDishes();
