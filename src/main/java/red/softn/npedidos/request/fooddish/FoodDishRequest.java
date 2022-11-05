@@ -9,4 +9,6 @@ public class FoodDishRequest {
     
     private String name;
     
+    private Integer typeDishId;
+    
 }

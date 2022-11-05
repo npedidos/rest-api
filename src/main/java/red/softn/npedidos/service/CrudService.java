@@ -103,7 +103,7 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     }
     
     @SuppressWarnings("unchecked")
-    private Class<T> getEntityClass() {
+    public Class<T> getEntityClass() {
         return (Class<T>) ResolvableType.forClass(this.getClass())
                                         .getSuperType()
                                         .resolveGeneric(2);
