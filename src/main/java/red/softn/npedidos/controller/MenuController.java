@@ -23,7 +23,7 @@ public class MenuController extends CrudController<MenuRequest, MenuResponse, In
     }
     
     @PostMapping("/{id}/food-dishes")
-    public ResponseEntity<?> saveMenus(@PathVariable Integer id, @RequestBody MenuFoodDishesSaveRequest request) {
+    public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody MenuFoodDishesSaveRequest request) {
         getService().saveFoodDishes(id, request);
         
         return ResponseEntity.noContent()

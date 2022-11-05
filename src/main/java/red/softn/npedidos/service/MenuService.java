@@ -36,7 +36,7 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
         Menu menu = getRepository().getReferenceById(id);
         Set<FoodDish> foodDishes = menu.getFoodDishes();
         
-        request.getFoodDishes()
+        request.getFoodDishesId()
                .stream()
                .map(FoodDish::new)
                .forEach(foodDishes::add);

@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class MenuFoodDishesSaveRequest {
     
-    private List<Integer> foodDishes;
+    private List<Integer> foodDishesId;
     
 }
