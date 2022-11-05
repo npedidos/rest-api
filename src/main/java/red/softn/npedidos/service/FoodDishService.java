@@ -33,7 +33,7 @@ public class FoodDishService extends CrudService<FoodDishRequest, FoodDishRespon
         return pageToResponse(menus, MenuResponse.class);
     }
     
-    public void save(Integer id, FoodDishMenusSaveRequest request) {
+    public void saveMenus(Integer id, FoodDishMenusSaveRequest request) {
         FoodDish foodDish = getRepository().getReferenceById(id);
         Set<Menu> menus = foodDish.getMenus();
         

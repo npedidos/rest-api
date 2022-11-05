@@ -24,7 +24,7 @@ public class FoodDishController extends CrudController<FoodDishRequest, FoodDish
     
     @PostMapping("/{id}/menus")
     public ResponseEntity<?> saveMenus(@PathVariable Integer id, @RequestBody FoodDishMenusSaveRequest request) {
-        getService().save(id, request);
+        getService().saveMenus(id, request);
         
         return ResponseEntity.noContent()
                              .build();
