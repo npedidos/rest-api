@@ -1,13 +1,13 @@
 package red.softn.npedidos.response;
 
 import lombok.Data;
-
-import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @Data
-public class PagingAndSortingResponse<R> {
-    
-    private List<R> content;
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class PagingAndSortingResponse<R> extends ContentResponse<R> {
     
     private int currentPage;
     
