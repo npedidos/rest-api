@@ -58,4 +58,9 @@ public final class TestUtil {
                     .password(60, 60);
     }
     
+    public static String fakeRandomUsername() {
+        return faker.name()
+                    .username();
+    }
+    
 }

@@ -30,4 +30,8 @@ public abstract class ControllerTest {
     
     public abstract String getUrlMapping();
     
+    public String getUrlMapping(String... urls) {
+        return getUrlMapping() + String.join("", urls);
+    }
+    
 }
