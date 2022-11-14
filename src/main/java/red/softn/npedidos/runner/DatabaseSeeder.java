@@ -26,8 +26,6 @@ public class DatabaseSeeder {
     
     private final Faker faker;
     
-    private final ExcludeDayRepository excludeDayRepository;
-    
     private final FoodDishRepository foodDishRepository;
     
     private final OrderRepository orderRepository;
@@ -45,7 +43,6 @@ public class DatabaseSeeder {
     public void db() {
         log.info("Insertando datos de prueba...");
         userFactory(50);
-        excludeDayFactory(10);
         typeDishFactory(10);
         foodDishFactory(100);
         orderingFactory(50);
@@ -57,7 +54,6 @@ public class DatabaseSeeder {
     
     public void fresh() {
         log.info("Eliminando todos los datos...");
-        this.excludeDayRepository.deleteAll();
         this.foodDishRepository.deleteAll();
         this.typeDishRepository.deleteAll();
         this.orderRepository.deleteAll();
@@ -162,9 +158,10 @@ public class DatabaseSeeder {
         
         run(count, () -> {
             Order order = new Order();
-            LocalDateTime dateNoExclude = getDateNoExclude(date, random);
+            LocalDateTime localDateTime = date.future(random.nextInt(1, 100), TimeUnit.DAYS)
+                                              .toLocalDateTime();
             
-            order.setDateOrder(dateNoExclude);
+            order.setDateOrder(localDateTime);
             order.setUser(options.nextElement(userList));
             
             this.orderRepository.save(order);
@@ -187,32 +184,6 @@ public class DatabaseSeeder {
             
             this.foodDishRepository.save(foodDish);
         });
-    }
-    
-    private void excludeDayFactory(int count) {
-        log.info("Insertando registros ExcludeDay...");
-        DateAndTime date = this.faker.date();
-        RandomService random = this.faker.random();
-        
-        run(count, () -> {
-            ExcludeDay excludeDay = new ExcludeDay();
-            LocalDateTime localDateTime = getDateNoExclude(date, random);
-            
-            excludeDay.setDateExclude(localDateTime.toLocalDate());
-            
-            this.excludeDayRepository.save(excludeDay);
-        });
-    }
-    
-    private LocalDateTime getDateNoExclude(DateAndTime date, RandomService random) {
-        LocalDateTime localDateTime;
-        
-        do {
-            localDateTime = date.future(random.nextInt(1, 100), TimeUnit.DAYS)
-                                .toLocalDateTime();
-        } while (this.excludeDayRepository.existsByDateExclude(localDateTime.toLocalDate()));
-        
-        return localDateTime;
     }
     
     private void run(int count, Runnable runnable) {

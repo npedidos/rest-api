@@ -16,16 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `exclude_days`
---
-
-LOCK TABLES `exclude_days` WRITE;
-/*!40000 ALTER TABLE `exclude_days` DISABLE KEYS */;
-INSERT INTO `exclude_days` VALUES (7,'2022-10-23'),(2,'2022-10-26'),(9,'2022-11-01'),(10,'2022-11-02'),(5,'2022-11-06'),(4,'2022-11-17'),(1,'2022-11-18'),(3,'2022-12-02'),(6,'2022-12-08'),(8,'2022-12-27');
-/*!40000 ALTER TABLE `exclude_days` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping data for table `food_dishes`
 --
 
