@@ -1,13 +1,18 @@
 package red.softn.npedidos.service.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
+import red.softn.npedidos.configuration.AppProperties;
+import red.softn.npedidos.entity.User;
+import red.softn.npedidos.exception.BadRequestException;
+import red.softn.npedidos.repository.UserRepository;
+import red.softn.npedidos.request.LoginRequest;
 import red.softn.npedidos.response.TokenAuthenticationResponse;
 
 import java.time.Instant;
@@ -18,22 +23,35 @@ public class AuthService {
     
     private final JwtEncoder encoder;
     
-    public TokenAuthenticationResponse login(UserDetails userDetails) {
-        TokenAuthenticationResponse.User user = new TokenAuthenticationResponse.User(userDetails.getUsername());
+    private final UserRepository userRepository;
+    
+    private final AppProperties appProperties;
+    
+    private final PasswordEncoder passwordEncoder;
+    
+    public TokenAuthenticationResponse login(LoginRequest request) {
+        User user = this.userRepository.findByUsername(request.getUsername())
+                                       .filter(value -> this.passwordEncoder.matches(request.getPassword(), value.getPassword()))
+                                       .orElseThrow(() -> new BadRequestException("El usuario/contraseña es incorrecto."));
+        
+        String tokenValue = getTokenValue(request);
+        
+        return new TokenAuthenticationResponse(tokenValue, new TokenAuthenticationResponse.User(user.getUsername()));
+    }
+    
+    private String getTokenValue(LoginRequest request) {
         Instant now = Instant.now();
-        long expiry = 36000L;
         JwsHeader jwsHeader = JwsHeader.with(MacAlgorithm.HS256)
                                        .build();
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                                          .issuer("self")
+                                          .issuer(this.appProperties.getJwtIssuer())
                                           .issuedAt(now)
-                                          .expiresAt(now.plusSeconds(expiry))
-                                          .subject(userDetails.getUsername())
+                                          .expiresAt(now.plusSeconds(this.appProperties.getJwtExpiresAt()))
+                                          .subject(request.getUsername())
                                           .build();
-        String tokenValue = this.encoder.encode(JwtEncoderParameters.from(jwsHeader, claims))
-                                        .getTokenValue();
         
-        return new TokenAuthenticationResponse(tokenValue, user);
+        return this.encoder.encode(JwtEncoderParameters.from(jwsHeader, claims))
+                           .getTokenValue();
     }
     
 }

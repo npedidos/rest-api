@@ -1,14 +1,11 @@
 package red.softn.npedidos.controller.security;
 
-import lombok.AccessLevel;
+import com.google.gson.Gson;
 import lombok.Getter;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import red.softn.npedidos.TestUtil;
 import red.softn.npedidos.entity.User;
+import red.softn.npedidos.request.LoginRequest;
 import red.softn.npedidos.response.TokenAuthenticationResponse;
-
-import java.util.Collections;
 
 @Getter
 public class AuthControllerTestUtil {
@@ -17,37 +14,30 @@ public class AuthControllerTestUtil {
     
     private TokenAuthenticationResponse tokenAuthenticationResponse;
     
-    private UserDetails userDetails;
+    private LoginRequest loginRequest;
     
-    @Getter(value = AccessLevel.PRIVATE)
-    private final PasswordEncoder passwordEncoder;
+    private final String requestJSON;
     
-    public AuthControllerTestUtil(PasswordEncoder passwordEncoder) {
-        super();
-        this.passwordEncoder = passwordEncoder;
-        initLogin();
+    public AuthControllerTestUtil(Gson gson) {
+        init();
+        this.requestJSON = gson.toJson(this.loginRequest);
     }
     
-    private void initLogin() {
-        var username = TestUtil.faker.name()
-                                     .username();
-        var passwordEncode = this.passwordEncoder.encode(username);
-        var user = new TokenAuthenticationResponse.User(username);
-        this.tokenAuthenticationResponse = new TokenAuthenticationResponse(TestUtil.faker.internet()
-                                                                                         .uuid(), user);
+    private void init() {
+        var user = new TokenAuthenticationResponse.User();
         this.userEntity = new User();
-        this.userDetails = org.springframework.security.core.userdetails.User.builder()
-                                                                             .username(username)
-                                                                             .password(passwordEncode)
-                                                                             .authorities(Collections.emptyList())
-                                                                             .build();
+        this.loginRequest = new LoginRequest();
+        this.tokenAuthenticationResponse = new TokenAuthenticationResponse();
         
-        userEntity.setId(TestUtil.fakeRandomInteger());
-        userEntity.setEmail(TestUtil.faker.internet()
-                                          .emailAddress());
-        userEntity.setUsername(username);
-        userEntity.setPassword(passwordEncode);
-        userEntity.setOrders(Collections.emptySet());
+        user.setUsername(loginRequest.getUsername());
+        this.userEntity.setId(TestUtil.fakeRandomInteger());
+        this.userEntity.setEmail(TestUtil.fakeRandomEmail());
+        this.userEntity.setUsername(TestUtil.fakeRandomUsername());
+        this.userEntity.setPassword(TestUtil.fakeRandomPassword());
+        this.loginRequest.setUsername(this.userEntity.getUsername());
+        this.loginRequest.setPassword(this.userEntity.getPassword());
+        this.tokenAuthenticationResponse.setToken(TestUtil.fakeRandomWord());
+        this.tokenAuthenticationResponse.setUser(user);
     }
     
 }

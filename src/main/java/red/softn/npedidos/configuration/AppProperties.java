@@ -35,4 +35,10 @@ public class AppProperties {
     @Value("${app.pageable.size:10}")
     private int pageableSize;
     
+    @Value("${app.jwt.expires-at:36000}")
+    private long jwtExpiresAt;
+    
+    @Value("${app.jwt.issuer:self}")
+    private String jwtIssuer;
+    
 }

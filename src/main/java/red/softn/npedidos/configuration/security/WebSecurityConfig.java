@@ -9,14 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
@@ -26,15 +23,11 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import red.softn.npedidos.configuration.AppProperties;
-import red.softn.npedidos.repository.UserRepository;
-import red.softn.npedidos.service.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    
-    private final UserRepository userRepository;
     
     private final AppProperties appProperties;
     
@@ -50,8 +43,7 @@ public class WebSecurityConfig {
                 authorizeRequestCustomizer.anyRequest()
                                           .authenticated();
             })
-            .httpBasic(Customizer.withDefaults())
-            .authenticationProvider(daoAuthenticationProvider())
+            .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(sessionManagerCustomizer -> sessionManagerCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
@@ -60,23 +52,8 @@ public class WebSecurityConfig {
     }
     
     @Bean
-    public UserDetailsService userDetailsServiceImpl() {
-        return new UserDetailsServiceImpl(this.userRepository);
-    }
-    
-    @Bean
     public PasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-    
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        
-        daoAuthenticationProvider.setUserDetailsService(userDetailsServiceImpl());
-        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-        
-        return daoAuthenticationProvider;
     }
     
     @Bean
