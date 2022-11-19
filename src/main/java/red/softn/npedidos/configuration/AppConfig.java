@@ -1,10 +1,14 @@
 package red.softn.npedidos.configuration;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -58,7 +62,23 @@ public class AppConfig implements WebMvcConfigurer {
                              .version(appProperties.getAppVersion())
                              .license(license);
         
-        return new OpenAPI().info(info);
+        SecurityScheme securityScheme = new SecurityScheme().type(SecurityScheme.Type.HTTP)
+                                                            .scheme("bearer")
+                                                            .bearerFormat("JWT");
+        Components components = new Components().addSecuritySchemes("bearer-key", securityScheme);
+        
+        return new OpenAPI().info(info)
+                            .components(components);
+    }
+    
+    @Bean
+    public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {
+        return openApi -> openApi.getPaths()
+                                 .values()
+                                 .stream()
+                                 .flatMap(pathItem -> pathItem.readOperations()
+                                                              .stream())
+                                 .forEach(operation -> operation.addSecurityItem(new SecurityRequirement().addList("bearer-key")));
     }
     
 }
