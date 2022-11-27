@@ -15,9 +15,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerTypePredicate;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
@@ -79,6 +81,16 @@ public class AppConfig implements WebMvcConfigurer {
                                  .flatMap(pathItem -> pathItem.readOperations()
                                                               .stream())
                                  .forEach(operation -> operation.addSecurityItem(new SecurityRequirement().addList("bearer-key")));
+    }
+    
+    @Bean
+    public LocaleResolver localeResolver() {
+        var acceptHeaderLocaleResolver = new AcceptHeaderLocaleResolver();
+        
+        acceptHeaderLocaleResolver.setSupportedLocales(this.appProperties.getSupportedLocales());
+        acceptHeaderLocaleResolver.setDefaultLocale(this.appProperties.getDefaultLocale());
+        
+        return acceptHeaderLocaleResolver;
     }
     
 }

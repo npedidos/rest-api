@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+import java.util.Locale;
+
 @Configuration
 @Getter
 public class AppProperties {
@@ -40,5 +43,11 @@ public class AppProperties {
     
     @Value("${app.jwt.issuer:self}")
     private String jwtIssuer;
+    
+    @Value("${app.locale.default:}")
+    private Locale defaultLocale;
+    
+    @Value("${app.locale.supported:}")
+    private List<Locale> supportedLocales;
     
 }
