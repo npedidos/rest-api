@@ -9,6 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.response.ErrorResponse;
 import red.softn.npedidos.utils.gson.GsonUtil;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import javax.servlet.RequestDispatcher;
 import java.util.Map;
@@ -19,6 +20,8 @@ import java.util.Objects;
 public class CustomDefaultErrorAttribute extends DefaultErrorAttributes {
     
     private final GsonUtil gsonUtil;
+    
+    private final MessageUtil messageUtil;
     
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
@@ -31,7 +34,7 @@ public class CustomDefaultErrorAttribute extends DefaultErrorAttributes {
             String error = getValue(errorAttributes, "error");
             
             errorDetails.setCode(StringUtils.defaultIfBlank(status, "500"));
-            errorDetails.setDescription(StringUtils.defaultIfBlank(error, "Error desconocido"));
+            errorDetails.setDescription(StringUtils.defaultIfBlank(error, this.messageUtil.getMessage("error.unknown")));
         } else {
             errorDetails.setDescription(errorMessage);
         }

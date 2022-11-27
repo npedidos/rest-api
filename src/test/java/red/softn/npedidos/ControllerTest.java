@@ -10,11 +10,13 @@ import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.utils.gson.GsonConfig;
 import red.softn.npedidos.utils.gson.GsonUtil;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 @Import({
     GsonConfig.class,
     AppProperties.class,
-    DataRequestScope.class
+    DataRequestScope.class,
+    MessageUtil.class
 })
 @Getter
 public abstract class ControllerTest {

@@ -14,6 +14,7 @@ import red.softn.npedidos.exception.BadRequestException;
 import red.softn.npedidos.repository.UserRepository;
 import red.softn.npedidos.request.LoginRequest;
 import red.softn.npedidos.response.TokenAuthenticationResponse;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import java.time.Instant;
 
@@ -29,10 +30,12 @@ public class AuthService {
     
     private final PasswordEncoder passwordEncoder;
     
+    private final MessageUtil messageUtil;
+    
     public TokenAuthenticationResponse login(LoginRequest request) {
         User user = this.userRepository.findByUsername(request.getUsername())
                                        .filter(value -> this.passwordEncoder.matches(request.getPassword(), value.getPassword()))
-                                       .orElseThrow(() -> new BadRequestException("El usuario/contraseña es incorrecto."));
+                                       .orElseThrow(() -> new BadRequestException(this.messageUtil.getMessage("error.user-password-incorrect")));
         
         String tokenValue = getTokenValue(request);
         

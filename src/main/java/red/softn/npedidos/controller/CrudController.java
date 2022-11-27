@@ -11,6 +11,7 @@ import red.softn.npedidos.configuration.AppProperties;
 import red.softn.npedidos.exception.InternalServerErrorException;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.service.CrudServiceI;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
@@ -21,6 +22,10 @@ public abstract class CrudController<E, R, ID> {
     @Autowired
     @Getter(value = AccessLevel.PROTECTED)
     private AppProperties appProperties;
+    
+    @Autowired
+    @Getter(value = AccessLevel.PROTECTED)
+    private MessageUtil messageUtil;
     
     public abstract CrudServiceI<E, R, ID> getService();
     
@@ -65,14 +70,14 @@ public abstract class CrudController<E, R, ID> {
         Object fieldId;
         
         if (field == null) {
-            throw new InternalServerErrorException(new ErrorDetails("La clase no tiene una propiedad ID."));
+            throw new InternalServerErrorException(new ErrorDetails(this.messageUtil.getMessage("error.class-does-not-have-x-property", "ID")));
         }
         
         try {
             ReflectionUtils.makeAccessible(field);
             fieldId = ReflectionUtils.getField(field, response);
         } catch (Exception ex) {
-            throw new InternalServerErrorException(new ErrorDetails("Error al obtener el valor de la propiedad ID."));
+            throw new InternalServerErrorException(new ErrorDetails(this.messageUtil.getMessage("error.obtaining-value_x-property", "ID")));
         }
         
         return fieldId;

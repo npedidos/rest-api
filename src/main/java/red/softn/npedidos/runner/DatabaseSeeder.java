@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import red.softn.npedidos.entity.*;
 import red.softn.npedidos.repository.*;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,8 +41,10 @@ public class DatabaseSeeder {
     
     private final PasswordEncoder passwordEncoder;
     
+    private final MessageUtil messageUtil;
+    
     public void db() {
-        log.info("Insertando datos de prueba...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-test-data"));
         userFactory(50);
         typeDishFactory(10);
         foodDishFactory(100);
@@ -49,22 +52,22 @@ public class DatabaseSeeder {
         settingFactory(10);
         menuFactory(10);
         relationshipFactory();
-        log.info("Proceso finalizado.");
+        log.info(this.messageUtil.getMessage("factory-seeder.process_finished"));
     }
     
     public void fresh() {
-        log.info("Eliminando todos los datos...");
+        log.info(this.messageUtil.getMessage("factory-seeder.deleting-all-data"));
         this.foodDishRepository.deleteAll();
         this.typeDishRepository.deleteAll();
         this.orderRepository.deleteAll();
         this.settingRepository.deleteAll();
         this.userRepository.deleteAll();
         this.menuRepository.deleteAll();
-        log.info("Proceso finalizado.");
+        log.info(this.messageUtil.getMessage("factory-seeder.process_finished"));
     }
     
     private void relationshipFactory() {
-        log.info("Insertando relaciones de tablas...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-table-relationships"));
         Iterable<Order> orderings = this.orderRepository.findAll();
         Iterable<FoodDish> foodDishes = this.foodDishRepository.findAll();
         List<Menu> menus = this.menuRepository.findAll();
@@ -91,7 +94,7 @@ public class DatabaseSeeder {
     }
     
     private void userFactory(int count) {
-        log.info("Insertando registros User...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "User"));
         run(count, () -> {
             User user = new User();
             String username = this.faker.name()
@@ -107,7 +110,7 @@ public class DatabaseSeeder {
     }
     
     private void typeDishFactory(int count) {
-        log.info("Insertando registros TypeDish...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "TypeDish"));
         run(count, () -> {
             TypeDish typeDish = new TypeDish();
             typeDish.setName(this.faker.funnyName()
@@ -118,7 +121,7 @@ public class DatabaseSeeder {
     }
     
     private void settingFactory(int count) {
-        log.info("Insertando registros Setting...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "Setting"));
         run(count, () -> {
             Setting setting = new Setting();
             setting.setKeyName(this.faker.letterify("???_???_???"));
@@ -132,7 +135,7 @@ public class DatabaseSeeder {
     }
     
     private void menuFactory(int count) {
-        log.info("Insertando registros de menu...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "Menu"));
         DateAndTime date = this.faker.date();
         RandomService random = this.faker.random();
         
@@ -148,7 +151,7 @@ public class DatabaseSeeder {
     }
     
     private void orderingFactory(int count) {
-        log.info("Insertando registros Order...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "Order"));
         DateAndTime date = this.faker.date();
         RandomService random = this.faker.random();
         Iterable<User> all = this.userRepository.findAll();
@@ -169,7 +172,7 @@ public class DatabaseSeeder {
     }
     
     private void foodDishFactory(int count) {
-        log.info("Insertando registros FoodDish...");
+        log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "FoodDish"));
         var all = this.typeDishRepository.findAll();
         var typeDishList = StreamSupport.stream(all.spliterator(), false)
                                         .toList();

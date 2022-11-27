@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -20,13 +21,15 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     
     private final ApplicationContext applicationContext;
     
+    private final MessageUtil messageUtil;
+    
     @Override
     public void run(ApplicationArguments args) throws Exception {
         List<String> nonOptionArgs = args.getNonOptionArgs();
         Set<String> optionNames = args.getOptionNames();
         
         if (nonOptionArgs == null) {
-            throw new IllegalArgumentException("No se han especificado argumentos.");
+            throw new IllegalArgumentException(this.messageUtil.getMessage("error.no-arguments-specified"));
         }
         
         nonOptionArgs.forEach(value -> {
@@ -36,7 +39,8 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
                     boolean seed = optionNames.contains("seed");
                     this.actionsRun.dbFresh(seed);
                 }
-                default -> throw new IllegalStateException(String.format("El argumento %s no es valido.", value));
+                default ->
+                    throw new IllegalStateException(this.messageUtil.getMessage("error.argument-x-not-valid", value));
             }
             
             SpringApplication.exit(this.applicationContext);

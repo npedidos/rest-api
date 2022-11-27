@@ -11,6 +11,7 @@ import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.pojo.ErrorDetails;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.utils.gson.GsonUtil;
+import red.softn.npedidos.utils.message.MessageUtil;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -24,6 +25,9 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     
     @Autowired
     private DataRequestScope dataRequestScope;
+    
+    @Autowired
+    private MessageUtil messageUtil;
     
     protected abstract JpaRepository<T, ID> getRepository();
     
@@ -89,7 +93,7 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
     
     private void checkIsExistById(ID id) {
         if (!getRepository().existsById(id)) {
-            throw new NotFoundException(new ErrorDetails("El registro no existe"));
+            throw new NotFoundException(new ErrorDetails(this.messageUtil.getMessage("error.record-not-exist")));
         }
     }
     
