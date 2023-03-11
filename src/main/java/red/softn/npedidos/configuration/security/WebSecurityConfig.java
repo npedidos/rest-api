@@ -22,7 +22,13 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import red.softn.npedidos.configuration.AppProperties;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -46,9 +52,22 @@ public class WebSecurityConfig {
             .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(sessionManagerCustomizer -> sessionManagerCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+            .cors(value -> value.configurationSource(corsConfigurationSource()));
         
         return http.build();
+    }
+    
+    private CorsConfigurationSource corsConfigurationSource() {
+        var source = new UrlBasedCorsConfigurationSource();
+        var configuration = new CorsConfiguration();
+        
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(List.of("*"));
+        source.registerCorsConfiguration(appProperties.getPathPrefix() + "/**", configuration);
+        
+        return source;
     }
     
     @Bean
