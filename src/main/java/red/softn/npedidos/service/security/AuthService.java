@@ -38,8 +38,9 @@ public class AuthService {
                                        .orElseThrow(() -> new BadRequestException(this.messageUtil.getMessage("error.user-password-incorrect")));
         
         String tokenValue = getTokenValue(request);
+        var userResponse = new TokenAuthenticationResponse.User(user.getId(), user.getUsername());
         
-        return new TokenAuthenticationResponse(tokenValue, new TokenAuthenticationResponse.User(user.getUsername()));
+        return new TokenAuthenticationResponse(tokenValue, userResponse);
     }
     
     private String getTokenValue(LoginRequest request) {
