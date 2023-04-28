@@ -22,7 +22,7 @@ public class OrderController extends CrudController<OrderRequest, OrderResponse,
         return ResponseEntity.ok(getService().findAllFoodDishes(id));
     }
     
-    @PostMapping("/{id}/food-dishes")
+    @PutMapping("/{id}/food-dishes")
     public ResponseEntity<?> saveFoodDishes(@PathVariable Integer id, @RequestBody OrderFoodDishesRequest request) {
         getService().saveFoodDishes(id, request);
         
