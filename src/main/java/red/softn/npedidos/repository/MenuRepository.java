@@ -19,4 +19,6 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>, JpaSpecifi
     
     Optional<Menu> findFirstByDateLessThanOrderByDateDesc(LocalDate date);
     
+    Optional<Menu> findFirstByDateLessThanEqualOrderByDateDesc(LocalDate date);
+    
 }

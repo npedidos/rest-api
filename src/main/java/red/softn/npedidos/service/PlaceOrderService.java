@@ -25,31 +25,12 @@ public class PlaceOrderService {
     
     private final MessageUtil messageUtil;
     
-    public PlaceOrderResponse placeOrder(Integer menuId) {
-        var menuEntity = getMenuEntity(menuId);
-        var menuDate = menuEntity.getDate();
-        var fistLocalDateOfWeek = menuDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        var lastLocalDateOfWeek = menuDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        int weekOfYear = getWeekOfYear(menuDate);
-        var typeDishes = getTypeDishes(menuEntity);
-        var nexMenuId = getMenuId(this.menuRepository.findFirstByDateGreaterThanAndDateBetweenOrderByDate(menuEntity.getDate(), fistLocalDateOfWeek, lastLocalDateOfWeek));
-        var previousMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanAndDateBetweenOrderByDateDesc(menuEntity.getDate(), fistLocalDateOfWeek, lastLocalDateOfWeek));
-        var previousWeekMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanOrderByDateDesc(fistLocalDateOfWeek));
-        var nextWeekMenuId = getMenuId(this.menuRepository.findFirstByDateGreaterThanOrderByDate(lastLocalDateOfWeek));
-        var menu = new PlaceOrderResponse.Menu(menuEntity.getId(), menuDate, nexMenuId, previousMenuId);
-        var menuWeek = new PlaceOrderResponse.MenuWeek(weekOfYear, fistLocalDateOfWeek.getDayOfMonth(), lastLocalDateOfWeek.getDayOfMonth(), nextWeekMenuId, previousWeekMenuId);
-        
-        return new PlaceOrderResponse(menu, menuWeek, typeDishes);
+    public PlaceOrderResponse getByCurrentDate() {
+        return getResponse(this.menuRepository.findFirstByDateLessThanEqualOrderByDateDesc(LocalDate.now()));
     }
     
-    private Menu getMenuEntity(Integer menuId) {
-        var menuEntityOption = this.menuRepository.findById(menuId);
-        
-        if (menuEntityOption.isPresent()) {
-            return menuEntityOption.get();
-        }
-        
-        throw new NotFoundException(this.messageUtil.getMessage("error.record-not-exist"));
+    public PlaceOrderResponse placeOrder(Integer menuId) {
+        return getResponse(this.menuRepository.findById(menuId));
     }
     
     private List<PlaceOrderResponse.TypeDish> getTypeDishes(Menu menuEntity) {
@@ -84,6 +65,27 @@ public class PlaceOrderService {
     private Integer getMenuId(Optional<Menu> menuOptional) {
         return menuOptional.map(Menu::getId)
                            .orElse(null);
+    }
+    
+    private PlaceOrderResponse getResponse(Optional<Menu> menuEntityOption) {
+        if (menuEntityOption.isEmpty()) {
+            throw new NotFoundException(this.messageUtil.getMessage("error.record-not-exist"));
+        }
+        
+        var menuEntity = menuEntityOption.get();
+        var menuDate = menuEntity.getDate();
+        var fistLocalDateOfWeek = menuDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        var lastLocalDateOfWeek = menuDate.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        int weekOfYear = getWeekOfYear(menuDate);
+        var typeDishes = getTypeDishes(menuEntity);
+        var nexMenuId = getMenuId(this.menuRepository.findFirstByDateGreaterThanAndDateBetweenOrderByDate(menuEntity.getDate(), fistLocalDateOfWeek, lastLocalDateOfWeek));
+        var previousMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanAndDateBetweenOrderByDateDesc(menuEntity.getDate(), fistLocalDateOfWeek, lastLocalDateOfWeek));
+        var previousWeekMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanOrderByDateDesc(fistLocalDateOfWeek));
+        var nextWeekMenuId = getMenuId(this.menuRepository.findFirstByDateGreaterThanOrderByDate(lastLocalDateOfWeek));
+        var menu = new PlaceOrderResponse.Menu(menuEntity.getId(), menuDate, nexMenuId, previousMenuId);
+        var menuWeek = new PlaceOrderResponse.MenuWeek(weekOfYear, fistLocalDateOfWeek.getDayOfMonth(), lastLocalDateOfWeek.getDayOfMonth(), nextWeekMenuId, previousWeekMenuId);
+        
+        return new PlaceOrderResponse(menu, menuWeek, typeDishes);
     }
     
 }

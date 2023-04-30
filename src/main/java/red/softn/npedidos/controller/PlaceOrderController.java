@@ -18,6 +18,11 @@ public class PlaceOrderController {
     
     private final PlaceOrderService placeOrderService;
     
+    @GetMapping
+    public ResponseEntity<PlaceOrderResponse> getByCurrentDate() {
+        return ResponseEntity.ok(this.placeOrderService.getByCurrentDate());
+    }
+    
     @GetMapping("/{menuId}")
     public ResponseEntity<PlaceOrderResponse> placeOrder(@PathVariable Integer menuId) {
         return ResponseEntity.ok(this.placeOrderService.placeOrder(menuId));
