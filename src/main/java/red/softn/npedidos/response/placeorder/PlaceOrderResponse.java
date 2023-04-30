@@ -64,6 +64,8 @@ public class PlaceOrderResponse {
     @NoArgsConstructor
     public static class Menu {
         
+        private Integer id;
+        
         private LocalDate currentDate;
         
         private Integer nextMenuId;

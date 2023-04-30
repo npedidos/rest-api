@@ -36,7 +36,7 @@ public class PlaceOrderService {
         var previousMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanAndDateBetweenOrderByDateDesc(menuEntity.getDate(), fistLocalDateOfWeek, lastLocalDateOfWeek));
         var previousWeekMenuId = getMenuId(this.menuRepository.findFirstByDateLessThanOrderByDateDesc(fistLocalDateOfWeek));
         var nextWeekMenuId = getMenuId(this.menuRepository.findFirstByDateGreaterThanOrderByDate(lastLocalDateOfWeek));
-        var menu = new PlaceOrderResponse.Menu(menuDate, nexMenuId, previousMenuId);
+        var menu = new PlaceOrderResponse.Menu(menuEntity.getId(), menuDate, nexMenuId, previousMenuId);
         var menuWeek = new PlaceOrderResponse.MenuWeek(weekOfYear, fistLocalDateOfWeek.getDayOfMonth(), lastLocalDateOfWeek.getDayOfMonth(), nextWeekMenuId, previousWeekMenuId);
         
         return new PlaceOrderResponse(menu, menuWeek, typeDishes);
