@@ -2,12 +2,15 @@ package red.softn.npedidos.controller;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import red.softn.npedidos.request.menus.MenuFoodDishesRequest;
 import red.softn.npedidos.request.menus.MenuRequest;
 import red.softn.npedidos.response.MenuResponse;
 import red.softn.npedidos.service.MenuService;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/menus")
@@ -16,6 +19,11 @@ import red.softn.npedidos.service.MenuService;
 public class MenuController extends CrudController<MenuRequest, MenuResponse, Integer> {
     
     private final MenuService service;
+    
+    @GetMapping("/calendar/{month}")
+    public ResponseEntity<?> findAllByMonth(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate month) {
+        return ResponseEntity.ok(getService().findAllByMonth(month));
+    }
     
     @GetMapping("/{id}/food-dishes")
     public ResponseEntity<?> findAllFoodDishes(@PathVariable Integer id) {

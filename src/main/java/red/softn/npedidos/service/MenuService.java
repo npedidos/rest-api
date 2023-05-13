@@ -12,9 +12,13 @@ import red.softn.npedidos.request.menus.MenuFoodDishesRequest;
 import red.softn.npedidos.request.menus.MenuRequest;
 import red.softn.npedidos.response.FoodDishResponse;
 import red.softn.npedidos.response.MenuResponse;
+import red.softn.npedidos.response.MonthMenuResponse;
 import red.softn.npedidos.response.PagingAndSortingResponse;
 import red.softn.npedidos.specifications.MenuSpecifications;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -68,6 +72,21 @@ public class MenuService extends CrudService<MenuRequest, MenuResponse, Menu, In
             .removeAll(foodDishes);
         
         getRepository().save(menu);
+    }
+    
+    public MonthMenuResponse findAllByMonth(LocalDate month) {
+        var response = new MonthMenuResponse();
+        var startDate = month.with(TemporalAdjusters.firstDayOfMonth());
+        var endDate = month.with(TemporalAdjusters.lastDayOfMonth());
+        var monthMenu = getRepository().findAllByDateBetween(startDate, endDate);
+        var menuResponse = monthMenu.orElse(Collections.emptyList())
+                                    .stream()
+                                    .map(value -> new MonthMenuResponse.Menu(value.getId(), value.getDate()))
+                                    .toList();
+        
+        response.setMenus(menuResponse);
+        
+        return response;
     }
     
 }
