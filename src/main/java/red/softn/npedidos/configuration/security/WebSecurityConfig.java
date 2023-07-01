@@ -39,15 +39,15 @@ public class WebSecurityConfig {
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.antMatcher(appProperties.getPathPrefix() + "/**")
-            .authorizeRequests(authorizeRequestCustomizer -> {
+        http.securityMatcher(appProperties.getPathPrefix() + "/**")
+            .authorizeHttpRequests(authorizeHttpRequestCustomizer -> {
                 if (ArrayUtils.isNotEmpty(appProperties.getPermitAllPaths())) {
-                    authorizeRequestCustomizer.antMatchers(appProperties.getPermitAllPaths())
-                                              .permitAll();
+                    authorizeHttpRequestCustomizer.requestMatchers(appProperties.getPermitAllPaths())
+                                                  .permitAll();
                 }
-            
-                authorizeRequestCustomizer.anyRequest()
-                                          .authenticated();
+                
+                authorizeHttpRequestCustomizer.anyRequest()
+                                              .authenticated();
             })
             .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)

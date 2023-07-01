@@ -1,5 +1,6 @@
 package red.softn.npedidos.configuration;
 
+import jakarta.servlet.RequestDispatcher;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
@@ -11,7 +12,6 @@ import red.softn.npedidos.response.ErrorResponse;
 import red.softn.npedidos.utils.gson.GsonUtil;
 import red.softn.npedidos.utils.message.MessageUtil;
 
-import javax.servlet.RequestDispatcher;
 import java.util.Map;
 import java.util.Objects;
 

@@ -1,9 +1,8 @@
 package red.softn.npedidos.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 @AllArgsConstructor
@@ -27,7 +26,6 @@ public class Setting {
     private String value;
     
     @Column(name = "description")
-    @Type(type = "org.hibernate.type.TextType")
     private String description;
     
     public boolean equals(final Object o) {

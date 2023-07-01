@@ -1,10 +1,9 @@
 package red.softn.npedidos.specifications;
 
+import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 import red.softn.npedidos.entity.FoodDish;
 import red.softn.npedidos.entity.Menu;
-
-import javax.persistence.criteria.Join;
 
 public class MenuSpecifications {
     
