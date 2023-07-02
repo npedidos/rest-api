@@ -40,18 +40,18 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.securityMatcher(appProperties.getPathPrefix() + "/**")
-            .authorizeHttpRequests(authorizeHttpRequestCustomizer -> {
+            .authorizeHttpRequests(authorize -> {
                 if (ArrayUtils.isNotEmpty(appProperties.getPermitAllPaths())) {
-                    authorizeHttpRequestCustomizer.requestMatchers(appProperties.getPermitAllPaths())
-                                                  .permitAll();
+                    authorize.requestMatchers(appProperties.getPermitAllPaths())
+                             .permitAll();
                 }
                 
-                authorizeHttpRequestCustomizer.anyRequest()
-                                              .authenticated();
+                authorize.anyRequest()
+                         .authenticated();
             })
             .httpBasic(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
-            .sessionManagement(sessionManagerCustomizer -> sessionManagerCustomizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
             .cors(value -> value.configurationSource(corsConfigurationSource()));
         
