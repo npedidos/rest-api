@@ -8,7 +8,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import net.datafaker.Faker;
-import org.springdoc.core.customizers.OpenApiCustomiser;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
@@ -74,7 +74,7 @@ public class AppConfig implements WebMvcConfigurer {
     }
     
     @Bean
-    public OpenApiCustomiser customerGlobalHeaderOpenApiCustomiser() {
+    public OpenApiCustomizer customerGlobalHeaderOpenApiCustomizer() {
         return openApi -> openApi.getPaths()
                                  .values()
                                  .stream()
