@@ -2,10 +2,10 @@ package red.softn.npedidos.runner;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.datafaker.DateAndTime;
 import net.datafaker.Faker;
-import net.datafaker.Food;
-import net.datafaker.Options;
+import net.datafaker.providers.base.DateAndTime;
+import net.datafaker.providers.base.Options;
+import net.datafaker.providers.food.Food;
 import net.datafaker.service.RandomService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

@@ -19,7 +19,7 @@
 
     <properties>
         <java.version>17</java.version>
-        <datafaker.version>1.6.0</datafaker.version>
+        <datafaker.version>2.0.1</datafaker.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <wildfly-maven-plugin.version>3.0.2.Final</wildfly-maven-plugin.version>
         <springdoc-openapi-ui.version>1.6.12</springdoc-openapi-ui.version>
