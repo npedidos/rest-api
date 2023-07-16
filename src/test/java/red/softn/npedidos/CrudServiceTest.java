@@ -10,11 +10,9 @@ import red.softn.npedidos.service.CrudService;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -59,19 +57,6 @@ public abstract class CrudServiceTest<E, R, T, ID, U extends CrudServiceTestUtil
     
     private Class<?> getEntityClass() {
         return TestUtil.resolveGeneric(getClass(), 2);
-    }
-    
-    @Test
-    void testFindAll() {
-        List<T> entityList = this.crudServiceTestUtil.getEntityList();
-        List<R> expected = this.crudServiceTestUtil.getResponseList();
-        
-        when(getRepository().findAll()).thenReturn(entityList);
-        when(this.gsonUtil.convertTo(eq(entityList), eq(getResponseClass()))).thenReturn(expected);
-        
-        List<R> actual = getService().findAll();
-        
-        assertIterableEquals(expected, actual);
     }
     
     @Test

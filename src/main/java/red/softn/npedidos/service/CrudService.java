@@ -51,13 +51,6 @@ public abstract class CrudService<E, R, T, ID> implements CrudServiceI<E, R, ID>
         return response;
     }
     
-    @Deprecated
-    public List<R> findAll() {
-        Iterable<T> all = getRepository().findAll();
-        
-        return this.gsonUtil.convertTo(all, getResponseClass());
-    }
-    
     public R findById(ID id) {
         T entity = getRepository().findById(id)
                                   .orElse(null);

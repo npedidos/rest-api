@@ -8,7 +8,6 @@ import org.springframework.util.ReflectionUtils;
 import red.softn.npedidos.service.CrudServiceI;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
@@ -47,18 +46,6 @@ public abstract class CrudControllerTest<E, R, ID, T extends ControllerTestUtil<
     @BeforeEach
     public void setUp() {
         this.controllerTestUtil = newInstanceControllerTestUtil();
-    }
-    
-    @Test
-    void testFindAllStatusIsOk() throws Exception {
-        List<R> response = this.controllerTestUtil.getResponseList();
-        
-        when(getService().findAll()).thenReturn(response);
-        
-        var requestBuilder = get(getUrlMapping()).with(jwt());
-        
-        getMockMvc().perform(requestBuilder)
-                    .andExpect(status().isOk());
     }
     
     @Test

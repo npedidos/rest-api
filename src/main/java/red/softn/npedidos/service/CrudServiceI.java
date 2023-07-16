@@ -2,14 +2,9 @@ package red.softn.npedidos.service;
 
 import red.softn.npedidos.response.PagingAndSortingResponse;
 
-import java.util.List;
-
 public interface CrudServiceI<E, R, ID> {
     
     PagingAndSortingResponse<R> findAllPageable();
-    
-    @Deprecated
-    List<R> findAll();
     
     R findById(ID id);
     
