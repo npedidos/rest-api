@@ -138,11 +138,11 @@
                 <version>${jacoco-maven-plugin.version}</version>
                 <configuration>
                     <excludes>
-                        <exclude>**/response/*</exclude>
-                        <exclude>**/request/*</exclude>
-                        <exclude>**/pojo/*</exclude>
-                        <exclude>**/entity/*</exclude>
-                        <exclude>**/exception/*</exclude>
+                        <exclude>**/response/**</exclude>
+                        <exclude>**/request/**</exclude>
+                        <exclude>**/pojo/**</exclude>
+                        <exclude>**/entity/**</exclude>
+                        <exclude>**/exception/**</exclude>
                         <exclude>**/AppProperties.class</exclude>
                     </excludes>
                 </configuration>
