@@ -34,7 +34,7 @@ No disponible, por el momento.
 ### Requisitos
 
 * [Java 17](https://jdk.java.net/archive/)
-* [Maven 3.8.6](https://maven.apache.org/download.cgi)
+* [Maven 3.9.3](https://maven.apache.org/download.cgi)
 * [MySQL 8](https://dev.mysql.com/downloads/mysql/)
 * [Wildfly 26](https://www.wildfly.org/downloads/) (Opcional)
 
