@@ -1,6 +1,5 @@
 package red.softn.npedidos.controller.spring;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 

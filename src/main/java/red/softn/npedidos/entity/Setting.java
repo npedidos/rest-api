@@ -1,8 +1,8 @@
 package red.softn.npedidos.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import jakarta.persistence.*;
 import java.util.Objects;
 
 @AllArgsConstructor

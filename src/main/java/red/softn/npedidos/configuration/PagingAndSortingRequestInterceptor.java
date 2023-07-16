@@ -1,7 +1,5 @@
 package red.softn.npedidos.configuration;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
@@ -12,6 +10,8 @@ import red.softn.npedidos.pojo.DataRequestScope;
 import red.softn.npedidos.request.PagingAndSortingRequest;
 import red.softn.npedidos.utils.gson.GsonUtil;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Collections;
