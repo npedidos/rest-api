@@ -174,8 +174,8 @@ public class DatabaseSeeder {
     private void foodDishFactory(int count) {
         log.info(this.messageUtil.getMessage("factory-seeder.inserting-x-records", "FoodDish"));
         var all = this.typeDishRepository.findAll();
-        var typeDishList = StreamSupport.stream(all.spliterator(), false)
-                                        .toList();
+        var typeDishList = all.stream()
+                              .toList();
         Options options = this.faker.options();
         Food food = this.faker.food();
         
